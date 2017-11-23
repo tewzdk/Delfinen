@@ -8,7 +8,7 @@ public class Medlem {
     private Date fødselsaar;
     private int telefonnummer;
     private Adresse adresse = new Adresse();
-    private ArrayList<Indbetaling> indbetalinger = new ArrayList<>();
+
 
     public String getNavn() {
         return navn;
@@ -56,13 +56,5 @@ public class Medlem {
 
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
-    }
-
-    public ArrayList<Indbetaling> getIndbetalinger() {
-        return indbetalinger;
-    }
-
-    public void setIndbetalinger(ArrayList<Indbetaling> indbetalinger) {
-        this.indbetalinger = indbetalinger;
     }
 }

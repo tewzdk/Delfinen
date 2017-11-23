@@ -1,25 +1,21 @@
-import java.util.Date;
+import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Utility {
-    public void validerIntegerSvar(){
+    private Scanner in = new Scanner(System.in);
 
-        //utility
-        public static int intSvar(){ //undgår exceptions, når brugeren indtaster andet end integers.
-            int intSvar = -1;
-            int n = 0;
-            for(int x=0;x<=n;x++) {
+    public int validerIntegerSvar(){
+            int svar = -1;
+
                 try {
-                    intSvar = in.nextInt();
+                    svar = in.nextInt();
                 } catch (InputMismatchException exception) {
-
                     System.out.println("Indtast et nummer.");
                     in.nextLine();
                 }
-            }
-            return intSvar;
+
+            return svar;
         }
 
-    }
     public void validerDateSvar(){}
 }

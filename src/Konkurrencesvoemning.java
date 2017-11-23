@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Staevneliste {
+public class Konkurrencesvoemning {
     private ArrayList<Staevne> staevneliste = new ArrayList<>();
 
     private void seAktiveStaevner(){}
