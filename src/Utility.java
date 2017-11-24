@@ -18,4 +18,8 @@ public class Utility {
         }
 
     public void validerDateSvar(){}
+
+    public void scannerClose(){
+    in.close();
+    }
 }

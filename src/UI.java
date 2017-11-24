@@ -17,6 +17,7 @@ public class UI {
         switch (svar) {
             case 0:
                 System.out.println("[Programmet afsluttes]");
+                utility.scannerClose();
                 return false;
 
             case 1:
@@ -67,23 +68,23 @@ public class UI {
                 return false;
 
             case 1:
-                //medlemshaandtering.tilgaaMedlemsinformationer();
+                medlemshaandtering.tilgaaMedlemsinformationer();
                 break;
 
             case 2:
-                //medlemshaandtering.printMedlemsliste();
+                medlemshaandtering.printMedlemsliste();
                 break;
 
             case 3:
-                //medlemshaandtering.tilfoejMedlem();
+                medlemshaandtering.tilfoejMedlem();
                 break;
 
             case 4:
-                //medlemshaandtering.redigerMedlem();
+                medlemshaandtering.redigerMedlem();
                 break;
 
             case 5:
-                //medlemshaandtering.fjernMedlem();
+                medlemshaandtering.fjernMedlem();
                 break;
         }
 
@@ -107,15 +108,15 @@ public class UI {
                 return false;
 
             case 1:
-                //indbetalingsliste.tilfoejIndbetaling();
+                indbetalingsliste.tilfoejIndbetaling();
                 break;
 
             case 2:
-                //indbetalingsliste.printRestanceOversigt();
+                indbetalingsliste.printRestanceOversigt();
                 break;
 
             case 3:
-                //indbetalingsliste.redigerIndbetaling();
+                indbetalingsliste.redigerIndbetaling();
                 break;
         }
         return true;
@@ -126,9 +127,9 @@ public class UI {
         Konkurrencesvoemning konkurrencesvoemning = new Konkurrencesvoemning();
 
         System.out.println("Vælg en handling:");
-        System.out.println("1. Se holdoversigt"); //submenu
-        System.out.println("2. Administrer resultater"); //submenu se, tilføj, rediger, slet
-        System.out.println("3. Administrer stævner"); //submenu
+        System.out.println("1. Se holdoversigt");
+        System.out.println("2. Administrer resultater");
+        System.out.println("3. Administrer stævner");
         System.out.println("0. Log ud");
 
         int svar;
@@ -166,11 +167,11 @@ public class UI {
             case 0:
                 break;
             case 1:
-                konkurrencesvoemning.seJuniorHoldliste();
+                konkurrencesvoemning.printJuniorHoldliste();
                 break;
 
             case 2:
-                konkurrencesvoemning.seSeniorHoldliste();
+                konkurrencesvoemning.printSeniorHoldliste();
                 break;
         }
     }
@@ -190,7 +191,7 @@ public class UI {
                 break;
 
             case 1:
-                konkurrencesvoemning.seResultater();
+                konkurrencesvoemning.printResultater();
                 break;
 
             case 2:
@@ -226,11 +227,11 @@ public class UI {
                 break;
 
             case 1:
-                konkurrencesvoemning.seAktiveStaevner();
+                konkurrencesvoemning.printAktiveStaevner();
                 break;
 
             case 2:
-                konkurrencesvoemning.seAfsluttedeStaevner();
+                konkurrencesvoemning.printAfsluttedeStaevner();
                 break;
 
             case 3:
