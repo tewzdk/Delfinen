@@ -10,10 +10,9 @@ public class UI {
     }
 
     public boolean loginMenu(Utility utility){
+        System.out.println("Indtast loginkode / Tast '0' for at afslutte programmet:");
         boolean aktiv;
         int svar;
-
-        System.out.println("Indtast loginkode / Tast '0' for at afslutte programmet:");
         svar = utility.validerIntegerSvar();
         switch(svar){
             case 0:
@@ -99,6 +98,7 @@ public class UI {
         System.out.println("2. Oversigt over restance");
         System.out.println("3. Ret indbetaling");
         System.out.println("0. Log ud");
+
         int svar;
         svar = utility.validerIntegerSvar();
         switch(svar){
@@ -123,6 +123,7 @@ public class UI {
     //Traener
     private boolean hovedMenuTraener(Utility utility){
         Konkurrencesvoemning konkurrencesvoemning = new Konkurrencesvoemning();
+
         System.out.println("Vælg en handling:");
         System.out.println("1. Se holdoversigt"); //submenu
         System.out.println("2. Administrer resultater"); //submenu se, tilføj, rediger, slet
@@ -141,7 +142,7 @@ public class UI {
                 break;
 
             case 2:
-                //resultatMenu();
+                resultatMenu(utility, konkurrencesvoemning);
                 break;
 
             case 3:
@@ -150,7 +151,6 @@ public class UI {
         }
         return true;
     }
-
 
     private void holdoversigtMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning) {
 
@@ -173,5 +173,37 @@ public class UI {
                 konkurrencesvoemning.seSeniorHoldliste();
                 break;
         }
+    }
+
+    private void resultatMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning){
+        System.out.println("Vælg en handling:");
+        System.out.println("1. Se resultater");
+        System.out.println("2. Tilføj resultat");
+        System.out.println("3. Rediger resultat");
+        System.out.println("4. Fjern resultat");
+        System.out.println("0. Gå tilbage");
+        int svar;
+        svar = utility.validerIntegerSvar();
+        switch(svar){
+            case 0:
+                break;
+
+            case 1:
+                konkurrencesvoemning.seResultater();
+                break;
+
+            case 2:
+                konkurrencesvoemning.tilfoejResultater();
+                break;
+
+            case 3:
+                konkurrencesvoemning.redigerResultat();
+                break;
+
+            case 4:
+                konkurrencesvoemning.fjernResultat();
+                break;
+        }
+
     }
 }

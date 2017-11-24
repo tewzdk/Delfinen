@@ -10,4 +10,8 @@ public class Konkurrencesvoemning {
     private void tilfoejStaevne(){}
     private void redigerStaevne(){}
     private void fjernStaevne(){}
+    public void seResultater(){}
+    public void tilfoejResultater(){}
+    public void redigerResultat(){}
+    public void fjernResultat(){}
 }
