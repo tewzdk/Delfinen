@@ -1,14 +1,12 @@
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Medlem {
     private String navn;
     private int medlemsnummer;
     private String emailadresse;
-    private Date fødselsaar;
+    private Date foedselsdato;
     private int telefonnummer;
     private Adresse adresse = new Adresse();
-
 
     public String getNavn() {
         return navn;
@@ -26,12 +24,12 @@ public class Medlem {
         this.medlemsnummer = medlemsnummer;
     }
 
-    public Date getFødselsaar() {
-        return fødselsaar;
+    public Date getFoedselsdato() {
+        return foedselsdato;
     }
 
-    public void setFødselsaar(Date fødselsaar) {
-        this.fødselsaar = fødselsaar;
+    public void setFoedselsdato(Date foedselsdato) {
+        this.foedselsdato = foedselsdato;
     }
 
     public int getTelefonnummer() {

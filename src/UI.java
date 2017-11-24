@@ -2,7 +2,6 @@ public class UI {
 
     public void start() {
         Utility utility = new Utility();
-
         boolean programmetKoerer = true;
         while (programmetKoerer) {
             programmetKoerer = loginMenu(utility);
@@ -13,7 +12,7 @@ public class UI {
         System.out.println("Indtast loginkode / Tast '0' for at afslutte programmet:");
         boolean aktiv;
         int svar;
-        svar = utility.validerIntegerSvar();
+        svar = utility.inputIntegerSvar();
         switch (svar) {
             case 0:
                 System.out.println("[Programmet afsluttes]");
@@ -61,7 +60,7 @@ public class UI {
         System.out.println("5. Fjern medlem");
         System.out.println("0. Log ud");
         int svar;
-        svar = utility.validerIntegerSvar();
+        svar = utility.inputIntegerSvar();
 
         switch (svar) {
             case 0:
@@ -102,7 +101,7 @@ public class UI {
         System.out.println("0. Log ud");
 
         int svar;
-        svar = utility.validerIntegerSvar();
+        svar = utility.inputIntegerSvar();
         switch (svar) {
             case 0:
                 return false;
@@ -133,7 +132,7 @@ public class UI {
         System.out.println("0. Log ud");
 
         int svar;
-        svar = utility.validerIntegerSvar();
+        svar = utility.inputIntegerSvar();
 
         switch (svar) {
             case 0:
@@ -161,7 +160,7 @@ public class UI {
         System.out.println("0. Gå tilbage");
 
         int svar;
-        svar = utility.validerIntegerSvar();
+        svar = utility.inputIntegerSvar();
 
         switch (svar) {
             case 0:
@@ -184,7 +183,7 @@ public class UI {
         System.out.println("4. Fjern resultat");
         System.out.println("0. Gå tilbage");
         int svar;
-        svar = utility.validerIntegerSvar();
+        svar = utility.inputIntegerSvar();
 
         switch (svar) {
             case 0:
@@ -219,7 +218,7 @@ public class UI {
         System.out.println("5. Afslut stævne");
         System.out.println("0. Gå tilbage");
         int svar;
-        svar = utility.validerIntegerSvar();
+        svar = utility.inputIntegerSvar();
 
         switch (svar) {
 

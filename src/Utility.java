@@ -1,10 +1,13 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Utility {
-    private Scanner in = new Scanner(System.in);
+    private Scanner in = new Scanner(System.in).useDelimiter("\\n");
 
-    public int validerIntegerSvar(){
+    public int inputIntegerSvar(){
             int svar = -1;
 
                 try {
@@ -17,7 +20,24 @@ public class Utility {
             return svar;
         }
 
-    public void validerDateSvar(){}
+    public Date inputFoedselsdato(){
+        System.out.println("Indtast fødselsdato (dd/mm/åååå)");
+        String svar;
+        svar = in.next();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date foedselsdato = null;
+        try {
+            foedselsdato = dateFormat.parse(svar);
+        } catch (ParseException e) {
+        }
+
+        return foedselsdato;
+    }
+
+    //public Adresse inputAdresse(){}
+
+    //public Staevne inputStaevne(){}
 
     public void scannerClose(){
     in.close();

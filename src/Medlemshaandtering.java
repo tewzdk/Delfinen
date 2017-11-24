@@ -5,8 +5,13 @@ public class Medlemshaandtering {
 
     public void tilgaaMedlemsinformationer(){
     }
-    public void printMedlemsliste(){}
-    public void tilfoejMedlem(){}
+    public void printMedlemsliste(){
+        for (int i = 0; i < medlemsliste.size(); i++) {
+            System.out.println(medlemsliste.get(i));
+        }
+    }
+    public void tilfoejMedlem(){
+    }
     public void redigerMedlem(){}
     public void fjernMedlem(){}
 }
