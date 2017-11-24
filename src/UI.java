@@ -10,9 +10,10 @@ public class UI {
     }
 
     public boolean loginMenu(Utility utility){
-        System.out.println("Indtast loginkode / Tast '0' for at afslutte programmet:");
         boolean aktiv;
         int svar;
+
+        System.out.println("Indtast loginkode / Tast '0' for at afslutte programmet:");
         svar = utility.validerIntegerSvar();
         switch(svar){
             case 0:
@@ -124,11 +125,8 @@ public class UI {
         Konkurrencesvoemning konkurrencesvoemning = new Konkurrencesvoemning();
         System.out.println("Vælg en handling:");
         System.out.println("1. Se holdoversigt"); //submenu
-        System.out.println("2. Se resultater"); //submenu
-        System.out.println("3. Tilføj resultat");
-        System.out.println("4. Rediger resultat");
-        System.out.println("5. Slet resultat");
-        System.out.println("6. Administrer stævner"); //submenu
+        System.out.println("2. Administrer resultater"); //submenu se, tilføj, rediger, slet
+        System.out.println("3. Administrer stævner"); //submenu
         System.out.println("0. Log ud");
         int svar;
         svar = utility.validerIntegerSvar();
@@ -146,22 +144,11 @@ public class UI {
                 break;
 
             case 3:
-                //konkurrencesvoemning.tilfoejResultat();
-                break;
-
-            case 4:
-                //konkurrencesvoemning.redigerResultat();
-                break;
-
-            case 5:
-                //konkurrencesvoemning.fjernResultat();
-                break;
-
-            case 6:
                 //staevneMenu();
                 break;
         }
         return true;
     }
+
 
 }
