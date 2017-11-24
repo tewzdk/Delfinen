@@ -128,6 +128,7 @@ public class UI {
         System.out.println("2. Administrer resultater"); //submenu se, tilføj, rediger, slet
         System.out.println("3. Administrer stævner"); //submenu
         System.out.println("0. Log ud");
+
         int svar;
         svar = utility.validerIntegerSvar();
 
@@ -136,7 +137,7 @@ public class UI {
                 return false;
 
             case 1:
-                //holdoversigtMenu();
+                holdoversigtMenu(utility, konkurrencesvoemning);
                 break;
 
             case 2:
@@ -151,4 +152,26 @@ public class UI {
     }
 
 
+    private void holdoversigtMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning) {
+
+        System.out.println("Vælg en handling");
+        System.out.println("1. Se juniorhold");
+        System.out.println("2. Se seniorhold");
+        System.out.println("0. Gå tilbage");
+
+        int svar;
+        svar = utility.validerIntegerSvar();
+
+        switch (svar){
+            case 0:
+                break;
+            case 1:
+                konkurrencesvoemning.seJuniorHoldliste();
+                break;
+
+            case 2:
+                konkurrencesvoemning.seSeniorHoldliste();
+                break;
+        }
+    }
 }
