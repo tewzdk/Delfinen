@@ -51,7 +51,6 @@ public class UI {
     //Formand
     private boolean hovedMenuFormand(Utility utility){
         Medlemshaandtering medlemshaandtering = new Medlemshaandtering();
-        System.out.println();
         System.out.println("Vælg en handling:");
         System.out.println("1. Tilgå medlemsinformationer");
         System.out.println("2. Se alle medlemmer");
@@ -123,10 +122,46 @@ public class UI {
     //Traener
     private boolean hovedMenuTraener(Utility utility){
         Konkurrencesvoemning konkurrencesvoemning = new Konkurrencesvoemning();
-        System.out.println();
+        System.out.println("Vælg en handling:");
+        System.out.println("1. Se holdoversigt"); //submenu
+        System.out.println("2. Se resultater"); //submenu
+        System.out.println("3. Tilføj resultat");
+        System.out.println("4. Rediger resultat");
+        System.out.println("5. Slet resultat");
+        System.out.println("6. Administrer stævner"); //submenu
+        System.out.println("0. Log ud");
+        int svar;
+        svar = utility.validerIntegerSvar();
 
-        System.out.println("Du er fanget i hovedMenuTraener");
-        return false;
+        switch(svar){
+            case 0:
+                return false;
+
+            case 1:
+                //holdoversigtMenu();
+                break;
+
+            case 2:
+                //resultatMenu();
+                break;
+
+            case 3:
+                //konkurrencesvoemning.tilfoejResultat();
+                break;
+
+            case 4:
+                //konkurrencesvoemning.redigerResultat();
+                break;
+
+            case 5:
+                //konkurrencesvoemning.fjernResultat();
+                break;
+
+            case 6:
+                //staevneMenu();
+                break;
+        }
+        return true;
     }
 
 }
