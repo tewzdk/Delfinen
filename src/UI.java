@@ -1,6 +1,6 @@
 public class UI {
 
-    public void start(){
+    public void start() {
         Utility utility = new Utility();
 
         boolean programmetKoerer = true;
@@ -9,33 +9,33 @@ public class UI {
         }
     }
 
-    public boolean loginMenu(Utility utility){
+    public boolean loginMenu(Utility utility) {
         System.out.println("Indtast loginkode / Tast '0' for at afslutte programmet:");
         boolean aktiv;
         int svar;
         svar = utility.validerIntegerSvar();
-        switch(svar){
+        switch (svar) {
             case 0:
                 System.out.println("[Programmet afsluttes]");
                 return false;
 
             case 1:
                 aktiv = true;
-                while(aktiv) {
+                while (aktiv) {
                     aktiv = hovedMenuFormand(utility);
                 }
                 break;
 
             case 2:
                 aktiv = true;
-                while(aktiv){
+                while (aktiv) {
                     aktiv = hovedMenuKasserer(utility);
                 }
                 break;
 
             case 3:
                 aktiv = true;
-                while(aktiv) {
+                while (aktiv) {
                     aktiv = hovedMenuTraener(utility);
                 }
                 break;
@@ -48,8 +48,9 @@ public class UI {
         }
         return true;
     }
+
     //Formand
-    private boolean hovedMenuFormand(Utility utility){
+    private boolean hovedMenuFormand(Utility utility) {
         Medlemshaandtering medlemshaandtering = new Medlemshaandtering();
         System.out.println("Vælg en handling:");
         System.out.println("1. Tilgå medlemsinformationer");
@@ -61,7 +62,7 @@ public class UI {
         int svar;
         svar = utility.validerIntegerSvar();
 
-        switch(svar){
+        switch (svar) {
             case 0:
                 return false;
 
@@ -90,7 +91,7 @@ public class UI {
     }
 
     //Kasserer
-    private boolean hovedMenuKasserer(Utility utility){
+    private boolean hovedMenuKasserer(Utility utility) {
         Indbetalingsliste indbetalingsliste = new Indbetalingsliste();
 
         System.out.println("Vælg en handling:");
@@ -101,7 +102,7 @@ public class UI {
 
         int svar;
         svar = utility.validerIntegerSvar();
-        switch(svar){
+        switch (svar) {
             case 0:
                 return false;
 
@@ -121,7 +122,7 @@ public class UI {
     }
 
     //Traener
-    private boolean hovedMenuTraener(Utility utility){
+    private boolean hovedMenuTraener(Utility utility) {
         Konkurrencesvoemning konkurrencesvoemning = new Konkurrencesvoemning();
 
         System.out.println("Vælg en handling:");
@@ -133,7 +134,7 @@ public class UI {
         int svar;
         svar = utility.validerIntegerSvar();
 
-        switch(svar){
+        switch (svar) {
             case 0:
                 return false;
 
@@ -146,14 +147,13 @@ public class UI {
                 break;
 
             case 3:
-                //staevneMenu();
+                staevneMenu(utility, konkurrencesvoemning);
                 break;
         }
         return true;
     }
 
     private void holdoversigtMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning) {
-
         System.out.println("Vælg en handling");
         System.out.println("1. Se juniorhold");
         System.out.println("2. Se seniorhold");
@@ -162,7 +162,7 @@ public class UI {
         int svar;
         svar = utility.validerIntegerSvar();
 
-        switch (svar){
+        switch (svar) {
             case 0:
                 break;
             case 1:
@@ -175,7 +175,7 @@ public class UI {
         }
     }
 
-    private void resultatMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning){
+    private void resultatMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning) {
         System.out.println("Vælg en handling:");
         System.out.println("1. Se resultater");
         System.out.println("2. Tilføj resultat");
@@ -184,7 +184,8 @@ public class UI {
         System.out.println("0. Gå tilbage");
         int svar;
         svar = utility.validerIntegerSvar();
-        switch(svar){
+
+        switch (svar) {
             case 0:
                 break;
 
@@ -203,6 +204,46 @@ public class UI {
             case 4:
                 konkurrencesvoemning.fjernResultat();
                 break;
+        }
+
+    }
+
+    private void staevneMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning) {
+
+        System.out.println("Vælg en handling");
+        System.out.println("1. Se aktive staevner");
+        System.out.println("2. Se afsluttede staevner");
+        System.out.println("3. Tilfoej staevne");
+        System.out.println("4. Rediger staevne");
+        System.out.println("5. Afslut stævne");
+        System.out.println("0. Gå tilbage");
+        int svar;
+        svar = utility.validerIntegerSvar();
+
+        switch (svar) {
+
+            case 0:
+                break;
+
+            case 1:
+                konkurrencesvoemning.seAktiveStaevner();
+                break;
+
+            case 2:
+                konkurrencesvoemning.seAfsluttedeStaevner();
+                break;
+
+            case 3:
+                konkurrencesvoemning.tilfoejStaevne();
+                break;
+
+            case 4:
+                konkurrencesvoemning.redigerStaevne();
+                break;
+
+            case 5:
+                konkurrencesvoemning.afslutStaevne();
+
         }
 
     }

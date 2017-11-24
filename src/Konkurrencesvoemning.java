@@ -5,11 +5,11 @@ public class Konkurrencesvoemning {
 
     public void seSeniorHoldliste(){}
     public void seJuniorHoldliste(){}
-    private void seAktiveStaevner(){}
-    private void seAfsluttedeStaevner(){}
-    private void tilfoejStaevne(){}
-    private void redigerStaevne(){}
-    private void fjernStaevne(){}
+    public void seAktiveStaevner(){}
+    public void seAfsluttedeStaevner(){}
+    public void tilfoejStaevne(){}
+    public void redigerStaevne(){}
+    public void afslutStaevne(){}
     public void seResultater(){}
     public void tilfoejResultater(){}
     public void redigerResultat(){}
