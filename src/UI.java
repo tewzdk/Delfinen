@@ -75,7 +75,7 @@ public class UI {
                 break;
 
             case 3:
-                medlemshaandtering.tilfoejMedlem();
+                medlemshaandtering.tilfoejMedlem(utility);
                 break;
 
             case 4:

@@ -2,9 +2,9 @@ import java.util.Date;
 
 public class Medlem {
     private String navn;
+    private Date foedselsdato;
     private int medlemsnummer;
     private String emailadresse;
-    private Date foedselsdato;
     private int telefonnummer;
     private Adresse adresse;
 
@@ -16,20 +16,20 @@ public class Medlem {
         this.navn = navn;
     }
 
-    public int getMedlemsnummer() {
-        return medlemsnummer;
-    }
-
-    public void setMedlemsnummer(int medlemsnummer) {
-        this.medlemsnummer = medlemsnummer;
-    }
-
     public Date getFoedselsdato() {
         return foedselsdato;
     }
 
     public void setFoedselsdato(Date foedselsdato) {
         this.foedselsdato = foedselsdato;
+    }
+
+    public int getMedlemsnummer() {
+        return medlemsnummer;
+    }
+
+    public void setMedlemsnummer(int medlemsnummer) {
+        this.medlemsnummer = medlemsnummer;
     }
 
     public int getTelefonnummer() {
