@@ -5,6 +5,14 @@ public class Adresse {
     private int postnummer;
     private String by;
 
+    public Adresse(String gadenavn, int husnummer, String etage, int postnummer, String by) {
+        this.gadenavn = gadenavn;
+        this.husnummer = husnummer;
+        this.etage = etage;
+        this.postnummer = postnummer;
+        this.by = by;
+    }
+
     public String getGadenavn() {
         return gadenavn;
     }

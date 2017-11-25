@@ -6,7 +6,7 @@ public class Medlem {
     private String emailadresse;
     private Date foedselsdato;
     private int telefonnummer;
-    private Adresse adresse = new Adresse();
+    private Adresse adresse;
 
     public String getNavn() {
         return navn;
