@@ -7,6 +7,11 @@ import java.util.InputMismatchException;
 public class Utility {
     private Scanner in = new Scanner(System.in).useDelimiter("\\n");
 
+    public String inputString(){
+        String string = in.next();
+        return string;
+    }
+
     public int inputIntegerSvar(){
             int svar = -1;
 
