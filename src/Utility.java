@@ -30,14 +30,14 @@ public class Utility {
         boolean validerDatoInput = false;
         String svar;
         Date date = null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        dateFormat.setLenient(false);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        simpleDateFormat.setLenient(false);
 
         while(!validerDatoInput) {
             svar = in.next();
 
             try {
-                date = dateFormat.parse(svar);
+                date = simpleDateFormat.parse(svar);
                 validerDatoInput = true;
 
             } catch (ParseException e) {
@@ -90,4 +90,5 @@ public class Utility {
     public void scannerClose(){
     in.close();
     }
+
 }

@@ -21,22 +21,28 @@ public class UI {
 
             case 1:
                 aktiv = true;
+                Medlemshaandtering medlemshaandtering = new Medlemshaandtering();
+
                 while (aktiv) {
-                    aktiv = hovedMenuFormand(utility);
+                    aktiv = hovedMenuFormand(utility, medlemshaandtering);
                 }
                 break;
 
             case 2:
                 aktiv = true;
+                Indbetalingsliste indbetalingsliste = new Indbetalingsliste();
+
                 while (aktiv) {
-                    aktiv = hovedMenuKasserer(utility);
+                    aktiv = hovedMenuKasserer(utility, indbetalingsliste);
                 }
                 break;
 
             case 3:
                 aktiv = true;
+                Konkurrencesvoemning konkurrencesvoemning = new Konkurrencesvoemning();
+
                 while (aktiv) {
-                    aktiv = hovedMenuTraener(utility);
+                    aktiv = hovedMenuTraener(utility, konkurrencesvoemning);
                 }
                 break;
 
@@ -50,8 +56,7 @@ public class UI {
     }
 
     //Formand
-    private boolean hovedMenuFormand(Utility utility) {
-        Medlemshaandtering medlemshaandtering = new Medlemshaandtering();
+    private boolean hovedMenuFormand(Utility utility, Medlemshaandtering medlemshaandtering) {
         System.out.println("Vælg en handling:");
         System.out.println("1. Tilgå medlemsinformationer");
         System.out.println("2. Se alle medlemmer");
@@ -91,9 +96,7 @@ public class UI {
     }
 
     //Kasserer
-    private boolean hovedMenuKasserer(Utility utility) {
-        Indbetalingsliste indbetalingsliste = new Indbetalingsliste();
-
+    private boolean hovedMenuKasserer(Utility utility, Indbetalingsliste indbetalingsliste) {
         System.out.println("Vælg en handling:");
         System.out.println("1. Indberet betaling");
         System.out.println("2. Oversigt over restance");
@@ -122,9 +125,7 @@ public class UI {
     }
 
     //Traener
-    private boolean hovedMenuTraener(Utility utility) {
-        Konkurrencesvoemning konkurrencesvoemning = new Konkurrencesvoemning();
-
+    private boolean hovedMenuTraener(Utility utility, Konkurrencesvoemning konkurrencesvoemning) {
         System.out.println("Vælg en handling:");
         System.out.println("1. Se holdoversigt");
         System.out.println("2. Administrer resultater");

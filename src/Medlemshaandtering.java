@@ -8,7 +8,7 @@ public class Medlemshaandtering {
     }
     public void printMedlemsliste(){
         for (int i = 0; i < medlemsliste.size(); i++) {
-            System.out.println(medlemsliste.get(i));
+            System.out.println("[" + medlemsliste.get(i).getMedlemsnummer() + "] " + medlemsliste.get(i).getNavn());
         }
     }
     public void tilfoejMedlem(Utility utility){
@@ -56,19 +56,19 @@ public class Medlemshaandtering {
         switch(svar){
             case 1:
                 Konkurrencesvoemmer konkurrencesvoemmer =
-                        new Konkurrencesvoemmer(navn, foedselsdato, medlemsnummer, emailadresse, telefonnummer, adresse);
+                        new Konkurrencesvoemmer(medlemsnummer, navn, foedselsdato, emailadresse, telefonnummer, adresse);
                 medlemsliste.add(konkurrencesvoemmer);
                 break;
 
             case 2:
                 Motionist motionist =
-                        new Motionist(navn, foedselsdato, medlemsnummer, emailadresse, telefonnummer, adresse);
+                        new Motionist(medlemsnummer, navn, foedselsdato, emailadresse, telefonnummer, adresse);
                 medlemsliste.add(motionist);
                 break;
 
             case 3:
                 Passiv passiv =
-                        new Passiv(navn, foedselsdato, medlemsnummer, emailadresse, telefonnummer, adresse);
+                        new Passiv(medlemsnummer, navn, foedselsdato, emailadresse, telefonnummer, adresse);
                 medlemsliste.add(passiv);
                 break;
         }

@@ -2,10 +2,10 @@ import java.util.Date;
 
 public class Passiv extends Medlem {
 
-    public Passiv(String navn, Date foedselsdato, int medlemsnummer, String emailadresse, int telefonnummer, Adresse adresse) {
+    public Passiv(int medlemsnummer, String navn, Date foedselsdato, String emailadresse, int telefonnummer, Adresse adresse) {
+        super.setMedlemsnummer(medlemsnummer);
         super.setNavn(navn);
         super.setFoedselsdato(foedselsdato);
-        super.setMedlemsnummer(medlemsnummer);
         super.setEmailadresse(emailadresse);
         super.setTelefonnummer(telefonnummer);
         super.setAdresse(adresse);
