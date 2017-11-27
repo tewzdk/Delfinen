@@ -80,5 +80,37 @@ public class Medlemshaandtering {
     }
     public void redigerMedlem(){}
     public void fjernMedlem(Utility utility){
+        boolean validerSvar = false;
+        boolean validerSvar2 = false;
+        System.out.println("Indtast medlemsnummer:");
+        while(!validerSvar) {
+            int svar = utility.inputIntegerSvar();
+            for (int i = 0; i < medlemsliste.size(); i++) {
+                if (medlemsliste.get(i).getMedlemsnummer() == svar) {
+                    System.out.println("Er du sikker på, at du vil slette: (Tast: 'JA'/'NEJ')");
+                    System.out.println(medlemsliste.get(i));
+                    while(!validerSvar2) {
+                        String svar2 = utility.inputString();
+                        if (svar2.equalsIgnoreCase("JA")) {
+                            medlemsliste.remove(i);
+                            System.out.println("[Medlemmet er blevet fjernet]");
+                            System.out.println();
+                            validerSvar2 = true;
+                        }
+                        else if (svar2.equalsIgnoreCase("NEJ")) {
+                            validerSvar2 = true;
+                        }
+                        else{
+                            System.out.println("Indtast venligst 'JA' eller 'NEJ':");
+                        }
+                    }
+                    validerSvar = true;
+                }
+                else{
+                    System.out.println("Medlemsnummer " + svar + " eksisterer ikke. Indtast venligst et korrekt medlemsnummer:");
+                }
+            }
+        }
+
     }
 }
