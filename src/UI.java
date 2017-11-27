@@ -235,7 +235,7 @@ public class UI {
                 break;
 
             case 3:
-                konkurrencesvoemning.tilfoejStaevne();
+                konkurrencesvoemning.tilfoejStaevne(utility);
                 break;
 
             case 4:
