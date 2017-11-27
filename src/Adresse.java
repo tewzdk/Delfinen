@@ -52,4 +52,10 @@ public class Adresse {
     public void setBy(String by) {
         this.by = by;
     }
+
+    @Override
+    public String toString(){
+        return gadenavn + " " + husnummer + " " + etage +
+                "\n" + postnummer + " " + by;
+    }
 }
