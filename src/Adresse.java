@@ -55,7 +55,6 @@ public class Adresse {
 
     @Override
     public String toString(){
-        return gadenavn + " " + husnummer + " " + etage +
-                ", " + postnummer + " " + by;
+        return "Adresse: " + gadenavn + " " + husnummer + " " + etage + ", " + postnummer + " " + by;
     }
 }
