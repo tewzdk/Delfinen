@@ -4,14 +4,23 @@ import java.util.Date;
 public class Medlemshaandtering {
     private ArrayList<Medlem> medlemsliste = new ArrayList<>();
 
-    public void tilgaaMedlemsinformationer(){
+    public void tilgaaMedlemsinformationer(Utility utility){
+        System.out.println("Indtast medlemsnummer:");
+        int svar = utility.inputIntegerSvar();
+        for (int i = 0; i < medlemsliste.size(); i++) {
+            if(medlemsliste.get(i).getMedlemsnummer() == svar){
+                System.out.println(medlemsliste.get(i));
+            }
+        }
     }
     public void printMedlemsliste(){
         for (int i = 0; i < medlemsliste.size(); i++) {
             System.out.println("[" + medlemsliste.get(i).getMedlemsnummer() + "] " + medlemsliste.get(i).getNavn());
         }
+        System.out.println();
     }
     public void tilfoejMedlem(Utility utility){
+        int medlemsnummer = medlemsliste.size() + 1;
 
         //navn
         System.out.println("Indtast navn:");
@@ -20,10 +29,6 @@ public class Medlemshaandtering {
         //foedselsdato
         System.out.println("Indtast fødselsdato (dd/mm/åååå):");
         Date foedselsdato = utility.inputDato();
-
-        //medlemsnummer
-        System.out.println("Indtast medlemsnummer:");
-        int medlemsnummer = utility.inputIntegerSvar();
 
         //emailadresse
         boolean validerEmailadresseInput = false;
@@ -74,5 +79,6 @@ public class Medlemshaandtering {
         }
     }
     public void redigerMedlem(){}
-    public void fjernMedlem(){}
+    public void fjernMedlem(Utility utility){
+    }
 }

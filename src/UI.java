@@ -72,7 +72,7 @@ public class UI {
                 return false;
 
             case 1:
-                medlemshaandtering.tilgaaMedlemsinformationer();
+                medlemshaandtering.tilgaaMedlemsinformationer(utility);
                 break;
 
             case 2:
@@ -88,7 +88,7 @@ public class UI {
                 break;
 
             case 5:
-                medlemshaandtering.fjernMedlem();
+                medlemshaandtering.fjernMedlem(utility);
                 break;
         }
 

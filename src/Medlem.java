@@ -69,7 +69,8 @@ public class Medlem {
                 "\nFødselsdato: " + fødselsdatoString +
                 "\nE-mailadresse: " + emailadresse +
                 "\nTelefonnummer: " + telefonnummer +
-                "\nAdresse: " + adresse;
+                "\n" + adresse +
+                "\n̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅";
 
     }
 }
