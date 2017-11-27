@@ -48,6 +48,36 @@ public class Utility {
         return date;
     }
 
+    public String inputEmailadresse(){
+        boolean validerEmailadresseInput = false;
+        String emailadresse = "";
+        while(!validerEmailadresseInput){
+            emailadresse = inputString();
+            if(emailadresse.contains("@")){
+                validerEmailadresseInput = true;
+            }
+            else{
+                System.out.println("emailadressen skal indeholde '@':");
+            }
+        }
+        return emailadresse;
+    }
+
+    public int inputTelefonnummer(){
+        boolean validerSvar = false;
+        int telefonnummer = -1;
+        while(!validerSvar) {
+            telefonnummer = inputIntegerSvar();
+            if(telefonnummer > 0 && telefonnummer < 99999999){
+                validerSvar = true;
+            }
+            else{
+                System.out.println("Indtast venligst et korrekt telefonnummer:");
+            }
+        }
+        return telefonnummer;
+    }
+
     public Adresse inputAdresse(){
         //gadenavn
         System.out.println("Indtast gadenavn:");

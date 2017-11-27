@@ -85,7 +85,7 @@ public class UI {
                 break;
 
             case 4:
-                medlemshaandtering.redigerMedlem();
+                medlemshaandtering.redigerMedlem(utility);
                 break;
 
             case 5:

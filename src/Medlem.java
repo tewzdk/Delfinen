@@ -63,14 +63,14 @@ public class Medlem {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String fødselsdatoString;
         fødselsdatoString = simpleDateFormat.format(foedselsdato);
-        return "____________________\n" +
-                "Medlemsnummer: " + medlemsnummer +
+        return "________________________________________" +
+                "\nMedlemsnummer: " + medlemsnummer +
                 "\nNavn: " + navn +
                 "\nFødselsdato: " + fødselsdatoString +
                 "\nE-mailadresse: " + emailadresse +
                 "\nTelefonnummer: " + telefonnummer +
-                "\n" + adresse +
-                "\n̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅";
+                "\nAdresse: " + adresse +
+                "\n̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅";
 
     }
 }
