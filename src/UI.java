@@ -2,6 +2,7 @@ public class UI {
 
     public void start() {
         Utility utility = new Utility();
+
         boolean programmetKoerer = true;
         while (programmetKoerer) {
             programmetKoerer = loginMenu(utility);
@@ -239,11 +240,11 @@ public class UI {
                 break;
 
             case 4:
-                konkurrencesvoemning.redigerStaevne();
+                konkurrencesvoemning.redigerStaevne(utility);
                 break;
 
             case 5:
-                konkurrencesvoemning.afslutStaevne();
+                konkurrencesvoemning.afslutStaevne(utility);
 
         }
 

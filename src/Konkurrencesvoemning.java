@@ -19,21 +19,36 @@ public class Konkurrencesvoemning {
         //Laver stævnenavn
         System.out.println("Indtast stævne");
         String staevnenavn = utility.inputString();
-       // System.out.println("Indtast adresse");
+        //Laver adresse
         Adresse staevneadresse = utility.inputAdresse();
         System.out.println("Indtast dato for stævnet (dd/mm/åååå)");
         Date staevneDato = utility.inputDato();
 
+        //Skaber det nye stævne
         Staevne staevne = new Staevne(staevnenavn, staevneadresse, staevneDato);
-
         staevneliste.add(staevne);
-
-        System.out.println(staevneliste);
-
     }
 
-    public void redigerStaevne(){}
-    public void afslutStaevne(){}
+    public void redigerStaevne(Utility utility){
+
+        System.out.println("Hvilket stævne vil du redigere?");
+
+
+
+    }
+    public void afslutStaevne(Utility utility){
+
+        System.out.println("Hvilket stævne vil du afslutte?");
+
+        String svar = utility.inputString();
+
+
+        for (int i = 0; i < staevneliste.size(); i++) {
+            if (staevneliste.get(i).getStaevnenavn().equalsIgnoreCase(svar)){ staevneliste.remove(i);
+            }
+
+        }
+    }
     public void printResultater(){}
     public void tilfoejResultater(){}
     public void redigerResultat(){}
