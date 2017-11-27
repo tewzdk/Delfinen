@@ -5,6 +5,7 @@ public class Staevne {
     private String staevnenavn;
     private Adresse adresse;
     private Date dato;
+    private String staevnelisteNummer;
 
     public Staevne(String staevnenavn, Adresse adresse, Date dato) {
         this.staevnenavn = staevnenavn;
@@ -43,6 +44,6 @@ public class Staevne {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String staevnedato;
         staevnedato = simpleDateFormat.format(dato);
-        return "Stævnenavn: " + staevnenavn + "\n Adresse: " + adresse + "\n Dato: " + staevnedato;
+        return staevnedato + ": " + staevnenavn + " (" + adresse + ") ";
     }
 }
