@@ -3,6 +3,7 @@ import java.util.Date;
 
 public class Konkurrencesvoemning {
     private ArrayList<Staevne> staevneliste = new ArrayList<>();
+    private ArrayList<Staevne> afsluttedeStaevner = new ArrayList<>();
 
     public void printMedlemsliste() {
         for (int i = 0; i < staevneliste.size(); i++) {
@@ -11,6 +12,11 @@ public class Konkurrencesvoemning {
     }
 
     public void printSeniorHoldliste() {
+
+
+        Date date;
+        Medlemshaandtering medlemshaandtering = new Medlemshaandtering();
+
     }
 
     public void printJuniorHoldliste() {
@@ -29,6 +35,16 @@ public class Konkurrencesvoemning {
     }
 
     public void printAfsluttedeStaevner() {
+
+        if (afsluttedeStaevner.size() > 0){
+            for (int i = 0; i < afsluttedeStaevner.size(); i++) {
+                System.out.println(afsluttedeStaevner.get(i));
+            }
+        } else {
+            System.out.println("[Der er ingen afsluttede stævner");
+        }
+        System.out.println("");
+
     }
 
     public void tilfoejStaevne(Utility utility) {
@@ -57,11 +73,15 @@ public class Konkurrencesvoemning {
 
         boolean validerSvar = false;
         boolean validerSvar2 = false;
+        int[] anArray = new int[20];
+        int nummer = 0;
+
+        for (int i = 0; i < staevneliste.size(); i++) {
+            nummer++;
+            System.out.println(nummer + ". " + staevneliste.get(i).getStaevnenavn());
+        }
 
         System.out.println("Hvilket stævne vil du afslutte?");
-
-        printAktiveStaevner();
-
         while (!validerSvar2) {
             String svar = utility.inputString();
             for (int i = 0; i < staevneliste.size(); i++) {
@@ -71,6 +91,7 @@ public class Konkurrencesvoemning {
                     while (!validerSvar) {
                         String svar2 = utility.inputString();
                         if (svar2.equalsIgnoreCase("JA")) {
+                            afsluttedeStaevner.add(staevneliste.get(i));
                             staevneliste.remove(i);
                             System.out.println("[Stævnet er blevet afsluttet]\n");
 
