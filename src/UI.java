@@ -59,6 +59,7 @@ public class UI {
 
     //Formand
     private boolean hovedMenuFormand(Utility utility, Medlemshaandtering medlemshaandtering) {
+        Konkurrencesvoemning ks = new Konkurrencesvoemning();
         System.out.println("Vælg en handling:");
         System.out.println("1. Tilgå medlemsinformationer");
         System.out.println("2. Se alle medlemmer");
@@ -92,6 +93,12 @@ public class UI {
             case 5:
                 medlemshaandtering.fjernMedlem(utility);
                 break;
+
+            case 6:
+                //ks.printSeniorHoldliste();
+                medlemshaandtering.printSeniorHoldliste();
+                break;
+
         }
 
         return true;

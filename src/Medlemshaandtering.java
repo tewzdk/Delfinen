@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -11,6 +14,22 @@ import java.util.Scanner;
 public class Medlemshaandtering {
     private ArrayList<Medlem> medlemsliste = new ArrayList<>();
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+    public void printSeniorHoldliste() {
+
+        for (int i = 0; i < medlemsliste.size(); i++) {
+            //medlemsliste.get(i).getFoedselsdato();
+            Date person = medlemsliste.get(i).getFoedselsdato();
+            LocalDate date = person.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            long yearsDelta = date.until(LocalDate.now(), ChronoUnit.YEARS);
+            if (yearsDelta > 17) {
+
+                medlemsliste.get(i).getMedlemsnummer();
+                System.out.println("[" + medlemsliste.get(i).getMedlemsnummer() + "] " + medlemsliste.get(i).getNavn() +
+                        ", " + yearsDelta);
+            }
+        }
+    }
 
     public void laesMedlemsliste(){
         Scanner scanner = null;
