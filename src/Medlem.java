@@ -3,6 +3,7 @@ import java.util.Date;
 
 public class Medlem {
     private int medlemsnummer;
+    private String medlemstype;
     private String navn;
     private Date foedselsdato;
     private String emailadresse;
@@ -15,6 +16,14 @@ public class Medlem {
 
     public void setMedlemsnummer(int medlemsnummer) {
         this.medlemsnummer = medlemsnummer;
+    }
+
+    public String getMedlemstype() {
+        return medlemstype;
+    }
+
+    public void setMedlemstype(String medlemstype) {
+        this.medlemstype = medlemstype;
     }
 
     public String getNavn() {
@@ -32,7 +41,6 @@ public class Medlem {
     public void setFoedselsdato(Date foedselsdato) {
         this.foedselsdato = foedselsdato;
     }
-
 
     public int getTelefonnummer() {
         return telefonnummer;
@@ -65,6 +73,7 @@ public class Medlem {
         fødselsdatoString = simpleDateFormat.format(foedselsdato);
         return "________________________________________" +
                 "\nMedlemsnummer: " + medlemsnummer +
+                "\nMedlemstype: " + medlemstype +
                 "\nNavn: " + navn +
                 "\nFødselsdato: " + fødselsdatoString +
                 "\nE-mailadresse: " + emailadresse +

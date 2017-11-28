@@ -8,7 +8,6 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Medlemshaandtering {
@@ -40,6 +39,7 @@ public class Medlemshaandtering {
         }
         //medlemsoplysninger
         int medlemsnummer;
+        String medlemstype;
         String navn;
         String foedselsdatoString;
         String emailadresse;
@@ -55,6 +55,7 @@ public class Medlemshaandtering {
         while(scanner.hasNextInt()){ //Denne scanner går igennem txt-filen, og lægger hver scannet del ind som variabel
             //medlemsoplysninger
             medlemsnummer = scanner.nextInt();
+            medlemstype = scanner.next();
             navn = scanner.next();
             foedselsdatoString = scanner.next();
             Date foedselsdato = null;
@@ -75,9 +76,25 @@ public class Medlemshaandtering {
             by = scanner.next();
 
             Adresse adresse = new Adresse(gadenavn,husnummer,etage,postnummer,by);
-            Medlem medlem = new Konkurrencesvoemmer(medlemsnummer, navn, foedselsdato, emailadresse, telefonnummer, adresse);
-            //OBS. MEGA FEJL!!!!
-            medlemsliste.add(medlem);
+            if(medlemstype.equalsIgnoreCase("Konkurrencesvømmer")){
+                Konkurrencesvoemmer konkurrencesvoemmer =
+                        new Konkurrencesvoemmer(medlemsnummer, navn, foedselsdato, emailadresse, telefonnummer, adresse);
+                medlemsliste.add(konkurrencesvoemmer);
+            }
+            else if(medlemstype.equalsIgnoreCase("Motionist")){
+                Motionist motionist =
+                        new Motionist(medlemsnummer, navn, foedselsdato, emailadresse, telefonnummer, adresse);
+                medlemsliste.add(motionist);
+            }
+            else if(medlemstype.equalsIgnoreCase("Passiv")) {
+                Passiv passiv =
+                        new Passiv(medlemsnummer, navn, foedselsdato, emailadresse, telefonnummer, adresse);
+                medlemsliste.add(passiv);
+            }
+            else{
+                System.out.println("Medlemstype eksisterer ikke");
+            }
+
 
             scanner.nextLine(); //Scanneren fungerer som en cursor, og skal dirigeres til næste linje efter hver menu er indlæst.
         }
@@ -91,6 +108,7 @@ public class Medlemshaandtering {
                 String foedselsdatoString = format.format(medlemsliste.get(i).getFoedselsdato());
                 outputStream.println(
                         medlemsliste.get(i).getMedlemsnummer() + ";" +
+                                medlemsliste.get(i).getMedlemstype() + ";" +
                                 medlemsliste.get(i).getNavn() + ";" +
                                 foedselsdatoString + ";" +
                                 medlemsliste.get(i).getEmailadresse() + ";" +
@@ -184,11 +202,12 @@ public class Medlemshaandtering {
                 if(medlemsliste.get(i).getMedlemsnummer() == svar){
                     System.out.println(medlemsliste.get(i));
                     System.out.println("Hvad ønsker du at ændre?");
-                    System.out.println("1. Navn");
-                    System.out.println("2. Fødselsdato");
-                    System.out.println("3. E-mailadresse");
-                    System.out.println("4. Telefonnummer");
-                    System.out.println("5. Adresse");
+                    System.out.println("1. Medlemstype");
+                    System.out.println("2. Navn");
+                    System.out.println("3. Fødselsdato");
+                    System.out.println("4. E-mailadresse");
+                    System.out.println("5. Telefonnummer");
+                    System.out.println("6. Adresse");
                     System.out.println("0. Gå tilbage");
 
 
@@ -199,34 +218,54 @@ public class Medlemshaandtering {
                                 break;
 
                             case 1:
+                                System.out.println("Vælg medlemstype:");
+                                System.out.println("1. Konkurrencesvømmer");
+                                System.out.println("2. Motionist");
+                                System.out.println("3. Passiv");
+                                switch(utility.inputIntegerSvar()){
+                                    case 1:
+                                        medlemsliste.get(i).setMedlemstype("Konkurrencesvømmer");
+                                        break;
+
+                                    case 2:
+                                        medlemsliste.get(i).setMedlemstype("Motionist");
+                                        break;
+
+                                    case 3:
+                                        medlemsliste.get(i).setMedlemstype("Passiv");
+                                        break;
+                                }
+                                break;
+
+                            case 2:
                                 System.out.println("Indtast nyt navn:");
                                 String nytNavn = utility.inputString();
                                 medlemsliste.get(i).setNavn(nytNavn);
                                 gemMedlemsliste();
                                 break;
 
-                            case 2:
+                            case 3:
                                 System.out.println("Indtast ny fødselsdato: (dd/mm/åååå)");
                                 Date nyFoedselsdato = utility.inputDato();
                                 medlemsliste.get(i).setFoedselsdato(nyFoedselsdato);
                                 gemMedlemsliste();
                                 break;
 
-                            case 3:
+                            case 4:
                                 System.out.println("Indtast ny e-mailadresse:");
                                 String nyEmailadresse = utility.inputEmailadresse();
                                 medlemsliste.get(i).setEmailadresse(nyEmailadresse);
                                 gemMedlemsliste();
                                 break;
 
-                            case 4:
+                            case 5:
                                 System.out.println("Indtast nyt telefonnummer:");
                                 int nytTelefonnummer = utility.inputTelefonnummer();
                                 medlemsliste.get(i).setTelefonnummer(nytTelefonnummer);
                                 gemMedlemsliste();
                                 break;
 
-                            case 5:
+                            case 6:
                                 Adresse nyAdresse = utility.inputAdresse();
                                 medlemsliste.get(i).setAdresse(nyAdresse);
                                 gemMedlemsliste();
