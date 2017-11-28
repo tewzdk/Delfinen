@@ -29,7 +29,7 @@ public class UI {
             case 1:
                 aktiv = true;
                 while (aktiv) {
-                    aktiv = hovedMenuFormand(utility, medlemshaandtering);
+                    aktiv = hovedMenuFormand(utility, medlemshaandtering,indbetalingsliste);
                 }
                 break;
 
@@ -57,7 +57,7 @@ public class UI {
     }
 
     //Formand
-    private boolean hovedMenuFormand(Utility utility, Medlemshaandtering medlemshaandtering) {
+    private boolean hovedMenuFormand(Utility utility, Medlemshaandtering medlemshaandtering,Indbetalingsliste indbetalingsliste) {
         Konkurrencesvoemning ks = new Konkurrencesvoemning();
         System.out.println("Vælg en handling:");
         System.out.println("1. Tilgå medlemsinformationer");
@@ -99,7 +99,7 @@ public class UI {
                 break;
 
             case 7:
-                indbetalingsMenu(utility);
+                indbetalingsMenu(utility, indbetalingsliste);
                 break;
 
         }
@@ -261,10 +261,8 @@ public class UI {
 
     }
 
-    private void indbetalingsMenu(Utility utility) {
+    private void indbetalingsMenu(Utility utility,Indbetalingsliste indbetalingsliste) {
         boolean aktiv = true;
-
-        Indbetalingsliste indbetalingsliste = new Indbetalingsliste();
         System.out.print("1: ");
         System.out.println("Tilføj indbetaling.");
         System.out.print("2: ");

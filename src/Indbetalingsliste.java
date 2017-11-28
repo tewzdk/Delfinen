@@ -126,6 +126,12 @@ public class Indbetalingsliste {
 
     }
 
+    private void gemBetalinger () {
+
+
+
+    }
+
     private boolean indbetalingsswitch(int i) {
 
 
