@@ -98,6 +98,10 @@ public class UI {
                 medlemshaandtering.printSeniorHoldliste();
                 break;
 
+            case 7:
+                indbetalingsMenu(utility);
+                break;
+
         }
 
         return true;
@@ -255,5 +259,55 @@ public class UI {
 
         }
 
+    }
+
+    private void indbetalingsMenu(Utility utility) {
+        boolean aktiv = true;
+
+        Indbetalingsliste indbetalingsliste = new Indbetalingsliste();
+
+        while(aktiv){
+            switch (utility.inputIntegerSvar()){
+                case 1:
+                    System.out.print("1: ");
+                    System.out.println("Tilføj indbetaling.");
+                    indbetalingsliste.tilfoejIndbetaling();break;
+
+                case 2:
+                    System.out.print("2: ");
+                    System.out.println("Restance oversigt.");
+                    indbetalingsliste.printRestanceOversigt();break;
+
+                case 3:
+                    System.out.print("3: ");
+                    System.out.println("Rediger indbetaling.");
+                    indbetalingsliste.redigerIndbetaling();break;
+
+                case 4:
+                    System.out.print("4: ");
+                    System.out.println("Udskriv bestemt medlems indbetalinger.");
+                    indbetalingsliste.printMedlemsindbetalinger();break;
+
+                case 5:
+                    System.out.print("5: ");
+                    System.out.println("Udskriv alle beralinger.");
+                    indbetalingsliste.printAlleBetalinger();break;
+
+                case 6:
+                    System.out.print("6: ");
+                    System.out.println("Udskriv en bestemt betaling.");
+                    indbetalingsliste.printEnkeltBetaling();break;
+
+                case 7:
+                    System.out.print("7: ");
+                    System.out.println("Slet en betaling");
+                    indbetalingsliste.sletEnkeltBetaling();break;
+
+                case 0: aktiv = false;
+
+                default: break;
+            }
+
+        }
     }
 }

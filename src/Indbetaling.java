@@ -2,8 +2,9 @@ import java.util.Date;
 
 public class Indbetaling {
     private int medlemsnummer;
-    private double beløb;
+    private double beloeb;
     private Date dato;
+    private int betalingsID = 0;
 
     public int getMedlemsnummer() {
         return medlemsnummer;
@@ -13,12 +14,20 @@ public class Indbetaling {
         this.medlemsnummer = medlemsnummer;
     }
 
-    public double getBeløb() {
-        return beløb;
+    public double getBeloeb() {
+        return beloeb;
     }
 
-    public void setBeløb(double beløb) {
-        this.beløb = beløb;
+    public int getBetalingsID() {
+        return betalingsID;
+    }
+
+    public void setBetalingsID(int betalingsID) {
+        this.betalingsID = betalingsID;
+    }
+
+    public void setBeloeb(double beloeb) {
+        this.beloeb = beloeb;
     }
 
     public Date getDato() {
