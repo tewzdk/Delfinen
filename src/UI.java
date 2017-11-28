@@ -1,15 +1,21 @@
 public class UI {
 
     public void start() {
+        //init classes
         Utility utility = new Utility();
+        Medlemshaandtering medlemshaandtering = new Medlemshaandtering();
+        Indbetalingsliste indbetalingsliste = new Indbetalingsliste();
+        Konkurrencesvoemning konkurrencesvoemning = new Konkurrencesvoemning();
+        medlemshaandtering.laesMedlemsliste();
 
         boolean programmetKoerer = true;
         while (programmetKoerer) {
-            programmetKoerer = loginMenu(utility);
+            programmetKoerer = loginMenu(utility, medlemshaandtering, indbetalingsliste, konkurrencesvoemning);
         }
     }
 
-    public boolean loginMenu(Utility utility) {
+    public boolean loginMenu(Utility utility, Medlemshaandtering medlemshaandtering,
+                             Indbetalingsliste indbetalingsliste, Konkurrencesvoemning konkurrencesvoemning) {
         System.out.println("Indtast loginkode / Tast '0' for at afslutte programmet:");
         boolean aktiv;
         int svar;
@@ -22,9 +28,6 @@ public class UI {
 
             case 1:
                 aktiv = true;
-                Medlemshaandtering medlemshaandtering = new Medlemshaandtering();
-                medlemshaandtering.laesMedlemsliste();
-
                 while (aktiv) {
                     aktiv = hovedMenuFormand(utility, medlemshaandtering);
                 }
@@ -32,8 +35,6 @@ public class UI {
 
             case 2:
                 aktiv = true;
-                Indbetalingsliste indbetalingsliste = new Indbetalingsliste();
-
                 while (aktiv) {
                     aktiv = hovedMenuKasserer(utility, indbetalingsliste);
                 }
@@ -41,8 +42,6 @@ public class UI {
 
             case 3:
                 aktiv = true;
-                Konkurrencesvoemning konkurrencesvoemning = new Konkurrencesvoemning();
-
                 while (aktiv) {
                     aktiv = hovedMenuTraener(utility, konkurrencesvoemning);
                 }
@@ -51,7 +50,7 @@ public class UI {
             default:
                 System.out.println("'" + svar + "' er ikke en korrekt kode");
                 System.out.println();
-                loginMenu(utility);
+                loginMenu(utility, medlemshaandtering, indbetalingsliste, konkurrencesvoemning);
                 break;
         }
         return true;
