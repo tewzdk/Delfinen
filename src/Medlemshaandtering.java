@@ -1,9 +1,94 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Medlemshaandtering {
     private ArrayList<Medlem> medlemsliste = new ArrayList<>();
+    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
+    public void laesMedlemsliste(){
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File("resources/medlemsliste")).useDelimiter(";");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        //medlemsoplysninger
+        int medlemsnummer;
+        String navn;
+        String foedselsdatoString;
+        String emailadresse;
+        int telefonnummer;
+
+        //adresseoplysninger
+        String gadenavn;
+        int husnummer;
+        String etage;
+        int postnummer;
+        String by;
+
+        while(scanner.hasNextInt()){ //Denne scanner går igennem txt-filen, og lægger hver scannet del ind som variabel
+            //medlemsoplysninger
+            medlemsnummer = scanner.nextInt();
+            navn = scanner.next();
+            foedselsdatoString = scanner.next();
+            Date foedselsdato = null;
+            try {
+                foedselsdato = format.parse(foedselsdatoString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            emailadresse = scanner.next();
+            telefonnummer = scanner.nextInt();
+
+            //adresseoplysninger
+            gadenavn = scanner.next();
+            husnummer = scanner.nextInt();
+            etage = scanner.next();
+            postnummer = scanner.nextInt();
+            by = scanner.next();
+
+            Adresse adresse = new Adresse(gadenavn,husnummer,etage,postnummer,by);
+            Medlem medlem = new Konkurrencesvoemmer(medlemsnummer, navn, foedselsdato, emailadresse, telefonnummer, adresse);
+            //OBS. MEGA FEJL!!!!
+            medlemsliste.add(medlem);
+
+            scanner.nextLine(); //Scanneren fungerer som en cursor, og skal dirigeres til næste linje efter hver menu er indlæst.
+        }
+        scanner.close();
+
+    }
+    private void gemMedlemsliste(){
+        try {
+            PrintWriter outputStream = new PrintWriter(new File("resources/medlemsliste"));
+            for (int i = 0; i < medlemsliste.size(); i++) {
+                String foedselsdatoString = format.format(medlemsliste.get(i).getFoedselsdato());
+                outputStream.println(
+                        medlemsliste.get(i).getMedlemsnummer() + ";" +
+                                medlemsliste.get(i).getNavn() + ";" +
+                                foedselsdatoString + ";" +
+                                medlemsliste.get(i).getEmailadresse() + ";" +
+                                medlemsliste.get(i).getTelefonnummer() + ";" +
+                                medlemsliste.get(i).getAdresse().getGadenavn() + ";" +
+                                medlemsliste.get(i).getAdresse().getHusnummer() + ";" +
+                                medlemsliste.get(i).getAdresse().getEtage() + ";" +
+                                medlemsliste.get(i).getAdresse().getPostnummer() + ";" +
+                                medlemsliste.get(i).getAdresse().getBy() + ";"
+                    );
+            }
+            outputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
     public void tilgaaMedlemsinformationer(Utility utility){
         System.out.println("Indtast medlemsnummer:");
         int svar = utility.inputIntegerSvar();
@@ -67,6 +152,7 @@ public class Medlemshaandtering {
                 medlemsliste.add(passiv);
                 break;
         }
+        gemMedlemsliste();
     }
     public void redigerMedlem(Utility utility){
         System.out.println("Indtast medlemsnummer:");
@@ -97,29 +183,34 @@ public class Medlemshaandtering {
                                 System.out.println("Indtast nyt navn:");
                                 String nytNavn = utility.inputString();
                                 medlemsliste.get(i).setNavn(nytNavn);
+                                gemMedlemsliste();
                                 break;
 
                             case 2:
                                 System.out.println("Indtast ny fødselsdato: (dd/mm/åååå)");
                                 Date nyFoedselsdato = utility.inputDato();
                                 medlemsliste.get(i).setFoedselsdato(nyFoedselsdato);
+                                gemMedlemsliste();
                                 break;
 
                             case 3:
                                 System.out.println("Indtast ny e-mailadresse:");
                                 String nyEmailadresse = utility.inputEmailadresse();
                                 medlemsliste.get(i).setEmailadresse(nyEmailadresse);
+                                gemMedlemsliste();
                                 break;
 
                             case 4:
                                 System.out.println("Indtast nyt telefonnummer:");
                                 int nytTelefonnummer = utility.inputTelefonnummer();
                                 medlemsliste.get(i).setTelefonnummer(nytTelefonnummer);
+                                gemMedlemsliste();
                                 break;
 
                             case 5:
                                 Adresse nyAdresse = utility.inputAdresse();
                                 medlemsliste.get(i).setAdresse(nyAdresse);
+                                gemMedlemsliste();
                                 break;
 
                             default:
@@ -136,7 +227,6 @@ public class Medlemshaandtering {
                 }
             }
         }
-
     public void fjernMedlem(Utility utility){
         boolean validerSvar = false;
         boolean validerSvar2 = false;

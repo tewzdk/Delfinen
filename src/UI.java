@@ -23,6 +23,7 @@ public class UI {
             case 1:
                 aktiv = true;
                 Medlemshaandtering medlemshaandtering = new Medlemshaandtering();
+                medlemshaandtering.laesMedlemsliste();
 
                 while (aktiv) {
                     aktiv = hovedMenuFormand(utility, medlemshaandtering);
