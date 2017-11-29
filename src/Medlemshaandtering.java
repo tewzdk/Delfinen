@@ -82,7 +82,7 @@ public class Medlemshaandtering {
             }
 
 
-            scanner.nextLine(); //Scanneren fungerer som en cursor, og skal dirigeres til næste linje efter hver menu er indlæst.
+            scanner.nextLine(); //Scanneren fungerer som en cursor, og skal dirigeres til næste linje efter hvert medlem er indlæst.
         }
         scanner.close();
 

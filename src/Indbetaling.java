@@ -25,16 +25,16 @@ public class Indbetaling {
         return beloeb;
     }
 
+    public void setBeloeb(double beloeb) {
+        this.beloeb = beloeb;
+    }
+
     public int getBetalingsID() {
         return betalingsID;
     }
 
     public void setBetalingsID(int betalingsID) {
         this.betalingsID = betalingsID;
-    }
-
-    public void setBeloeb(double beloeb) {
-        this.beloeb = beloeb;
     }
 
     public Date getDato() {

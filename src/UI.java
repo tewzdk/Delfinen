@@ -9,7 +9,7 @@ public class UI {
 
         //indlæs txt-filer
         medlemshaandtering.laesMedlemsliste();
-        indbetalingsliste.laesIndbetalinger();
+        indbetalingsliste.laesIndbetalinger(utility);
 
         boolean programmetKoerer = true;
         while (programmetKoerer) {
@@ -125,7 +125,7 @@ public class UI {
                 return false;
 
             case 1:
-                indbetalingsliste.tilfoejIndbetaling();
+                indbetalingsliste.tilfoejIndbetaling(utility);
                 break;
 
             case 2:
@@ -133,7 +133,7 @@ public class UI {
                 break;
 
             case 3:
-                indbetalingsliste.redigerIndbetaling();
+                indbetalingsliste.redigerIndbetaling(utility);
                 break;
         }
         return true;
@@ -284,25 +284,25 @@ public class UI {
         while(aktiv){
             switch (utility.inputIntegerSvar()){
                 case 1:
-                    indbetalingsliste.tilfoejIndbetaling();break;
+                    indbetalingsliste.tilfoejIndbetaling(utility);break;
 
                 case 2:
                     indbetalingsliste.printRestanceOversigt();break;
 
                 case 3:
-                    indbetalingsliste.redigerIndbetaling();break;
+                    indbetalingsliste.redigerIndbetaling(utility);break;
 
                 case 4:
-                    indbetalingsliste.printMedlemsindbetalinger();break;
+                    indbetalingsliste.printMedlemsindbetalinger(utility);break;
 
                 case 5:
                     indbetalingsliste.printAlleBetalinger();break;
 
                 case 6:
-                    indbetalingsliste.printEnkeltBetaling();break;
+                    indbetalingsliste.printEnkeltBetaling(utility);break;
 
                 case 7:
-                    indbetalingsliste.sletEnkeltBetaling();break;
+                    indbetalingsliste.sletEnkeltBetaling(utility);break;
 
                 case 0: aktiv = false;
 
