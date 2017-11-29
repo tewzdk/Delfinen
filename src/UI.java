@@ -39,7 +39,7 @@ public class UI {
             case 2:
                 aktiv = true;
                 while (aktiv) {
-                    aktiv = hovedMenuKasserer(utility, indbetalingsliste);
+                    aktiv = hovedMenuKasserer(utility, indbetalingsliste,medlemshaandtering);
                 }
                 break;
 
@@ -102,7 +102,7 @@ public class UI {
                 break;
 
             case 7:
-                indbetalingsMenu(utility, indbetalingsliste);
+                indbetalingsMenu(utility, indbetalingsliste,medlemshaandtering);
                 break;
 
         }
@@ -111,7 +111,7 @@ public class UI {
     }
 
     //Kasserer
-    private boolean hovedMenuKasserer(Utility utility, Indbetalingsliste indbetalingsliste) {
+    private boolean hovedMenuKasserer(Utility utility, Indbetalingsliste indbetalingsliste,Medlemshaandtering medlemshaandtering) {
         System.out.println("Vælg en handling:");
         System.out.println("1. Indberet betaling");
         System.out.println("2. Oversigt over restance");
@@ -129,7 +129,7 @@ public class UI {
                 break;
 
             case 2:
-                indbetalingsliste.printRestanceOversigt();
+                indbetalingsliste.printRestanceOversigt(utility,medlemshaandtering);
                 break;
 
             case 3:
@@ -264,7 +264,7 @@ public class UI {
 
     }
 
-    private void indbetalingsMenu(Utility utility,Indbetalingsliste indbetalingsliste) {
+    private void indbetalingsMenu(Utility utility,Indbetalingsliste indbetalingsliste,Medlemshaandtering medlemshaandtering) {
         boolean aktiv = true;
         System.out.print("1: ");
         System.out.println("Tilføj indbetaling");
@@ -287,7 +287,7 @@ public class UI {
                     indbetalingsliste.tilfoejIndbetaling(utility);break;
 
                 case 2:
-                    indbetalingsliste.printRestanceOversigt();break;
+                    indbetalingsliste.printRestanceOversigt(utility,medlemshaandtering);break;
 
                 case 3:
                     indbetalingsliste.redigerIndbetaling(utility);break;

@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Indbetalingsliste {
@@ -35,7 +38,51 @@ public class Indbetalingsliste {
                 "\nBetalingsID: " + betalingsID);
     }
 
-    public void printRestanceOversigt() {
+    public void printRestanceOversigt(Utility utility,Medlemshaandtering medlemshaandtering) {
+
+        ArrayList<Medlem> medlemer = medlemshaandtering.getMedlemsliste();
+
+        double kontingent;
+        double restance;
+
+
+        for (int i = 0; i < medlemer.size(); i++) {
+
+            Date person = medlemer.get(i).getFoedselsdato();
+            LocalDate date = person.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            long yearsDelta = date.until(LocalDate.now(), ChronoUnit.YEARS);
+
+            if (!medlemer.get(i).getMedlemstype().equalsIgnoreCase("Passiv")){
+                if (yearsDelta > 17 && yearsDelta < 60) {
+                    //mellem 18 og 60 år
+                   kontingent = 1600;
+
+                } else if (yearsDelta > 59) {
+                    //over 60 år
+                    kontingent = 1600 - 1600*0.25;
+
+                }
+                else {
+                    //under 18
+                    kontingent = 1000;
+                    }
+                }else{
+
+                //passiv
+                kontingent = 500;
+            }
+            restance = kontingent;
+
+            for (int j = 0; j < indbetalinger.size(); j++) {
+
+                if (indbetalinger.get(j).getMedlemsnummer() == medlemer.get(i).getMedlemsnummer()){
+                    restance = restance - indbetalinger.get(j).getBeloeb();
+                }
+
+            }
+            System.out.println("MedlemNr.: " + medlemer.get(i).getMedlemsnummer() + " Kontingent: " + kontingent + " Restance: " + restance);
+
+        }
 
 
 

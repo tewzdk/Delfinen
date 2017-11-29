@@ -30,6 +30,10 @@ public class Medlemshaandtering {
         }
     }
 
+    public ArrayList<Medlem> getMedlemsliste() {
+        return medlemsliste;
+    }
+
     public void laesMedlemsliste(){
         Scanner scanner = null;
         try {
