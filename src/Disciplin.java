@@ -3,7 +3,8 @@ public class Disciplin {
     private int distance;
 
     public Disciplin(Svoemmestil svoemmestil, int distance){
-
+        this.svoemmestil = svoemmestil;
+        this.distance = distance;
     }
 
     public Svoemmestil getSvoemmestil() {
@@ -20,5 +21,10 @@ public class Disciplin {
 
     public void setDistance(int distance) {
         this.distance = distance;
+    }
+
+    @Override
+    public String toString(){
+        return distance + "m / " + svoemmestil;
     }
 }

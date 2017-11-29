@@ -1,7 +1,7 @@
 public enum Svoemmestil {
-    hundesvoemning,
+    brystsvømning,
+    butterfly,
     crawl,
-    rygcrawl,
-    brystsvoemning,
-    butterfly
+    hundesvømning,
+    rygcrawl
 }

@@ -164,15 +164,25 @@ public class Konkurrencesvoemning {
 
         System.out.println("Indtast medlemsnummer");
         int medlemsnummer = utility.inputIntegerSvar();
-        System.out.println("Indtast dato (dd/mm/åååå): ");
-       Date date = utility.inputDato();
+
         System.out.println("Indtast din nye tid: ");
         int minut = utility.inputIntegerSvar();
         int sekund = utility.inputIntegerSvar();
         int hundrededeleSekund = utility.inputIntegerSvar();
         int tid = (minut * 6000) + (sekund * 100) + hundrededeleSekund;
+
+        System.out.println("Indtast svømmestil:");
+        Svoemmestil svoemmestil = utility.inputSvoemmestil();
+        System.out.println("Indtast distance");
+        int distance = utility.inputDistance();
+
+        Disciplin disciplin = new Disciplin(svoemmestil, distance);
+
+        Date date = new Date();
+        date.getTime();
+
         System.out.println(tid);
-       Traeningsresultat traeningsresultat = new Traeningsresultat(tid, date, medlemsnummer);
+       Traeningsresultat traeningsresultat = new Traeningsresultat(tid, disciplin, date, medlemsnummer);
        traeningsresultats.add(traeningsresultat);
         System.out.println();
 

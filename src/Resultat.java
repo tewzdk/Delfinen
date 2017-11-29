@@ -2,9 +2,17 @@ import java.util.Date;
 
 public class Resultat {
     private int tid;
+    private Disciplin disciplin;
     private Date dato;
     private int medlemsnummer;
 
+    public Disciplin getDisciplin() {
+        return disciplin;
+    }
+
+    public void setDisciplin(Disciplin disciplin) {
+        this.disciplin = disciplin;
+    }
 
     public int getMedlemsnummer() {
         return medlemsnummer;
@@ -32,12 +40,12 @@ public class Resultat {
         this.dato = dato;
     }
 
-    @Override
-    public String toString(){
+    //@Override
+    //public String toString(){
 
        // return "Medlemsnummer: " + medlemsnummer + ", " + dato + tid
 
 
-    }
+    //}
 
 }

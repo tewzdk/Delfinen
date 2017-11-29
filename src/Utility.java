@@ -115,7 +115,39 @@ public class Utility {
         return adresse;
     }
 
-    //public Staevne inputStaevne(){}
+    public Svoemmestil inputSvoemmestil(){
+        boolean validerSvar = false;
+        Svoemmestil valideretSvoemmestil = null;
+        while(!validerSvar) {
+            String svar = in.next();
+            for (Svoemmestil svoemmestil : Svoemmestil.values()) {
+                if (svar.equalsIgnoreCase(svoemmestil.toString())) {
+                    valideretSvoemmestil = svoemmestil;
+                    validerSvar = true;
+                }
+                else{
+                    System.out.println("Indtast venligst en korrekt svømmestil: " +
+                            "(brystsvømning, butterfly, crawl, hundesvømning eller rygcrawl)");
+                }
+            }
+        }
+        return valideretSvoemmestil;
+    }
+
+    public int inputDistance(){
+        boolean korrektDistance = false;
+        int svar = -1;
+        while(!korrektDistance){
+            svar = inputIntegerSvar();
+            if(svar == 50 || svar == 100 || svar == 200 || svar == 400 || svar == 800 || svar == 1600){
+                korrektDistance = true;
+            }
+            else {
+                System.out.println("Den valgte distance (" + svar + ") eksisterer ikke, indtast en korrekt distance:");
+            }
+        }
+        return svar;
+    }
 
     public void scannerClose(){
     in.close();
