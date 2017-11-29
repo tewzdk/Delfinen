@@ -206,11 +206,11 @@ public class UI {
                 break;
 
             case 1:
-                konkurrencesvoemning.printResultater();
+                konkurrencesvoemning.printResultater(utility);
                 break;
 
             case 2:
-                konkurrencesvoemning.tilfoejResultater();
+                konkurrencesvoemning.tilfoejTraeningsResultat(utility);
                 break;
 
             case 3:

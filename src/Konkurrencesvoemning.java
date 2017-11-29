@@ -1,9 +1,11 @@
+import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Konkurrencesvoemning {
     private ArrayList<Staevne> staevneliste = new ArrayList<>();
     private ArrayList<Staevne> afsluttedeStaevner = new ArrayList<>();
+    private ArrayList<Traeningsresultat> traeningsresultats = new ArrayList<>();
 
     public void printMedlemsliste() {
         for (int i = 0; i < staevneliste.size(); i++) {
@@ -151,10 +153,30 @@ public class Konkurrencesvoemning {
         }
     }
 
-    public void printResultater() {
+    public void printResultater(Utility utility) {
+
+
+
+
     }
 
-    public void tilfoejResultater() {
+    public void tilfoejTraeningsResultat(Utility utility) {
+
+        System.out.println("Indtast medlemsnummer");
+        int medlemsnummer = utility.inputIntegerSvar();
+        System.out.println("Indtast dato (dd/mm/åååå): ");
+       Date date = utility.inputDato();
+        System.out.println("Indtast din nye tid: ");
+        int minut = utility.inputIntegerSvar();
+        int sekund = utility.inputIntegerSvar();
+        int hundrededeleSekund = utility.inputIntegerSvar();
+        int tid = (minut * 6000) + (sekund * 100) + hundrededeleSekund;
+        System.out.println(tid);
+       Traeningsresultat traeningsresultat = new Traeningsresultat(tid, date, medlemsnummer);
+       traeningsresultats.add(traeningsresultat);
+        System.out.println();
+
+
     }
 
     public void redigerResultat() {
