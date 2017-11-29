@@ -6,6 +6,7 @@ import java.util.InputMismatchException;
 
 public class Utility {
     private Scanner in = new Scanner(System.in).useDelimiter("\\n");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     public String inputString(){
         String string = in.next();
@@ -30,7 +31,6 @@ public class Utility {
         boolean validerDatoInput = false;
         String svar;
         Date date = null;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         simpleDateFormat.setLenient(false);
 
         while(!validerDatoInput) {

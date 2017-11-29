@@ -6,6 +6,13 @@ public class Indbetaling {
     private Date dato;
     private int betalingsID = 0;
 
+    public Indbetaling(int medlemsnummer, double beloeb, Date dato, int betalingsID) {
+        this.medlemsnummer = medlemsnummer;
+        this.beloeb = beloeb;
+        this.dato = dato;
+        this.betalingsID = betalingsID;
+    }
+
     public int getMedlemsnummer() {
         return medlemsnummer;
     }

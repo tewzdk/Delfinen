@@ -37,27 +37,13 @@ public class Medlemshaandtering {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        //medlemsoplysninger
-        int medlemsnummer;
-        String medlemstype;
-        String navn;
-        String foedselsdatoString;
-        String emailadresse;
-        int telefonnummer;
-
-        //adresseoplysninger
-        String gadenavn;
-        int husnummer;
-        String etage;
-        int postnummer;
-        String by;
 
         while(scanner.hasNextInt()){ //Denne scanner går igennem txt-filen, og lægger hver scannet del ind som variabel
             //medlemsoplysninger
-            medlemsnummer = scanner.nextInt();
-            medlemstype = scanner.next();
-            navn = scanner.next();
-            foedselsdatoString = scanner.next();
+            int medlemsnummer = scanner.nextInt();
+            String medlemstype = scanner.next();
+            String navn = scanner.next();
+            String foedselsdatoString = scanner.next();
             Date foedselsdato = null;
             try {
                 foedselsdato = format.parse(foedselsdatoString);
@@ -65,15 +51,15 @@ public class Medlemshaandtering {
                 e.printStackTrace();
             }
 
-            emailadresse = scanner.next();
-            telefonnummer = scanner.nextInt();
+            String emailadresse = scanner.next();
+            int telefonnummer = scanner.nextInt();
 
             //adresseoplysninger
-            gadenavn = scanner.next();
-            husnummer = scanner.nextInt();
-            etage = scanner.next();
-            postnummer = scanner.nextInt();
-            by = scanner.next();
+            String gadenavn = scanner.next();
+            int husnummer = scanner.nextInt();
+            String etage = scanner.next();
+            int postnummer = scanner.nextInt();
+            String by = scanner.next();
 
             Adresse adresse = new Adresse(gadenavn,husnummer,etage,postnummer,by);
             if(medlemstype.equalsIgnoreCase("Konkurrencesvømmer")){

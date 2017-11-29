@@ -1,5 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Indbetalingsliste {
     private ArrayList<Indbetaling> indbetalinger = new ArrayList<>();
@@ -7,7 +13,7 @@ public class Indbetalingsliste {
 
 
     public void tilfoejIndbetaling() {
-        int belloeb;
+        int beloeb;
         int medlemsnummer;
         int betalingsID = 0;
         Date date = new Date();
@@ -20,21 +26,16 @@ public class Indbetalingsliste {
         System.out.println("Indtast medlemsnummer: ");
         medlemsnummer = utility.inputIntegerSvar();
         System.out.println("Indtast beløb: ");
-        belloeb = utility.inputIntegerSvar();
+        beloeb = utility.inputIntegerSvar();
 
-        Indbetaling indbetaling = new Indbetaling();
-
-
-        indbetaling.setBeloeb(belloeb);
-        indbetaling.setDato(date);
-        indbetaling.setMedlemsnummer(medlemsnummer);
-        indbetaling.setBetalingsID(betalingsID);
+        Indbetaling indbetaling = new Indbetaling(medlemsnummer, beloeb, date, betalingsID);
         indbetalinger.add(indbetaling);
+        gemIndbetalinger();
         System.out.println(
                 "Ny inbetaling tilføjet:" +
                 "\nMedlemsnummber: " + medlemsnummer +
                 "\nDato: " + date +
-                "\nBeløb: " + belloeb +
+                "\nBeløb: " + beloeb +
                 "\nBetalingsID: " + betalingsID);
     }
 
@@ -53,6 +54,7 @@ public class Indbetalingsliste {
                 indbetalinger.remove(i);
             }
         }
+        gemIndbetalinger();
     }
 
     public void printEnkeltBetaling() {
@@ -119,15 +121,58 @@ public class Indbetalingsliste {
 
             }
         }
+        gemIndbetalinger();
 
         if (aktiv){
             System.out.println("Kunne ikke finde betalingsID");
         }
 
     }
+    public void laesIndbetalinger(){
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File("resources/indbetalinger")).useDelimiter(";").useLocale(Locale.US);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
-    private void gemBetalinger () {
+        while(scanner.hasNextInt()){ //Denne scanner går igennem txt-filen, og lægger hver scannet del ind som variabel
+            //indbetalingsoplysninger
+            int betalingsID = scanner.nextInt();
+            int medlemsnummer = scanner.nextInt();
+            double beloeb = scanner.nextDouble();
+            String datoString = scanner.next();
+            Date dato = null;
+            try {
+                dato = utility.simpleDateFormat.parse(datoString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
+            Indbetaling indbetaling = new Indbetaling(medlemsnummer, beloeb, dato, betalingsID);
+            indbetalinger.add(indbetaling);
+
+            scanner.nextLine(); //Scanneren fungerer som en cursor, og skal dirigeres til næste linje efter hver menu er indlæst.
+
+        }
+        scanner.close();
+    }
+    private void gemIndbetalinger(){
+        try {
+            PrintWriter outputStream = new PrintWriter(new File("resources/indbetalinger"));
+            for (int i = 0; i < indbetalinger.size(); i++) {
+                String datoString = utility.simpleDateFormat.format(indbetalinger.get(i).getDato());
+                outputStream.println(
+                        indbetalinger.get(i).getBetalingsID() + ";" +
+                                indbetalinger.get(i).getMedlemsnummer() + ";" +
+                                indbetalinger.get(i).getBeloeb() + ";" +
+                                datoString
+                );
+            }
+            outputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
 
     }

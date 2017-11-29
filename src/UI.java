@@ -6,7 +6,10 @@ public class UI {
         Medlemshaandtering medlemshaandtering = new Medlemshaandtering();
         Indbetalingsliste indbetalingsliste = new Indbetalingsliste();
         Konkurrencesvoemning konkurrencesvoemning = new Konkurrencesvoemning();
+
+        //indlæs txt-filer
         medlemshaandtering.laesMedlemsliste();
+        indbetalingsliste.laesIndbetalinger();
 
         boolean programmetKoerer = true;
         while (programmetKoerer) {
@@ -264,17 +267,17 @@ public class UI {
     private void indbetalingsMenu(Utility utility,Indbetalingsliste indbetalingsliste) {
         boolean aktiv = true;
         System.out.print("1: ");
-        System.out.println("Tilføj indbetaling.");
+        System.out.println("Tilføj indbetaling");
         System.out.print("2: ");
-        System.out.println("Restance oversigt.");
+        System.out.println("Restance oversigt");
         System.out.print("3: ");
-        System.out.println("Rediger indbetaling.");
+        System.out.println("Rediger indbetaling");
         System.out.print("4: ");
-        System.out.println("Udskriv bestemt medlems indbetalinger.");
+        System.out.println("Udskriv bestemt medlems indbetalinger");
         System.out.print("5: ");
-        System.out.println("Udskriv alle beralinger.");
+        System.out.println("Udskriv alle beralinger");
         System.out.print("6: ");
-        System.out.println("Udskriv en bestemt betaling.");
+        System.out.println("Udskriv en bestemt betaling");
         System.out.print("7: ");
         System.out.println("Slet en betaling");
 
