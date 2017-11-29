@@ -65,8 +65,48 @@ public class Konkurrencesvoemning {
     public void redigerStaevne(Utility utility) {
 
         System.out.println("Hvilket stævne vil du redigere?");
+        boolean validerSvar = false;
+        boolean aktiv = true;
 
 
+        while (!validerSvar) {
+            String svar = utility.inputString();
+            for (int i = 0; i < staevneliste.size(); i++) {
+                if (staevneliste.get(i).getStaevnenavn() == svar) {
+                    System.out.println(staevneliste.get(i));
+                    System.out.println("Hvad ønsker du at ændre?");
+                    System.out.println("1. Stævnenavn");
+                    System.out.println("2. Afholdningsdato");
+                    System.out.println("3. Adresse");
+                    System.out.println("0. Gå tilbage");
+                    while (aktiv) {
+                        aktiv = false;
+                        switch (utility.inputIntegerSvar()) {
+                            case 0:
+                                break;
+                            case 1:
+                                System.out.println("Indtast et nyt nanvn");
+                                String nyNavn = utility.inputString();
+                                staevneliste.get(i).setStaevnenavn(nyNavn);
+                                break;
+                            case 2:
+                                System.out.println("Indtast ny afholdningsdato (dd/mm/åååå)");
+                                Date nyDato = utility.inputDato();
+                                staevneliste.get(i).setDato(nyDato);
+                                break;
+                            case 3:
+                                System.out.println("Indtast ny afholdningsadresse");
+                                Adresse adresse = utility.inputAdresse();
+                                staevneliste.get(i).setAdresse(adresse);
+                                break;
+                        }
+                    }
+                    validerSvar = true;
+                } else {
+                    System.out.println("Indtast venlighst et korrekt stævnenavn");
+                }
+            }
+        }
     }
 
     public void afslutStaevne(Utility utility) {
