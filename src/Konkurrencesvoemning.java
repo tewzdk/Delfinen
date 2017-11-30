@@ -197,8 +197,57 @@ public class Konkurrencesvoemning {
                     navn = medlemshaandtering.getMedlemsliste().get(j).getNavn();
                 }
             }
+            String navn = utility.navnFraMedlemsnummer(medlemshaandtering, resultater.get(i).getMedlemsnummer());
             System.out.println("[Disciplin: " + resultater.get(i).getDisciplin() +
                     " | Tid: " + utility.omregnTid(resultater.get(i).getTid()) + " | " + navn + "]");
+        }
+        System.out.println();
+        printTop5Resultater(utility, medlemshaandtering);
+    }
+    public void printTop5Resultater(Utility utility, Medlemshaandtering medlemshaandtering) {
+        int femEllerResterende = 5;
+        if (resultater.size() == 1) {
+            System.out.println(resultater.get(0).getDisciplin() + ":");
+            String navn = utility.navnFraMedlemsnummer(medlemshaandtering, resultater.get(0).getMedlemsnummer());
+            System.out.println("(" + 1 + ") " + navn + " [" + utility.omregnTid(resultater.get(0).getTid()) + "]");
+            System.out.println();
+        }
+        else if (resultater.size() > 1) {
+            System.out.println(resultater.get(0).getDisciplin() + ":");
+            String navn = utility.navnFraMedlemsnummer(medlemshaandtering, resultater.get(0).getMedlemsnummer());
+            System.out.println("(" + 1 + ") " + navn + " [" + utility.omregnTid(resultater.get(0).getTid()) + "]");
+            if (resultater.size() < 5) {
+                femEllerResterende = resultater.size();
+            }
+            for (int i = 1; i < femEllerResterende; i++) {
+                if (resultater.get(i).getDisciplin().equals(resultater.get(0).getDisciplin())){
+                    navn = utility.navnFraMedlemsnummer(medlemshaandtering, resultater.get(i).getMedlemsnummer());
+                    System.out.println("(" + (i + 1) + ") " + navn + " [" + utility.omregnTid(resultater.get(i).getTid()) + "]");
+                }
+            }
+            System.out.println();
+            for (int d = 1; d < resultater.size(); d++) {
+                if(!resultater.get(d).getDisciplin().equals(resultater.get(d-1).getDisciplin())) {
+                    System.out.println(resultater.get(d).getDisciplin() + ":");
+                    navn = utility.navnFraMedlemsnummer(medlemshaandtering, resultater.get(d).getMedlemsnummer());
+                    System.out.println("(" + 1 + ") " + navn + " [" + utility.omregnTid(resultater.get(d).getTid()) + "]");
+                    if ((resultater.size() - d) < 5)
+                        femEllerResterende = resultater.size() - d;
+                    else {
+                        femEllerResterende = 5;
+                    }
+                    for (int j = 1; j < femEllerResterende; j++) {
+                        if (resultater.get(d + j).getDisciplin().equals(resultater.get(d).getDisciplin())) {
+                            navn = utility.navnFraMedlemsnummer(medlemshaandtering, resultater.get(d+j).getMedlemsnummer());
+                            System.out.println("(" + (j + 1) + ") " + navn + " [" + utility.omregnTid(resultater.get(d + j).getTid())+ "]");
+                        }
+                    }
+                    System.out.println();
+                }
+            }
+        }
+        else{
+            System.out.println("Der er ingen resultater at fremvise.");
         }
     }
 
