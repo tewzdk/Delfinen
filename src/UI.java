@@ -284,6 +284,8 @@ public class UI {
         System.out.println("Udskriv en bestemt betaling");
         System.out.print("7: ");
         System.out.println("Slet en betaling");
+        System.out.print("8: ");
+        System.out.println("Betal årlige kontingenter eller komprimer indbetalinger");
 
         while(aktiv){
             switch (utility.inputIntegerSvar()){
@@ -307,6 +309,9 @@ public class UI {
 
                 case 7:
                     indbetalingsliste.sletEnkeltBetaling(utility);break;
+
+                case 8:
+                    indbetalingsliste.betalKontingenter(utility,medlemshaandtering);
 
                 case 0: aktiv = false;
 
