@@ -4,8 +4,7 @@ import java.util.Date;
 public class Konkurrencesvoemning {
     private ArrayList<Staevne> staevneliste = new ArrayList<>();
     private ArrayList<Staevne> afsluttedeStaevner = new ArrayList<>();
-    private ArrayList<Traeningsresultat> traeningsresultatsliste = new ArrayList<>();
-    private ArrayList<Staevneresultat> staevneresultatsliste = new ArrayList<>();
+    private ArrayList<Resultat> resultater = new ArrayList<>();
 
     public void printMedlemsliste() {
         for (int i = 0; i < staevneliste.size(); i++) {
@@ -111,7 +110,7 @@ public class Konkurrencesvoemning {
         }
     }
 
-    public void afslutStaevne(Utility utility) {
+    public void afslutStaevne(Utility utility, Distancer distancer) {
 
         boolean validerSvar = false;
         boolean validerSvar2 = false;
@@ -152,19 +151,14 @@ public class Konkurrencesvoemning {
                                     int hundrededeleSekund = utility.inputIntegerSvar();
                                     int tid = (minut * 6000) + (sekund * 100) + hundrededeleSekund;
 
-                                    System.out.println("Indtast svømmestil:");
-                                    Svoemmestil svoemmestil = utility.inputSvoemmestil();
-                                    System.out.println("Indtast distance");
-                                    int distance = utility.inputDistance();
-
-                                    Disciplin disciplin = new Disciplin(svoemmestil, distance);
+                                    Disciplin disciplin = utility.inputDisciplin(distancer);
 
                                     Date date = new Date();
                                     date.getTime();
 
                                     System.out.println(tid);
                                     Staevneresultat staevneresultat = new Staevneresultat(tid, disciplin, date, medlemsnummer);
-                                    staevneresultatsliste.add(staevneresultat);
+                                    resultater.add(staevneresultat);
                                     System.out.println();
                                 } else if (svar3 == 2){
 
@@ -200,7 +194,7 @@ public class Konkurrencesvoemning {
 
     }
 
-    public void tilfoejTraeningsResultat(Utility utility) {
+    public void tilfoejTraeningsResultat(Utility utility, Distancer distancer) {
 
         System.out.println("Indtast medlemsnummer");
         int medlemsnummer = utility.inputIntegerSvar();
@@ -214,21 +208,14 @@ public class Konkurrencesvoemning {
         int hundrededeleSekund = utility.inputIntegerSvar();
         int tid = (minut * 6000) + (sekund * 100) + hundrededeleSekund;
 
-
-        System.out.println("");
-        System.out.println("Indtast svømmestil: (brystsvømning, butterfly, crawl, hundesvømning eller rygcrawl)");
-        Svoemmestil svoemmestil = utility.inputSvoemmestil();
-        System.out.println("Indtast distance");
-        int distance = utility.inputDistance();
-
-        Disciplin disciplin = new Disciplin(svoemmestil, distance);
+        Disciplin disciplin = utility.inputDisciplin(distancer);
 
         Date date = new Date();
         date.getTime();
 
         System.out.println(tid);
-       Traeningsresultat traeningsresultat = new Traeningsresultat(tid, disciplin, date, medlemsnummer);
-       traeningsresultatsliste.add(traeningsresultat);
+        Traeningsresultat traeningsresultat = new Traeningsresultat(tid, disciplin, date, medlemsnummer);
+        resultater.add(traeningsresultat);
         System.out.println();
 
 

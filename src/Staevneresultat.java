@@ -8,6 +8,7 @@ public class Staevneresultat extends Resultat {
         super.setTid(tid);
         super.setDato(dato);
         super.setMedlemsnummer(medlemsnummer);
+        super.setResultattype("Staevneresultat");
 
     }
 }

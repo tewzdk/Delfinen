@@ -5,6 +5,15 @@ public class Resultat {
     private Disciplin disciplin;
     private Date dato;
     private int medlemsnummer;
+    private String resultattype;
+
+    public String getResultattype() {
+        return resultattype;
+    }
+
+    public void setResultattype(String resultattype) {
+        this.resultattype = resultattype;
+    }
 
     public Disciplin getDisciplin() {
         return disciplin;

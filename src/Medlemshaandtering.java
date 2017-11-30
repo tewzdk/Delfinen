@@ -143,7 +143,7 @@ public class Medlemshaandtering {
         Date foedselsdato = utility.inputDato();
 
         //emailadresse
-        System.out.println("Indtast emailadresse");
+        System.out.println("Indtast e-mailadresse");
         String emailadresse = utility.inputEmailadresse();
 
         //telefonnummer

@@ -115,38 +115,39 @@ public class Utility {
         return adresse;
     }
 
-    public Svoemmestil inputSvoemmestil(){
+    public Disciplin inputDisciplin(Distancer distancer) {
+        System.out.println("Indtast svømmestil:");
         boolean validerSvar = false;
         Svoemmestil valideretSvoemmestil = null;
-        while(!validerSvar) {
-            String svar = in.next();
+        while (!validerSvar) {
+            String svarSvoemmestil = in.next();
             for (Svoemmestil svoemmestil : Svoemmestil.values()) {
-                if (svar.equalsIgnoreCase(svoemmestil.toString())) {
+                if (svarSvoemmestil.equalsIgnoreCase(svoemmestil.toString())) {
                     valideretSvoemmestil = svoemmestil;
                     validerSvar = true;
                 }
-                else{
-                    System.out.println("Indtast venligst en korrekt svømmestil: " +
-                            "(brystsvømning, butterfly, crawl, hundesvømning eller rygcrawl)");
+            }
+            if (!validerSvar) {
+                System.out.println("Indtast venligst en korrekt svømmestil:");
+            }
+        }
+        System.out.println("Indtast distance");
+        boolean validerSvar2 = false;
+        int svar2 = -1;
+        while (!validerSvar2) {
+            svar2 = inputIntegerSvar();
+            for (int i = 0; i < distancer.distanceliste.length; i++) {
+                if (svar2 == distancer.distanceliste[i]) {
+                    validerSvar2 = true;
                 }
             }
+            if (!validerSvar2) {
+                System.out.println("Indtast venligst en korrekt distance:");
+            }
         }
-        return valideretSvoemmestil;
-    }
+        Disciplin disciplin = new Disciplin(valideretSvoemmestil, svar2);
 
-    public int inputDistance(){
-        boolean korrektDistance = false;
-        int svar = -1;
-        while(!korrektDistance){
-            svar = inputIntegerSvar();
-            if(svar == 50 || svar == 100 || svar == 200 || svar == 400 || svar == 800 || svar == 1600){
-                korrektDistance = true;
-            }
-            else {
-                System.out.println("Den valgte distance (" + svar + ") eksisterer ikke, indtast en korrekt distance:");
-            }
-        }
-        return svar;
+        return disciplin;
     }
 
     public void scannerClose(){

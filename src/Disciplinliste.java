@@ -1,6 +1,6 @@
 public class Disciplinliste {
 
-    private Disciplin[] disciplinliste = new Disciplin[30];
+    public Disciplin[] disciplinliste = new Disciplin[101];
 
     public Disciplinliste(){
         int arrayPlads = -1;

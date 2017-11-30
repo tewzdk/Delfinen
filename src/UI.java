@@ -3,9 +3,13 @@ public class UI {
     public void start() {
         //init classes
         Utility utility = new Utility();
+
         Medlemshaandtering medlemshaandtering = new Medlemshaandtering();
         Indbetalingsliste indbetalingsliste = new Indbetalingsliste();
         Konkurrencesvoemning konkurrencesvoemning = new Konkurrencesvoemning();
+
+        Disciplinliste disciplinliste = new Disciplinliste();
+        Distancer distancer = new Distancer();
 
         //indlæs txt-filer
         medlemshaandtering.laesMedlemsliste();
@@ -13,12 +17,12 @@ public class UI {
 
         boolean programmetKoerer = true;
         while (programmetKoerer) {
-            programmetKoerer = loginMenu(utility, medlemshaandtering, indbetalingsliste, konkurrencesvoemning);
+            programmetKoerer = loginMenu(utility, medlemshaandtering, indbetalingsliste, konkurrencesvoemning, distancer);
         }
     }
 
     public boolean loginMenu(Utility utility, Medlemshaandtering medlemshaandtering,
-                             Indbetalingsliste indbetalingsliste, Konkurrencesvoemning konkurrencesvoemning) {
+                             Indbetalingsliste indbetalingsliste, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer) {
         System.out.println("Indtast loginkode / Tast '0' for at afslutte programmet:");
         boolean aktiv;
         int svar;
@@ -46,14 +50,14 @@ public class UI {
             case 3:
                 aktiv = true;
                 while (aktiv) {
-                    aktiv = hovedMenuTraener(utility, konkurrencesvoemning);
+                    aktiv = hovedMenuTraener(utility, konkurrencesvoemning, distancer);
                 }
                 break;
 
             default:
                 System.out.println("'" + svar + "' er ikke en korrekt kode");
                 System.out.println();
-                loginMenu(utility, medlemshaandtering, indbetalingsliste, konkurrencesvoemning);
+                loginMenu(utility, medlemshaandtering, indbetalingsliste, konkurrencesvoemning, distancer);
                 break;
         }
         return true;
@@ -140,7 +144,7 @@ public class UI {
     }
 
     //Traener
-    private boolean hovedMenuTraener(Utility utility, Konkurrencesvoemning konkurrencesvoemning) {
+    private boolean hovedMenuTraener(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer) {
         System.out.println("Vælg en handling:");
         System.out.println("1. Se holdoversigt");
         System.out.println("2. Administrer resultater");
@@ -159,11 +163,11 @@ public class UI {
                 break;
 
             case 2:
-                resultatMenu(utility, konkurrencesvoemning);
+                resultatMenu(utility, konkurrencesvoemning, distancer);
                 break;
 
             case 3:
-                staevneMenu(utility, konkurrencesvoemning);
+                staevneMenu(utility, konkurrencesvoemning, distancer);
                 break;
         }
         return true;
@@ -191,7 +195,7 @@ public class UI {
         }
     }
 
-    private void resultatMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning) {
+    private void resultatMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer) {
         System.out.println("Vælg en handling:");
         System.out.println("1. Se resultater");
         System.out.println("2. Tilføj resultat");
@@ -210,7 +214,7 @@ public class UI {
                 break;
 
             case 2:
-                konkurrencesvoemning.tilfoejTraeningsResultat(utility);
+                konkurrencesvoemning.tilfoejTraeningsResultat(utility, distancer);
                 break;
 
             case 3:
@@ -224,7 +228,7 @@ public class UI {
 
     }
 
-    private void staevneMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning) {
+    private void staevneMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer) {
 
         System.out.println("Vælg en handling");
         System.out.println("1. Se aktive staevner");
@@ -258,7 +262,7 @@ public class UI {
                 break;
 
             case 5:
-                konkurrencesvoemning.afslutStaevne(utility);
+                konkurrencesvoemning.afslutStaevne(utility, distancer);
 
         }
 
