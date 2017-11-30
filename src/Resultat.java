@@ -6,6 +6,15 @@ public class Resultat {
     private Date dato;
     private int medlemsnummer;
     private String resultattype;
+    private int resultatID;
+
+    public int getResultatID() {
+        return resultatID;
+    }
+
+    public void setResultatID(int resultatID) {
+        this.resultatID = resultatID;
+    }
 
     public String getResultattype() {
         return resultattype;
