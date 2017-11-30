@@ -50,7 +50,7 @@ public class UI {
             case 3:
                 aktiv = true;
                 while (aktiv) {
-                    aktiv = hovedMenuTraener(utility, konkurrencesvoemning, distancer);
+                    aktiv = hovedMenuTraener(utility, konkurrencesvoemning, distancer, medlemshaandtering);
                 }
                 break;
 
@@ -144,7 +144,7 @@ public class UI {
     }
 
     //Traener
-    private boolean hovedMenuTraener(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer) {
+    private boolean hovedMenuTraener(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer, Medlemshaandtering medlemshaandtering) {
         System.out.println("Vælg en handling:");
         System.out.println("1. Se holdoversigt");
         System.out.println("2. Administrer resultater");
@@ -163,7 +163,7 @@ public class UI {
                 break;
 
             case 2:
-                resultatMenu(utility, konkurrencesvoemning, distancer);
+                resultatMenu(utility, konkurrencesvoemning, distancer, medlemshaandtering);
                 break;
 
             case 3:
@@ -195,7 +195,7 @@ public class UI {
         }
     }
 
-    private void resultatMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer) {
+    private void resultatMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer, Medlemshaandtering medlemshaandtering) {
         System.out.println("Vælg en handling:");
         System.out.println("1. Se resultater");
         System.out.println("2. Tilføj resultat");
@@ -210,7 +210,7 @@ public class UI {
                 break;
 
             case 1:
-                konkurrencesvoemning.printResultater(utility);
+                konkurrencesvoemning.printResultater(utility, medlemshaandtering);
                 break;
 
             case 2:

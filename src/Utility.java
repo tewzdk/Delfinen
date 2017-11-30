@@ -154,4 +154,24 @@ public class Utility {
     in.close();
     }
 
+    public String omregnTid(int tid){
+        int min = tid / 6000;
+        int sekund = tid % 6000 / 100;
+        int hundrededele = tid % 6000 % 100;
+        String string;
+        if(sekund < 10 && hundrededele < 10){
+            string = min + ":0" + sekund + ":0" + hundrededele;
+        }
+        else if(sekund < 10 && hundrededele >= 10){
+            string = min + ":0" + sekund + ":" + hundrededele;
+        }
+        else if(sekund >= hundrededele && hundrededele < 10){
+            string = min + ":" + sekund + ":0" + hundrededele;
+        }
+        else{
+            string = min + ":" + sekund + ":" + hundrededele;
+        }
+        return string;
+    }
+
 }

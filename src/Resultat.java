@@ -49,12 +49,4 @@ public class Resultat {
         this.dato = dato;
     }
 
-    //@Override
-    //public String toString(){
-
-       // return "Medlemsnummer: " + medlemsnummer + ", " + dato + tid
-
-
-    //}
-
 }

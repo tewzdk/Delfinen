@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 public class Konkurrencesvoemning {
@@ -42,7 +44,7 @@ public class Konkurrencesvoemning {
                 System.out.println(afsluttedeStaevner.get(i));
             }
         } else {
-            System.out.println("[Der er ingen afsluttede stævner");
+            System.out.println("Der er ingen afsluttede stævner");
         }
         System.out.println("");
 
@@ -187,10 +189,25 @@ public class Konkurrencesvoemning {
         }
     }
 
-    public void printResultater(Utility utility) {
+    public void printResultater(Utility utility, Medlemshaandtering medlemshaandtering) {
+        for (int i = 0; i < resultater.size(); i++) {
+            String navn = "";
+            for (int j = 0; j < medlemshaandtering.getMedlemsliste().size(); j++) {
+                if(resultater.get(i).getMedlemsnummer() == medlemshaandtering.getMedlemsliste().get(j).getMedlemsnummer()){
+                    navn = medlemshaandtering.getMedlemsliste().get(j).getNavn();
+                }
+            }
+            System.out.println("[Disciplin: " + resultater.get(i).getDisciplin() +
+                    " | Tid: " + utility.omregnTid(resultater.get(i).getTid()) + " | " + navn + "]");
+        }
+    }
 
+    public void sorterResultater(){
+        Comparator<Resultat> resultatComparator = Comparator.comparing(disciplin -> disciplin.getDisciplin().getSvoemmestil());
+        resultatComparator = resultatComparator.thenComparing(disciplin -> disciplin.getDisciplin().getDistance());
+        resultatComparator = resultatComparator.thenComparing(Resultat::getTid);
 
-
+        Collections.sort(resultater, resultatComparator);
 
     }
 
@@ -213,12 +230,11 @@ public class Konkurrencesvoemning {
         Date date = new Date();
         date.getTime();
 
-        System.out.println(tid);
         Traeningsresultat traeningsresultat = new Traeningsresultat(tid, disciplin, date, medlemsnummer);
         resultater.add(traeningsresultat);
         System.out.println();
 
-
+        sorterResultater();
     }
 
     public void redigerResultat() {

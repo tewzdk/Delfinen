@@ -25,6 +25,6 @@ public class Disciplin {
 
     @Override
     public String toString(){
-        return distance + "m / " + svoemmestil;
+        return distance + "m " + svoemmestil;
     }
 }
