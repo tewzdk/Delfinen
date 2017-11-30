@@ -1,11 +1,11 @@
-import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Konkurrencesvoemning {
     private ArrayList<Staevne> staevneliste = new ArrayList<>();
     private ArrayList<Staevne> afsluttedeStaevner = new ArrayList<>();
-    private ArrayList<Traeningsresultat> traeningsresultats = new ArrayList<>();
+    private ArrayList<Traeningsresultat> traeningsresultatsliste = new ArrayList<>();
+    private ArrayList<Staevneresultat> staevneresultatsliste = new ArrayList<>();
 
     public void printMedlemsliste() {
         for (int i = 0; i < staevneliste.size(); i++) {
@@ -115,6 +115,7 @@ public class Konkurrencesvoemning {
 
         boolean validerSvar = false;
         boolean validerSvar2 = false;
+        boolean validerSvar3 = false;
         int[] anArray = new int[20];
         int nummer = 0;
 
@@ -133,6 +134,45 @@ public class Konkurrencesvoemning {
                     while (!validerSvar) {
                         String svar2 = utility.inputString();
                         if (svar2.equalsIgnoreCase("JA")) {
+                            while (!validerSvar3) {
+                                System.out.println("Tilføj nyt resultat? (Ja = 1' 'Nej = 2)");
+                                int svar3 = utility.inputIntegerSvar();
+                                if (svar3 == 1){
+
+                                    System.out.println("---------------------");
+                                    System.out.println("Indtast medlemsnummer");
+                                    int medlemsnummer = utility.inputIntegerSvar();
+
+                                    System.out.println("Indtast din nye tid: ");
+                                    System.out.print("Minut: ");
+                                    int minut = utility.inputIntegerSvar();
+                                    System.out.print("Sekund: ");
+                                    int sekund = utility.inputIntegerSvar();
+                                    System.out.print("Hundrededelesekund: ");
+                                    int hundrededeleSekund = utility.inputIntegerSvar();
+                                    int tid = (minut * 6000) + (sekund * 100) + hundrededeleSekund;
+
+                                    System.out.println("Indtast svømmestil:");
+                                    Svoemmestil svoemmestil = utility.inputSvoemmestil();
+                                    System.out.println("Indtast distance");
+                                    int distance = utility.inputDistance();
+
+                                    Disciplin disciplin = new Disciplin(svoemmestil, distance);
+
+                                    Date date = new Date();
+                                    date.getTime();
+
+                                    System.out.println(tid);
+                                    Staevneresultat staevneresultat = new Staevneresultat(tid, disciplin, date, medlemsnummer);
+                                    staevneresultatsliste.add(staevneresultat);
+                                    System.out.println();
+                                } else if (svar3 == 2){
+
+                                    validerSvar3 = true;
+                                } else {
+                                    System.out.println("Indtast enten 1 eller 2");
+                                }
+                            }
                             afsluttedeStaevner.add(staevneliste.get(i));
                             staevneliste.remove(i);
                             System.out.println("[Stævnet er blevet afsluttet]\n");
@@ -166,12 +206,17 @@ public class Konkurrencesvoemning {
         int medlemsnummer = utility.inputIntegerSvar();
 
         System.out.println("Indtast din nye tid: ");
+        System.out.print("Minut: ");
         int minut = utility.inputIntegerSvar();
+        System.out.print("Sekund: ");
         int sekund = utility.inputIntegerSvar();
+        System.out.print("Hundrededelesekund: ");
         int hundrededeleSekund = utility.inputIntegerSvar();
         int tid = (minut * 6000) + (sekund * 100) + hundrededeleSekund;
 
-        System.out.println("Indtast svømmestil:");
+
+        System.out.println("");
+        System.out.println("Indtast svømmestil: (brystsvømning, butterfly, crawl, hundesvømning eller rygcrawl)");
         Svoemmestil svoemmestil = utility.inputSvoemmestil();
         System.out.println("Indtast distance");
         int distance = utility.inputDistance();
@@ -183,7 +228,7 @@ public class Konkurrencesvoemning {
 
         System.out.println(tid);
        Traeningsresultat traeningsresultat = new Traeningsresultat(tid, disciplin, date, medlemsnummer);
-       traeningsresultats.add(traeningsresultat);
+       traeningsresultatsliste.add(traeningsresultat);
         System.out.println();
 
 
