@@ -171,6 +171,7 @@ public class Indbetalingsliste {
         }
 
     }
+
     public void laesIndbetalinger(Utility utility){
         Scanner scanner = null;
         try {
@@ -195,6 +196,109 @@ public class Indbetalingsliste {
         }
 
     }
+
+    public void betalKontingenter(Utility utility, Medlemshaandtering medlemshaandtering) {
+        ArrayList<Indbetaling> tempIndbetalinger = new ArrayList<>();
+
+        ArrayList<Medlem> medlemer = medlemshaandtering.getMedlemsliste();
+
+        Date idag = new Date();
+        double kontingent = 0;
+
+        idag.getTime();
+
+        System.out.println("1: Komprimer betalinger" +
+                "\n2: Udfør kontingetnt betaling" +
+                "\n0: Anuller");
+
+        int betal = utility.inputIntegerSvar();
+
+        if (betal < 3 && betal > 0) {
+            for (int i = 0; i < medlemer.size(); i++) {
+
+
+                Date person = medlemer.get(i).getFoedselsdato();
+                LocalDate date = person.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                long yearsDelta = date.until(LocalDate.now(), ChronoUnit.YEARS);
+
+
+                if (betal == 2) {
+                    if (!medlemer.get(i).getMedlemstype().equalsIgnoreCase("Passiv")) {
+                        if (yearsDelta > 17 && yearsDelta < 60) {
+                            //mellem 18 og 60 år
+                            kontingent = 1600;
+
+                        } else if (yearsDelta > 59) {
+                            //over 60 år
+                            kontingent = 1600 - 1600 * 0.25;
+
+                        } else {
+                            //under 18
+                            kontingent = 1000;
+                        }
+                    } else {
+
+                        //passiv
+                        kontingent = 500;
+                    }
+                }
+
+                Indbetaling indbetaling = new Indbetaling(medlemer.get(i).getMedlemsnummer(), -kontingent, idag, i);
+
+                tempIndbetalinger.add(i, indbetaling);
+
+                for (int j = 0; j < indbetalinger.size(); j++) {
+
+
+                    if (indbetalinger.get(j).getMedlemsnummer() == medlemer.get(i).getMedlemsnummer()) {
+
+                        tempIndbetalinger.get(i).setBeloeb(tempIndbetalinger.get(i).getBeloeb() + indbetalinger.get(j).getBeloeb());
+                        indbetalinger.remove(j);
+                        j--;
+                    }
+
+                }
+                System.out.println("MedlemNr.: " + medlemer.get(i).getMedlemsnummer() + " Kontingent: " + kontingent + " Restance: " + tempIndbetalinger.get(i).getBeloeb());
+
+
+            }
+
+            if (indbetalinger.size() > 0) {
+                System.out.println("Følgende indbetalinger kunne ikke forbindes med et medlem");
+                for (int i = 0; i < indbetalinger.size(); i++) {
+                    System.out.println("ID: " + indbetalinger.get(i).getBetalingsID() +
+                            " nr.: " + indbetalinger.get(i).getMedlemsnummer() +
+                            " kr.: " + indbetalinger.get(i).getBeloeb());
+                    tempIndbetalinger.add(indbetalinger.get(i));
+                }
+                System.out.println("Betalingerne er blevet tilføjet til listen igen. Slet eller ret for at fjerne overskydende betalinger");
+            }
+
+            for (int i = 0; i < tempIndbetalinger.size(); i++) {
+
+                Boolean print = true;
+
+                if(tempIndbetalinger.get(i).getBeloeb()<0) {
+                    if (print) {
+                        System.out.println("Disse medlemsnumre skylder kontingent:");
+                        print = false;
+                    }
+                    System.out.println( "Nr.: " + tempIndbetalinger.get(i).getMedlemsnummer() +
+                            " mangler at betale: " + tempIndbetalinger.get(i).getBeloeb());
+                }
+
+            }
+
+            indbetalinger = tempIndbetalinger;
+            gemIndbetalinger(utility);
+        }
+
+
+        if (!(betal == 0 || betal == 1 || betal == 2)) {
+            betalKontingenter(utility,medlemshaandtering);
+        }
+    }
+
     private void gemIndbetalinger(Utility utility){
         try {
             PrintWriter outputStream = new PrintWriter(new File("resources/indbetalinger"));

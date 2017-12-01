@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,7 +8,7 @@ public class Konkurrencesvoemning {
     private ArrayList<Staevne> staevneliste = new ArrayList<>();
     private ArrayList<Staevne> afsluttedeStaevner = new ArrayList<>();
     private ArrayList<Resultat> resultater = new ArrayList<>();
-
+    
     public void printMedlemsliste() {
         for (int i = 0; i < staevneliste.size(); i++) {
             System.out.println("[" + staevneliste.get(i).getDato() + "] " + staevneliste.get(i).getAdresse());
@@ -27,7 +28,7 @@ public class Konkurrencesvoemning {
 
     public void printAktiveStaevner() {
 
-        if (staevneliste.size() > 0){
+        if (staevneliste.size() > 0) {
             for (int i = 0; i < staevneliste.size(); i++) {
                 System.out.println(staevneliste.get(i));
             }
@@ -39,7 +40,7 @@ public class Konkurrencesvoemning {
 
     public void printAfsluttedeStaevner() {
 
-        if (afsluttedeStaevner.size() > 0){
+        if (afsluttedeStaevner.size() > 0) {
             for (int i = 0; i < afsluttedeStaevner.size(); i++) {
                 System.out.println(afsluttedeStaevner.get(i));
             }
@@ -136,37 +137,39 @@ public class Konkurrencesvoemning {
                         String svar2 = utility.inputString();
                         if (svar2.equalsIgnoreCase("JA")) {
                             while (!validerSvar3) {
-                                System.out.println("Tilføj nyt resultat? (Ja = 1' 'Nej = 2)");
+                                System.out.println("---------------------");
+                                System.out.println("Indtast medlemsnummer");
+                                int medlemsnummer = utility.inputIntegerSvar();
+
+                                System.out.println("Indtast din nye tid: ");
+                                System.out.print("Minut: ");
+                                int minut = utility.inputIntegerSvar();
+                                System.out.print("Sekund: ");
+                                int sekund = utility.inputIntegerSvar();
+                                System.out.print("Hundrededelesekund: ");
+                                int hundrededeleSekund = utility.inputIntegerSvar();
+                                int tid = (minut * 6000) + (sekund * 100) + hundrededeleSekund;
+
+                                Disciplin disciplin = utility.inputDisciplin(distancer);
+
+                                Date date = new Date();
+                                date.getTime();
+
+                                System.out.println(tid);
+                                Staevneresultat staevneresultat = new Staevneresultat(tid, disciplin, date, medlemsnummer);
+                                resultater.add(staevneresultat);
+                                System.out.println();
+
+
+                                System.out.println("1. Tilføj nyt resultat");
+                                System.out.println("2. Afslut");
                                 int svar3 = utility.inputIntegerSvar();
-                                if (svar3 == 1){
+                                if (svar3 == 1) {
 
-                                    System.out.println("---------------------");
-                                    System.out.println("Indtast medlemsnummer");
-                                    int medlemsnummer = utility.inputIntegerSvar();
-
-                                    System.out.println("Indtast din nye tid: ");
-                                    System.out.print("Minut: ");
-                                    int minut = utility.inputIntegerSvar();
-                                    System.out.print("Sekund: ");
-                                    int sekund = utility.inputIntegerSvar();
-                                    System.out.print("Hundrededelesekund: ");
-                                    int hundrededeleSekund = utility.inputIntegerSvar();
-                                    int tid = (minut * 6000) + (sekund * 100) + hundrededeleSekund;
-
-                                    Disciplin disciplin = utility.inputDisciplin(distancer);
-
-                                    Date date = new Date();
-                                    date.getTime();
-
-                                    System.out.println(tid);
-                                    Staevneresultat staevneresultat = new Staevneresultat(tid, disciplin, date, medlemsnummer);
-                                    resultater.add(staevneresultat);
-                                    System.out.println();
-                                } else if (svar3 == 2){
-
+                                } else if (svar3 == 2) {
                                     validerSvar3 = true;
                                 } else {
-                                    System.out.println("Indtast enten 1 eller 2");
+                                    System.out.println("Indtast 1 for at tilføje et nyt resultat eller 2 for at afslutte");
                                 }
                             }
                             afsluttedeStaevner.add(staevneliste.get(i));
@@ -265,7 +268,7 @@ public class Konkurrencesvoemning {
         System.out.println("Indtast medlemsnummer");
         int medlemsnummer = utility.inputIntegerSvar();
 
-        System.out.println("Indtast din nye tid: ");
+        System.out.println("Indtast din nye tid:");
         System.out.print("Minut: ");
         int minut = utility.inputIntegerSvar();
         System.out.print("Sekund: ");
@@ -278,8 +281,15 @@ public class Konkurrencesvoemning {
 
         Date date = new Date();
         date.getTime();
+        int resultatID;
 
-        Traeningsresultat traeningsresultat = new Traeningsresultat(tid, disciplin, date, medlemsnummer);
+        if (resultater.size() > 0) {
+            resultatID = resultater.get(resultater.size() - 1).getResultatID() + 1;
+        } else {
+            resultatID = 0;
+        }
+
+        Traeningsresultat traeningsresultat = new Traeningsresultat(tid, disciplin, date, medlemsnummer, resultatID);
         resultater.add(traeningsresultat);
         System.out.println();
 
@@ -289,6 +299,51 @@ public class Konkurrencesvoemning {
     public void redigerResultat() {
     }
 
-    public void fjernResultat() {
+    public void fjernResultat(Utility utility, Medlemshaandtering medlemshaandtering) {
+        System.out.println("Indtast medlemsnummer for den du vil fjerne resultater fra");
+        int svar = utility.inputIntegerSvar();
+        boolean aktiv = true;
+        while (aktiv) {
+            for (int i = 0; i < resultater.size(); i++) {
+
+                if (svar == resultater.get(i).getMedlemsnummer() && aktiv == true) {
+
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss");
+                    String dato;
+                    dato = simpleDateFormat.format(resultater.get(i).getDato());
+                    int tid = resultater.get(i).getTid();
+
+                    //System.out.println( + ": " + dato);
+                    System.out.println("Træningsresultat " + dato);
+                    System.out.println("ID: " + resultater.get(i).getResultatID() + ", " + resultater.get(i).getDisciplin());
+                    System.out.println("Tid: " + tid);
+                    System.out.println("");
+                    System.out.println("Tast [1. Slet] [2. Næste] [3. Fortryd]");
+
+                    boolean switch1 = true;
+                    while (switch1) {
+                        switch (utility.inputIntegerSvar()) {
+                            case 0:
+
+                                aktiv = false;
+                                switch1 = false;
+                                break;
+                            case 1:
+                                resultater.remove(i);
+                                aktiv = false;
+                                switch1 = false;
+                                break;
+                            case 2:
+                                aktiv = true;
+                                switch1 = false;
+                                break;
+                            default:
+                                System.out.println("Prøv Igen");
+                                break;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

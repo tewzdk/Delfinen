@@ -6,6 +6,7 @@ public class Resultat {
     private Date dato;
     private int medlemsnummer;
     private String resultattype;
+    private int resultatID;
 
     public String getResultattype() {
         return resultattype;
@@ -47,6 +48,14 @@ public class Resultat {
 
     public void setDato(Date dato) {
         this.dato = dato;
+    }
+
+    public int getResultatID() {
+        return resultatID;
+    }
+
+    public void setResultatID(int resultatID) {
+        this.resultatID = resultatID;
     }
 
 }
