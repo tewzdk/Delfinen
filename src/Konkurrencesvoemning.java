@@ -1,11 +1,9 @@
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
+import java.util.*;
 
 public class Konkurrencesvoemning {
     private ArrayList<Staevne> staevneliste = new ArrayList<>();
@@ -110,7 +108,7 @@ public class Konkurrencesvoemning {
                     }
                     validerSvar = true;
                 } else {
-                    System.out.println("Indtast venlighst et korrekt stævnenavn");
+                    System.out.println("Indtast venligst et korrekt stævnenavn");
                 }
             }
         }
@@ -159,7 +157,11 @@ public class Konkurrencesvoemning {
                                 date.getTime();
 
                                 System.out.println(tid);
-                                Staevneresultat staevneresultat = new Staevneresultat(tid, disciplin, date, medlemsnummer);
+
+                                //RET PLEASE
+                                int id = 4;
+
+                                Staevneresultat staevneresultat = new Staevneresultat(tid, disciplin, date, medlemsnummer, id);
                                 resultater.add(staevneresultat);
                                 System.out.println();
 
@@ -195,7 +197,46 @@ public class Konkurrencesvoemning {
         }
     }
 
-    public void laesResultater(){}
+    public void laesResultater(Utility utility) {
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File("resources/resultater")).useDelimiter(";");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (scanner.hasNextInt()) {
+            int resultatID = scanner.nextInt();
+            int medlemsnummer = scanner.nextInt();
+            String svoemmestilString = scanner.next();
+            int distance = scanner.nextInt();
+            int tid = scanner.nextInt();
+            String resultattype = scanner.next();
+            String datoString = scanner.next();
+            Date date = null;
+            try {
+                date = utility.simpleDateFormat.parse(datoString);
+            } catch (ParseException e) {
+            }
+
+            Svoemmestil svoemmestilValideret = null;
+            for (Svoemmestil svoemmestil : Svoemmestil.values()) {
+                if (svoemmestilString.equalsIgnoreCase(svoemmestil.toString())) {
+                    svoemmestilValideret = svoemmestil;
+                }
+            }
+            Disciplin disciplin = new Disciplin(svoemmestilValideret, distance);
+            if (resultattype.equalsIgnoreCase("Traeningsresultat")) {
+                Traeningsresultat traeningsresultat = new Traeningsresultat(tid, disciplin, date, medlemsnummer, resultatID);
+                resultater.add(traeningsresultat);
+            } else if (resultattype.equalsIgnoreCase("Staevneresultat")) {
+                Staevneresultat staevneresultat = new Staevneresultat(tid, disciplin, date, medlemsnummer, resultatID);
+                resultater.add(staevneresultat);
+            }
+            scanner.nextLine();
+        }
+    }
+
+
 
     private void gemResultater(Utility utility){
         try {
@@ -203,7 +244,12 @@ public class Konkurrencesvoemning {
             for (int i = 0; i < resultater.size(); i++) {
                 String datoString = utility.simpleDateFormat.format(resultater.get(i).getDato());
                 outputStream.println(
-                        
+                                resultater.get(i).getResultatID() + ";" +
+                                        resultater.get(i).getMedlemsnummer() + ";" +
+                                        resultater.get(i).getDisciplin().getSvoemmestil() + ";" +
+                                        resultater.get(i).getDisciplin().getDistance() + ";" +
+                                        resultater.get(i).getTid() + ";" +
+                                        resultater.get(i).getResultattype() + ";" +
                                 datoString + ";"
                 );
             }
@@ -218,7 +264,7 @@ public class Konkurrencesvoemning {
     public void printResultater(Utility utility, Medlemshaandtering medlemshaandtering) {
         for (int i = 0; i < resultater.size(); i++) {
             String navn = utility.navnFraMedlemsnummer(medlemshaandtering, resultater.get(i).getMedlemsnummer());
-            System.out.println("[Disciplin: " + resultater.get(i).getDisciplin() +
+            System.out.println("[ResultatsID: " + resultater.get(i).getResultatID() + " | Disciplin: " + resultater.get(i).getDisciplin() +
                     " | Tid: " + utility.omregnTid(resultater.get(i).getTid()) + " | " + navn + "]");
         }
         System.out.println();
@@ -313,9 +359,11 @@ public class Konkurrencesvoemning {
         System.out.println();
 
         sorterResultater();
+        gemResultater(utility);
     }
 
-    public void redigerResultat() {
+    public void redigerResultat(Utility utility) {
+        gemResultater(utility);
     }
 
     public void fjernResultat(Utility utility, Medlemshaandtering medlemshaandtering) {
@@ -325,7 +373,7 @@ public class Konkurrencesvoemning {
         while (aktiv) {
             for (int i = 0; i < resultater.size(); i++) {
 
-                if (svar == resultater.get(i).getMedlemsnummer() && aktiv == true) {
+                if (svar == resultater.get(i).getMedlemsnummer() && aktiv) {
 
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss");
                     String dato;
@@ -364,5 +412,6 @@ public class Konkurrencesvoemning {
                 }
             }
         }
+        gemResultater(utility);
     }
 }

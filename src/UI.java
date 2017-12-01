@@ -14,6 +14,7 @@ public class UI {
         //indlæs txt-filer
         medlemshaandtering.laesMedlemsliste();
         indbetalingsliste.laesIndbetalinger(utility);
+        konkurrencesvoemning.laesResultater(utility);
 
         boolean programmetKoerer = true;
         while (programmetKoerer) {
@@ -218,7 +219,7 @@ public class UI {
                 break;
 
             case 3:
-                konkurrencesvoemning.redigerResultat();
+                konkurrencesvoemning.redigerResultat(utility);
                 break;
 
             case 4:
