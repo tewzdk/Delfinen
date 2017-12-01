@@ -1,4 +1,10 @@
+<<<<<<< Updated upstream
 import java.text.SimpleDateFormat;
+=======
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+>>>>>>> Stashed changes
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -192,19 +198,35 @@ public class Konkurrencesvoemning {
         }
     }
 
+    public void laesResultater(){}
+
+    private void gemResultater(Utility utility){
+        try {
+            PrintWriter outputStream = new PrintWriter(new File("resources/resultater"));
+            for (int i = 0; i < resultater.size(); i++) {
+                String datoString = utility.simpleDateFormat.format(resultater.get(i).getDato());
+                outputStream.println(
+                        
+                                datoString + ";"
+                );
+            }
+            outputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public void printResultater(Utility utility, Medlemshaandtering medlemshaandtering) {
         for (int i = 0; i < resultater.size(); i++) {
-            String navn = "";
-            for (int j = 0; j < medlemshaandtering.getMedlemsliste().size(); j++) {
-                if(resultater.get(i).getMedlemsnummer() == medlemshaandtering.getMedlemsliste().get(j).getMedlemsnummer()){
-                    navn = medlemshaandtering.getMedlemsliste().get(j).getNavn();
-                }
-            }
             String navn = utility.navnFraMedlemsnummer(medlemshaandtering, resultater.get(i).getMedlemsnummer());
             System.out.println("[Disciplin: " + resultater.get(i).getDisciplin() +
                     " | Tid: " + utility.omregnTid(resultater.get(i).getTid()) + " | " + navn + "]");
         }
         System.out.println();
+
+        //skal slettes
         printTop5Resultater(utility, medlemshaandtering);
     }
     public void printTop5Resultater(Utility utility, Medlemshaandtering medlemshaandtering) {

@@ -27,4 +27,18 @@ public class Disciplin {
     public String toString(){
         return distance + "m " + svoemmestil;
     }
+
+    //blev nød til at lave en override equals for at kunne sammeligne discipliner i Top5menuen.
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Disciplin)) {
+            return false;
+        }
+
+        Disciplin that = (Disciplin) other;
+
+        // Custom equality check here.
+        return this.getSvoemmestil().equals(that.getSvoemmestil())
+                && this.getDistance() == (that.getDistance());
+    }
 }

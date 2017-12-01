@@ -174,4 +174,14 @@ public class Utility {
         return string;
     }
 
+    public String navnFraMedlemsnummer(Medlemshaandtering medlemshaandtering, int medlemsnummer){
+        String navn = "";
+        for (int i = 0; i < medlemshaandtering.getMedlemsliste().size(); i++) {
+            if(medlemsnummer == medlemshaandtering.getMedlemsliste().get(i).getMedlemsnummer()){
+                navn = medlemshaandtering.getMedlemsliste().get(i).getNavn();
+            }
+        }
+        return navn;
+    }
+
 }
