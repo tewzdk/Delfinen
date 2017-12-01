@@ -1,10 +1,7 @@
-<<<<<<< Updated upstream
 import java.text.SimpleDateFormat;
-=======
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
->>>>>>> Stashed changes
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

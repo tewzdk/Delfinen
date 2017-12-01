@@ -222,7 +222,7 @@ public class UI {
                 break;
 
             case 4:
-                konkurrencesvoemning.fjernResultat();
+                konkurrencesvoemning.fjernResultat(utility, medlemshaandtering);
                 break;
         }
 
