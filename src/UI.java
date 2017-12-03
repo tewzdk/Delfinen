@@ -160,7 +160,7 @@ public class UI {
                 return false;
 
             case 1:
-                holdoversigtMenu(utility, konkurrencesvoemning);
+                holdoversigtMenu(utility, konkurrencesvoemning, medlemshaandtering);
                 break;
 
             case 2:
@@ -174,7 +174,7 @@ public class UI {
         return true;
     }
 
-    private void holdoversigtMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning) {
+    private void holdoversigtMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Medlemshaandtering medlemshaandtering) {
         System.out.println("Vælg en handling");
         System.out.println("1. Se juniorhold");
         System.out.println("2. Se seniorhold");
@@ -187,11 +187,11 @@ public class UI {
             case 0:
                 break;
             case 1:
-                konkurrencesvoemning.printJuniorHoldliste();
+                konkurrencesvoemning.printJuniorHoldliste(medlemshaandtering);
                 break;
 
             case 2:
-                konkurrencesvoemning.printSeniorHoldliste();
+                konkurrencesvoemning.printSeniorHoldliste(medlemshaandtering);
                 break;
         }
     }

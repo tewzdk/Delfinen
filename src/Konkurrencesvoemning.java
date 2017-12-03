@@ -3,6 +3,9 @@ import java.text.SimpleDateFormat;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Konkurrencesvoemning {
@@ -16,15 +19,40 @@ public class Konkurrencesvoemning {
         }
     }
 
-    public void printSeniorHoldliste() {
+    public void printSeniorHoldliste(Medlemshaandtering medlemshaandtering) {
 
+        for (int i = 0; i < medlemshaandtering.getMedlemsliste().size(); i++) {
+            Date foedselsdag = medlemshaandtering.getMedlemsliste().get(i).getFoedselsdato();
+            LocalDate date = foedselsdag.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            long yearsDelta = date.until(LocalDate.now(), ChronoUnit.YEARS);
+            if (yearsDelta > 17) {
 
-        Date date;
-        Medlemshaandtering medlemshaandtering = new Medlemshaandtering();
+                medlemshaandtering.getMedlemsliste().get(i).getMedlemsnummer();
+                System.out.println("[" + medlemshaandtering.getMedlemsliste().get(i).getMedlemsnummer() + "] "
+                        + medlemshaandtering.getMedlemsliste().get(i).getNavn() +
+                        ", " + yearsDelta);
+            }
+        }
+        System.out.println("");
 
     }
 
-    public void printJuniorHoldliste() {
+    public void printJuniorHoldliste(Medlemshaandtering medlemshaandtering) {
+
+        for (int i = 0; i < medlemshaandtering.getMedlemsliste().size(); i++) {
+            Date foedselsdag = medlemshaandtering.getMedlemsliste().get(i).getFoedselsdato();
+            LocalDate date = foedselsdag.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            long yearsDelta = date.until(LocalDate.now(), ChronoUnit.YEARS);
+            if (yearsDelta < 18) {
+
+                medlemshaandtering.getMedlemsliste().get(i).getMedlemsnummer();
+                System.out.println("[" + medlemshaandtering.getMedlemsliste().get(i).getMedlemsnummer() + "] "
+                        + medlemshaandtering.getMedlemsliste().get(i).getNavn() +
+                        ", " + yearsDelta);
+            }
+        }
+        System.out.println("");
+
     }
 
     public void printAktiveStaevner() {
