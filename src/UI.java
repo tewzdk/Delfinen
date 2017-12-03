@@ -14,6 +14,7 @@ public class UI {
         //indlæs txt-filer
         medlemshaandtering.laesMedlemsliste();
         indbetalingsliste.laesIndbetalinger(utility);
+        konkurrencesvoemning.laesStaevneliste(utility);
         konkurrencesvoemning.laesResultater(utility);
 
         boolean programmetKoerer = true;

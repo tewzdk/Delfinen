@@ -54,6 +54,57 @@ public class Konkurrencesvoemning {
         System.out.println("");
 
     }
+    public void laesStaevneliste(Utility utility){
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File("resources/staevneliste")).useDelimiter(";").useLocale(Locale.US);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        while(scanner.hasNextInt()){
+            int staevneID = scanner.nextInt();
+            String staevnenavn = scanner.next();
+            String gadenavn = scanner.next();
+            int husnummer = scanner.nextInt();
+            String etage = scanner.next();
+            int postnummer = scanner.nextInt();
+            String by = scanner.next();
+            String datoString = scanner.next();
+            Date date = null;
+            try{
+                date = utility.simpleDateFormat.parse(datoString);
+            } catch (ParseException e){
+
+            }
+            Adresse adresse = new Adresse(gadenavn,husnummer,etage,postnummer,by);
+            Staevne staevne = new Staevne(staevnenavn, adresse, date, staevneID);
+            staevneliste.add(staevne);
+            scanner.nextLine();
+        }
+
+    }
+    public void gemStaevneliste(Utility utility){
+        try {
+            PrintWriter outputStream = new PrintWriter(new File("resources/staevneliste"));
+            for (int i = 0; i < staevneliste.size(); i++) {
+                String datoString = utility.simpleDateFormat.format(staevneliste.get(i).getDato());
+                outputStream.println(
+                        staevneliste.get(i).getStaevnelisteID() + ";" +
+                                staevneliste.get(i).getStaevnenavn() + ";" +
+                                staevneliste.get(i).getAdresse().getGadenavn() + ";" +
+                                staevneliste.get(i).getAdresse().getHusnummer() + ";" +
+                                staevneliste.get(i).getAdresse().getEtage() + ";" +
+                                staevneliste.get(i).getAdresse().getPostnummer() + ";" +
+                                staevneliste.get(i).getAdresse().getBy() + ";" +
+                                datoString + ";"
+
+                );
+            }
+            outputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void printAktiveStaevner() {
 
@@ -62,7 +113,7 @@ public class Konkurrencesvoemning {
                 System.out.println(staevneliste.get(i));
             }
         } else {
-            System.out.println("[Der er ingen planlagt stævner");
+            System.out.println("[Der er ingen planlagt stævner]");
         }
         System.out.println("");
     }
@@ -101,6 +152,7 @@ public class Konkurrencesvoemning {
         //Skaber det nye stævne
         Staevne staevne = new Staevne(staevnenavn, staevneadresse, staevneDato, staevnelisteID);
         staevneliste.add(staevne);
+        gemStaevneliste(utility);
     }
 
     public void redigerStaevne(Utility utility) {
@@ -159,7 +211,7 @@ public class Konkurrencesvoemning {
         }
 
         System.out.println("[Ændringerne er blevet gemt");
-        // gemStaevner();
+        gemStaevneliste(utility);
     }
 
     public void afslutStaevne(Utility utility, Distancer distancer) {
@@ -242,6 +294,7 @@ public class Konkurrencesvoemning {
                 }
             }
         }
+        gemStaevneliste(utility);
     }
 
     public void laesResultater(Utility utility) {
@@ -283,8 +336,7 @@ public class Konkurrencesvoemning {
         }
     }
 
-
-    private void gemResultater(Utility utility) {
+    private void gemResultater(Utility utility){
         try {
             PrintWriter outputStream = new PrintWriter(new File("resources/resultater"));
             for (int i = 0; i < resultater.size(); i++) {
