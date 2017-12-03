@@ -5,12 +5,13 @@ public class Staevne {
     private String staevnenavn;
     private Adresse adresse;
     private Date dato;
-    private String staevnelisteNummer;
+    private int staevnelisteID;
 
-    public Staevne(String staevnenavn, Adresse adresse, Date dato) {
+    public Staevne(String staevnenavn, Adresse adresse, Date dato, int staevnelisteNummer) {
         this.staevnenavn = staevnenavn;
         this.adresse = adresse;
         this.dato = dato;
+        this.staevnelisteID = staevnelisteNummer;
     }
 
     public String getStaevnenavn() {
@@ -36,6 +37,11 @@ public class Staevne {
     public void setDato(Date dato) {
         this.dato = dato;
     }
+
+    public int getStaevnelisteID() {
+        return staevnelisteID;
+    }
+
 //        return gadenavn + " " + husnummer + " " + etage +
 //                "\n" + postnummer + " " + by;
 

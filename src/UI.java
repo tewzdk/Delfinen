@@ -219,7 +219,7 @@ public class UI {
                 break;
 
             case 3:
-                konkurrencesvoemning.redigerResultat(utility);
+                konkurrencesvoemning.redigerResultat(utility, medlemshaandtering, distancer);
                 break;
 
             case 4:
