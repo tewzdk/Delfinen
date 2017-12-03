@@ -15,6 +15,7 @@ public class UI {
         medlemshaandtering.laesMedlemsliste();
         indbetalingsliste.laesIndbetalinger(utility);
         konkurrencesvoemning.laesStaevneliste(utility);
+        konkurrencesvoemning.laesAfsluttedeStaevner(utility);
         konkurrencesvoemning.laesResultater(utility);
 
         boolean programmetKoerer = true;

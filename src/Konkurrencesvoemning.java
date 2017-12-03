@@ -83,6 +83,37 @@ public class Konkurrencesvoemning {
         }
 
     }
+
+    public void laesAfsluttedeStaevner(Utility utility){
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File("resources/afsluttedestaevner")).useDelimiter(";").useLocale(Locale.US);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        while(scanner.hasNextInt()){
+            int staevneID = scanner.nextInt();
+            String staevnenavn = scanner.next();
+            String gadenavn = scanner.next();
+            int husnummer = scanner.nextInt();
+            String etage = scanner.next();
+            int postnummer = scanner.nextInt();
+            String by = scanner.next();
+            String datoString = scanner.next();
+            Date date = null;
+            try{
+                date = utility.simpleDateFormat.parse(datoString);
+            } catch (ParseException e){
+
+            }
+            Adresse adresse = new Adresse(gadenavn,husnummer,etage,postnummer,by);
+            Staevne staevne = new Staevne(staevnenavn, adresse, date, staevneID);
+            afsluttedeStaevner.add(staevne);
+            scanner.nextLine();
+        }
+
+    }
+
     public void gemStaevneliste(Utility utility){
         try {
             PrintWriter outputStream = new PrintWriter(new File("resources/staevneliste"));
@@ -96,6 +127,29 @@ public class Konkurrencesvoemning {
                                 staevneliste.get(i).getAdresse().getEtage() + ";" +
                                 staevneliste.get(i).getAdresse().getPostnummer() + ";" +
                                 staevneliste.get(i).getAdresse().getBy() + ";" +
+                                datoString + ";"
+
+                );
+            }
+            outputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void gemAfsluttedeStaevner(Utility utility){
+        try {
+            PrintWriter outputStream = new PrintWriter(new File("resources/afsluttedestaevner"));
+            for (int i = 0; i < afsluttedeStaevner.size(); i++) {
+                String datoString = utility.simpleDateFormat.format(afsluttedeStaevner.get(i).getDato());
+                outputStream.println(
+                        afsluttedeStaevner.get(i).getStaevnelisteID() + ";" +
+                                afsluttedeStaevner.get(i).getStaevnenavn() + ";" +
+                                afsluttedeStaevner.get(i).getAdresse().getGadenavn() + ";" +
+                                afsluttedeStaevner.get(i).getAdresse().getHusnummer() + ";" +
+                                afsluttedeStaevner.get(i).getAdresse().getEtage() + ";" +
+                                afsluttedeStaevner.get(i).getAdresse().getPostnummer() + ";" +
+                                afsluttedeStaevner.get(i).getAdresse().getBy() + ";" +
                                 datoString + ";"
 
                 );
@@ -295,6 +349,7 @@ public class Konkurrencesvoemning {
             }
         }
         gemStaevneliste(utility);
+        gemAfsluttedeStaevner(utility);
     }
 
     public void laesResultater(Utility utility) {
