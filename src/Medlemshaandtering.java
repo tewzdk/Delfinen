@@ -185,6 +185,7 @@ public class Medlemshaandtering {
                 medlemsliste.add(passiv);
                 break;
         }
+        System.out.println("[Medlemmet er gemt]");
         gemMedlemsliste();
     }
     public void redigerMedlem(Utility utility){
