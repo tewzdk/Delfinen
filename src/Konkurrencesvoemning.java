@@ -25,7 +25,7 @@ public class Konkurrencesvoemning {
             Date foedselsdag = medlemshaandtering.getMedlemsliste().get(i).getFoedselsdato();
             LocalDate date = foedselsdag.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             long yearsDelta = date.until(LocalDate.now(), ChronoUnit.YEARS);
-            if (yearsDelta > 17) {
+            if (yearsDelta > 17 && medlemshaandtering.getMedlemsliste().get(i).getMedlemstype() == "Konkurrencesvømmer") {
 
                 medlemshaandtering.getMedlemsliste().get(i).getMedlemsnummer();
                 System.out.println("[" + medlemshaandtering.getMedlemsliste().get(i).getMedlemsnummer() + "] "
@@ -43,7 +43,7 @@ public class Konkurrencesvoemning {
             Date foedselsdag = medlemshaandtering.getMedlemsliste().get(i).getFoedselsdato();
             LocalDate date = foedselsdag.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             long yearsDelta = date.until(LocalDate.now(), ChronoUnit.YEARS);
-            if (yearsDelta < 18) {
+            if (yearsDelta < 18 && medlemshaandtering.getMedlemsliste().get(i).getMedlemstype() == "Konkurrencesvømmer") {
 
                 medlemshaandtering.getMedlemsliste().get(i).getMedlemsnummer();
                 System.out.println("[" + medlemshaandtering.getMedlemsliste().get(i).getMedlemsnummer() + "] "
@@ -54,14 +54,15 @@ public class Konkurrencesvoemning {
         System.out.println("");
 
     }
-    public void laesStaevneliste(Utility utility){
+
+    public void laesStaevneliste(Utility utility) {
         Scanner scanner = null;
         try {
             scanner = new Scanner(new File("resources/staevneliste")).useDelimiter(";").useLocale(Locale.US);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        while(scanner.hasNextInt()){
+        while (scanner.hasNextInt()) {
             int staevneID = scanner.nextInt();
             String staevnenavn = scanner.next();
             String gadenavn = scanner.next();
@@ -71,12 +72,12 @@ public class Konkurrencesvoemning {
             String by = scanner.next();
             String datoString = scanner.next();
             Date date = null;
-            try{
+            try {
                 date = utility.simpleDateFormat.parse(datoString);
-            } catch (ParseException e){
+            } catch (ParseException e) {
 
             }
-            Adresse adresse = new Adresse(gadenavn,husnummer,etage,postnummer,by);
+            Adresse adresse = new Adresse(gadenavn, husnummer, etage, postnummer, by);
             Staevne staevne = new Staevne(staevnenavn, adresse, date, staevneID);
             staevneliste.add(staevne);
             scanner.nextLine();
@@ -188,7 +189,7 @@ public class Konkurrencesvoemning {
     public void tilfoejStaevne(Utility utility) {
 
         //Laver stævnenavn
-        System.out.println("Indtast stævne");
+        System.out.println("Indtast navnet på stævnet:");
         String staevnenavn = utility.inputString();
         //Laver adresse
         Adresse staevneadresse = utility.inputAdresse();
@@ -200,7 +201,7 @@ public class Konkurrencesvoemning {
         if (staevneliste.size() > 0) {
             staevnelisteID = staevneliste.get(staevneliste.size() - 1).getStaevnelisteID() + 1;
         } else {
-            staevnelisteID = 0;
+            staevnelisteID = 1;
         }
 
         //Skaber det nye stævne
@@ -210,23 +211,20 @@ public class Konkurrencesvoemning {
     }
 
     public void redigerStaevne(Utility utility) {
-
+        boolean validerSvar = false;
+        boolean aktiv = true;
 
         if (staevneliste.size() > 0) {
-            for (int j = 0; j < staevneliste.size(); j++) {
-                System.out.println(staevneliste.get(j).getStaevnelisteID() + ". " + staevneliste.get(j).getStaevnenavn());
-            }
-
-            System.out.println("\nHvilket stævne vil du redigere? (Indtast ID)");
-            boolean validerSvar = false;
-            boolean aktiv = true;
-
             while (!validerSvar) {
+                System.out.println("Stævner:");
+                for (int j = 0; j < staevneliste.size(); j++) {
+                    System.out.println(staevneliste.get(j).getStaevnelisteID() + ". " + staevneliste.get(j).getStaevnenavn());
+                }
+                System.out.println("\nHvilket stævne vil du redigere? (Indtast ID)");
                 int svar = utility.inputIntegerSvar();
 
                 for (int i = 0; i < staevneliste.size(); i++) {
                     if (staevneliste.get(i).getStaevnelisteID() == svar) {
-
                         System.out.println("Hvad ønsker du at ændre?");
                         System.out.println("1. Stævnenavn");
                         System.out.println("2. Afholdningsdato");
@@ -255,8 +253,15 @@ public class Konkurrencesvoemning {
                             }
                         }
                         validerSvar = true;
+                    }
+                } if (validerSvar == false) {
+                    System.out.println("Stævne: " + svar + " eksisterer ikke. Indtast venligst et korrekt stævneID.");
+                    System.out.println("Tast 1 for at prøve igen eller tast 2 for at stoppe");
+                    int check = utility.inputIntegerSvar();
+                    if (check == 1) {
+                    } else if (check == 2) {
+                        validerSvar = true;
                     } else {
-                        System.out.println("Indtast venligst et korrekt stævneID");
                     }
                 }
             }
@@ -273,19 +278,18 @@ public class Konkurrencesvoemning {
         boolean validerSvar = false;
         boolean validerSvar2 = false;
         boolean boolNytResultat = false;
-        int[] anArray = new int[20];
-        int nummer = 0;
 
         if (staevneliste.size() > 0) {
-            for (int j = 0; j < staevneliste.size(); j++) {
-                System.out.println(staevneliste.get(j).getStaevnelisteID() + ". " + staevneliste.get(j).getStaevnenavn());
-            }
-            System.out.println("Hvilket stævne vil du afslutte?");
             while (!validerSvar2) {
+                System.out.println("Stævner:");
+                for (int j = 0; j < staevneliste.size(); j++) {
+                    System.out.println(staevneliste.get(j).getStaevnelisteID() + ". " + staevneliste.get(j).getStaevnenavn());
+                }
+                System.out.println("\nHvilket stævne vil du afslutte? (Indtast ID)");
                 int svar = utility.inputIntegerSvar();
                 for (int i = 0; i < staevneliste.size(); i++) {
                     if (staevneliste.get(i).getStaevnelisteID() == svar) {
-                        System.out.println("Er du sikker på, at du vil slette: (Tast: 'JA'/'NEJ')");
+                        System.out.println("Er du sikker på, at du vil afslutte stævnet: (Tast: 'JA'/'NEJ')");
                         System.out.println(staevneliste.get(i));
                         while (!validerSvar) {
                             String svar2 = utility.inputString();
@@ -310,8 +314,13 @@ public class Konkurrencesvoemning {
                                     date.getTime();
                                     System.out.println(tid); //FJERN
 
-                                    //RET PLEASE
-                                    int id = 4;
+                                    int id;
+
+                                    if (resultater.size() > 0) {
+                                        id = resultater.get(resultater.size() - 1).getResultatID() + 1;
+                                    } else {
+                                        id = 0;
+                                    }
 
                                     Staevneresultat staevneresultat = new Staevneresultat(tid, disciplin, date, medlemsnummer, id);
                                     resultater.add(staevneresultat);
@@ -324,7 +333,6 @@ public class Konkurrencesvoemning {
                                     if (svar3 == 1) {
 
                                     } else if (svar3 == 2) {
-
                                         boolNytResultat = true;
                                     } else {
                                         System.out.println("Indtast 1 for at tilføje et nyt resultat eller 2 for at afslutte");
@@ -340,13 +348,22 @@ public class Konkurrencesvoemning {
                             } else {
                                 System.out.println("Indtast venligst 'JA' eller 'NEJ':");
                             }
+                            validerSvar2 = true;
                         }
+                    }
+                } if (validerSvar2 == false) {
+                    System.out.println("Stævne: " + svar + " eksisterer ikke. Indtast venligst et korrekt stævneID.");
+                    System.out.println("Tast 1 for at prøve igen eller tast 2 for at stoppe" + "");
+                    int check = utility.inputIntegerSvar();
+                    if (check == 1) {
+                    } else if (check == 2) {
                         validerSvar2 = true;
                     } else {
-                        System.out.println("Stævne: " + svar + " eksisterer ikke. Indtast venligst et korrekt stævneID.");
                     }
                 }
             }
+        } else {
+            System.out.println("Der er ingen planlagte stævner\n");
         }
         gemStaevneliste(utility);
         gemAfsluttedeStaevner(utility);
@@ -391,7 +408,7 @@ public class Konkurrencesvoemning {
         }
     }
 
-    private void gemResultater(Utility utility){
+    private void gemResultater(Utility utility) {
         try {
             PrintWriter outputStream = new PrintWriter(new File("resources/resultater"));
             for (int i = 0; i < resultater.size(); i++) {
@@ -482,7 +499,7 @@ public class Konkurrencesvoemning {
 
     public void tilfoejTraeningsResultat(Utility utility, Distancer distancer) {
 
-        System.out.println("Indtast medlemsnummer");
+        System.out.println("Indtast medlemsnummer:");
         int medlemsnummer = utility.inputIntegerSvar();
 
         System.out.println("Indtast din nye tid:");
@@ -520,7 +537,7 @@ public class Konkurrencesvoemning {
         boolean validerSvar = true;
 
         while (validerSvar) {
-            System.out.println("Indtast medlemsnummer for den du vil redigere resultater fra");
+            System.out.println("Indtast medlemsnummer:");
             int svar2 = utility.inputIntegerSvar();
             for (int k = 0; k < resultater.size(); k++) {
                 if (svar2 == resultater.get(k).getMedlemsnummer()) {
@@ -531,8 +548,8 @@ public class Konkurrencesvoemning {
 
                     System.out.println("Træningsresultat " + dato);
                     System.out.println(utility.navnFraMedlemsnummer(medlemshaandtering, resultater.get(k).getMedlemsnummer()));
-                    System.out.println("ID: " + resultater.get(k).getResultatID() + ", " + resultater.get(k).getDisciplin());
-                    System.out.println("Tid: " + tid);
+                    System.out.println("ResultatsID: " + resultater.get(k).getResultatID() + "\nDisciplin: " + resultater.get(k).getDisciplin());
+                    System.out.println("Tid: " + utility.omregnTid(tid));
                     System.out.println("");
                     validerSvar = false;
                 }
@@ -554,7 +571,7 @@ public class Konkurrencesvoemning {
 
 
         while (aktiv) {
-            System.out.println("Indtast resultatID: ");
+            System.out.println("Indtast resultatsID: ");
             int svar = utility.inputIntegerSvar();
             for (int i = 0; i < resultater.size(); i++) {
                 if (svar == resultater.get(i).getResultatID()) {
@@ -614,7 +631,7 @@ public class Konkurrencesvoemning {
                 }
             }
         }
-        System.out.println("[Resultaterne er gemt]\n");
+        System.out.println("[Resultatet er gemt]\n");
         gemResultater(utility);
     }
 
@@ -623,25 +640,25 @@ public class Konkurrencesvoemning {
 
         boolean validerSvar = true;
         while (validerSvar) {
-            System.out.println("Indtast medlemsnummer for den du vil fjerne resultater fra");
+            System.out.println("Indtast medlemsnummer:");
             int svar2 = utility.inputIntegerSvar();
             for (int p = 0; p < resultater.size(); p++) {
                 if (svar2 == resultater.get(p).getMedlemsnummer()) {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss");
                     String dato;
                     dato = simpleDateFormat.format(resultater.get(p).getDato());
-                    int tidd = resultater.get(p).getTid();
+                    int tid = resultater.get(p).getTid();
 
                     System.out.println("Træningsresultat " + dato + "");
                     System.out.println(utility.navnFraMedlemsnummer(medlemshaandtering, resultater.get(p).getMedlemsnummer()));
-                    System.out.println("ID: " + resultater.get(p).getResultatID() + ", " + resultater.get(p).getDisciplin());
-                    System.out.println("Tid: " + tidd);
+                    System.out.println("ResultatsID: " + resultater.get(p).getResultatID() + "\nDisciplin: " + resultater.get(p).getDisciplin());
+                    System.out.println("Tid: " + utility.omregnTid(tid));
                     System.out.println("");
                     validerSvar = false;
                 }
             }
             if (validerSvar == true) {
-                System.out.println("Der findes ingen resultater med dette medlemsnummer");
+                System.out.println("Der findes ingen resultater for dette medlemsnummer");
                 System.out.println("Tast 1 for at prøve igen eller tast 2 for at stoppe" + "");
                 int check = utility.inputIntegerSvar();
                 if (check == 1) {
@@ -663,12 +680,25 @@ public class Konkurrencesvoemning {
                     String check = utility.inputString();
                     if (check.equalsIgnoreCase("JA")) {
                         resultater.remove(i);
+                        aktiv = false;
+                    } else {
+                        aktiv = false;
                     }
-                } //IF SÆTNING
-            } //FORLYKKE
-            aktiv = false;
+                }
+            }
+            if (aktiv == true) {
+                System.out.println("Der findes ingen resultater med dette resultatsID");
+                System.out.println("Tast 1 for at prøve igen eller tast 2 for at stoppe");
+                int check = utility.inputIntegerSvar();
+                if (check == 1) {
+                } else if (check == 2) {
+                    aktiv = false;
+                } else {
+
+                }
+            }
         }
-        System.out.println("[Resultaterne er gemt/slettet]\n");
+        System.out.println("[Resultatet er gemt/slettet]\n");
         gemResultater(utility);
     }
 }

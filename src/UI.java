@@ -177,7 +177,7 @@ public class UI {
     }
 
     private void holdoversigtMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Medlemshaandtering medlemshaandtering) {
-        System.out.println("Vælg en handling");
+        System.out.println("Vælg en handling:");
         System.out.println("1. Se juniorhold");
         System.out.println("2. Se seniorhold");
         System.out.println("0. Gå tilbage");
@@ -273,6 +273,7 @@ public class UI {
 
     private void indbetalingsMenu(Utility utility,Indbetalingsliste indbetalingsliste,Medlemshaandtering medlemshaandtering) {
         boolean aktiv = true;
+        System.out.println("Vælg en handling:");
         System.out.print("1: ");
         System.out.println("Tilføj indbetaling");
         System.out.print("2: ");
@@ -282,7 +283,7 @@ public class UI {
         System.out.print("4: ");
         System.out.println("Udskriv bestemt medlems indbetalinger");
         System.out.print("5: ");
-        System.out.println("Udskriv alle beralinger");
+        System.out.println("Udskriv alle betalinger");
         System.out.print("6: ");
         System.out.println("Udskriv en bestemt betaling");
         System.out.print("7: ");
