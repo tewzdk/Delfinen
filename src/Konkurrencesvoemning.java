@@ -12,13 +12,7 @@ public class Konkurrencesvoemning {
     private ArrayList<Staevne> staevneliste = new ArrayList<>();
     private ArrayList<Staevne> afsluttedeStaevner = new ArrayList<>();
     private ArrayList<Resultat> resultater = new ArrayList<>();
-
-    public void printMedlemsliste() {
-        for (int i = 0; i < staevneliste.size(); i++) {
-            System.out.println("[" + staevneliste.get(i).getDato() + "] " + staevneliste.get(i).getAdresse());
-        }
-    }
-
+    
     public void printSeniorHoldliste(Medlemshaandtering medlemshaandtering) {
 
         for (int i = 0; i < medlemshaandtering.getMedlemsliste().size(); i++) {
@@ -132,12 +126,8 @@ public class Konkurrencesvoemning {
                 outputStream.println(
                         afsluttedeStaevner.get(i).getStaevnelisteID() + ";" +
                                 afsluttedeStaevner.get(i).getStaevnenavn() + ";" +
-                                afsluttedeStaevner.get(i).getAdresse().getGadenavn() + ";" +
-                                afsluttedeStaevner.get(i).getAdresse().getHusnummer() + ";" +
-                                afsluttedeStaevner.get(i).getAdresse().getEtage() + ";" +
-                                afsluttedeStaevner.get(i).getAdresse().getPostnummer() + ";" +
-                                afsluttedeStaevner.get(i).getAdresse().getBy() + ";" +
-                                datoString + ";"
+                                datoString + ";" +
+                                afsluttedeStaevner.get(i).getStaevnebeskrivels() + ";"
 
                 );
             }
@@ -169,7 +159,6 @@ public class Konkurrencesvoemning {
             System.out.println("Der er ingen afsluttede stævner");
         }
         System.out.println("");
-
     }
 
     public void tilfoejStaevne(Utility utility) {
@@ -216,7 +205,7 @@ public class Konkurrencesvoemning {
                         System.out.println("Hvad ønsker du at ændre?");
                         System.out.println("1. Stævnenavn");
                         System.out.println("2. Afholdningsdato");
-                        System.out.println("3. Adresse");
+                        System.out.println("3. Beskrivelse");
                         System.out.println("0. Gå tilbage");
                         while (aktiv) {
                             aktiv = false;
@@ -234,10 +223,9 @@ public class Konkurrencesvoemning {
                                     staevneliste.get(i).setDato(nyDato);
                                     break;
                                 case 3:
-                                    System.out.println("Indtast ny afholdningsadresse");
-                                    Adresse adresse = utility.inputAdresse();
-                                    staevneliste.get(i).setAdresse(adresse);
-                                    break;
+                                    System.out.println("Indtast ny beskrivelse");
+                                    String nyBeskrivelse = utility.inputString();
+                                    staevneliste.get(i).setStaevnebeskrivels(nyBeskrivelse);
                             }
                         }
                         validerSvar = true;
@@ -282,50 +270,14 @@ public class Konkurrencesvoemning {
                         while (!validerSvar) {
                             String svar2 = utility.inputString();
                             if (svar2.equalsIgnoreCase("JA")) {
-                                while (!boolNytResultat) {
-                                    System.out.println("---------------------");
-                                    System.out.println("Indtast medlemsnummer");
-                                    int medlemsnummer = utility.inputIntegerSvar();
-
-                                    System.out.println("Indtast din nye tid: ");
-                                    System.out.print("Minut: ");
-                                    int minut = utility.inputIntegerSvar();
-                                    System.out.print("Sekund: ");
-                                    int sekund = utility.inputIntegerSvar();
-                                    System.out.print("Hundrededelesekund: ");
-                                    int hundrededeleSekund = utility.inputIntegerSvar();
-                                    int tid = (minut * 6000) + (sekund * 100) + hundrededeleSekund;
-
-                                    Disciplin disciplin = utility.inputDisciplin(distancer);
-
-                                    Date date = new Date();
-                                    date.getTime();
-                                    System.out.println(tid); //FJERN
-
-                                    int id;
-
-                                    if (resultater.size() > 0) {
-                                        id = resultater.get(resultater.size() - 1).getResultatID() + 1;
-                                    } else {
-                                        id = 0;
-                                    }
-
-                                    Staevneresultat staevneresultat = new Staevneresultat(tid, disciplin, date, medlemsnummer, id);
-                                    resultater.add(staevneresultat);
-                                    System.out.println();
-
-
-                                    System.out.println("1. Tilføj nyt resultat");
-                                    System.out.println("2. Afslut");
-                                    int svar3 = utility.inputIntegerSvar();
-                                    if (svar3 == 1) {
-
-                                    } else if (svar3 == 2) {
-                                        boolNytResultat = true;
-                                    } else {
-                                        System.out.println("Indtast 1 for at tilføje et nyt resultat eller 2 for at afslutte");
-                                    }
+                                //Skaber ny stævneID så ID fra staevneliste passer til listen der hedder afsluttedeStaevner
+                                int staevneID;
+                                if (afsluttedeStaevner.size() >0 ){
+                                    staevneID = afsluttedeStaevner.get(afsluttedeStaevner.size() - 1).getStaevnelisteID() + 1;
+                                } else {
+                                    staevneID = 1;
                                 }
+                                staevneliste.get(i).setStaevnelisteID(staevneID);
                                 afsluttedeStaevner.add(staevneliste.get(i));
                                 staevneliste.remove(i);
                                 System.out.println("[Stævnet er blevet afsluttet]\n");

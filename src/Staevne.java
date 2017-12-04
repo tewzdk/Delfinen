@@ -3,14 +3,12 @@ import java.util.Date;
 
 public class Staevne {
     private String staevnenavn;
-    private Adresse adresse;
     private Date dato;
     private int staevnelisteID;
     private String staevnebeskrivels;
 
     public Staevne(String staevnenavn, Date dato, int staevnelisteNummer, String staevnebeskrivels) {
         this.staevnenavn = staevnenavn;
-        this.adresse = adresse;
         this.dato = dato;
         this.staevnelisteID = staevnelisteNummer;
         this.staevnebeskrivels = staevnebeskrivels;
@@ -32,14 +30,6 @@ public class Staevne {
         this.staevnenavn = staevnenavn;
     }
 
-    public Adresse getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
-    }
-
     public Date getDato() {
         return dato;
     }
@@ -52,8 +42,9 @@ public class Staevne {
         return staevnelisteID;
     }
 
-//        return gadenavn + " " + husnummer + " " + etage +
-//                "\n" + postnummer + " " + by;
+    public void setStaevnelisteID(int staevnelisteID) {
+        this.staevnelisteID = staevnelisteID;
+    }
 
     @Override
     public String toString() {
