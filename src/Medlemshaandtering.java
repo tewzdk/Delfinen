@@ -132,7 +132,13 @@ public class Medlemshaandtering {
         System.out.println();
     }
     public void tilfoejMedlem(Utility utility){
-        int medlemsnummer = medlemsliste.size() + 1;
+        int medlemsnummer;
+
+        if (medlemsliste.size() > 0) {
+            medlemsnummer = medlemsliste.get(medlemsliste.size() - 1).getMedlemsnummer() + 1;
+        } else {
+            medlemsnummer = 1;
+        }
 
         //navn
         System.out.println("Indtast navn:");
@@ -179,6 +185,7 @@ public class Medlemshaandtering {
                 medlemsliste.add(passiv);
                 break;
         }
+        System.out.println("[Medlemmet er gemt]");
         gemMedlemsliste();
     }
     public void redigerMedlem(Utility utility){
@@ -283,8 +290,8 @@ public class Medlemshaandtering {
             int svar = utility.inputIntegerSvar();
             for (int i = 0; i < medlemsliste.size(); i++) {
                 if (medlemsliste.get(i).getMedlemsnummer() == svar) {
-                    System.out.println("Er du sikker på, at du vil slette: (Tast: 'JA'/'NEJ')");
                     System.out.println(medlemsliste.get(i));
+                    System.out.println("Er du sikker på, at du vil slette: (Tast: 'JA'/'NEJ')");
                     while(!validerSvar2) {
                         String svar2 = utility.inputString();
                         if (svar2.equalsIgnoreCase("JA")) {

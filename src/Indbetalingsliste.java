@@ -32,10 +32,10 @@ public class Indbetalingsliste {
         gemIndbetalinger(utility);
         System.out.println(
                 "Ny inbetaling tilføjet:" +
-                "\nMedlemsnummber: " + medlemsnummer +
+                "\nMedlemsnummer: " + medlemsnummer +
                 "\nDato: " + date +
                 "\nBeløb: " + beloeb +
-                "\nBetalingsID: " + betalingsID);
+                "\nBetalingsID: " + betalingsID + "\n");
     }
 
     public void printRestanceOversigt(Utility utility,Medlemshaandtering medlemshaandtering) {
@@ -80,10 +80,10 @@ public class Indbetalingsliste {
                 }
 
             }
-            System.out.println("MedlemNr.: " + medlemer.get(i).getMedlemsnummer() + " Kontingent: " + kontingent + " Restance: " + restance);
+            System.out.println("Medlemsnummer: " + medlemer.get(i).getMedlemsnummer() + " Kontingent: " + kontingent + " Restance: " + restance);
 
         }
-
+        System.out.println();
 
 
     }
@@ -102,13 +102,13 @@ public class Indbetalingsliste {
 
     public void printEnkeltBetaling(Utility utility) {
         System.out.println("Angiv betalingsID:");
-        int medlemsnummer = utility.inputIntegerSvar();
+        int betalingsid = utility.inputIntegerSvar();
 
         for (int i = 0; i < indbetalinger.size(); i++) {
-            if (indbetalinger.get(i).getMedlemsnummer() == medlemsnummer) {
+            if (indbetalinger.get(i).getBetalingsID() == betalingsid) {
                 System.out.println(
                         "Ny inbetaling tilføjet:" +
-                                "\nMedlemsnummber: " + indbetalinger.get(i).getMedlemsnummer() +
+                                "\nMedlemsnummer: " + indbetalinger.get(i).getMedlemsnummer() +
                                 "\nDato: " + indbetalinger.get(i).getDato() +
                                 "\nBeløb: " + indbetalinger.get(i).getBeloeb() +
                                 "\nBetalingsID: " + indbetalinger.get(i).getBetalingsID());
@@ -147,14 +147,15 @@ public class Indbetalingsliste {
         int betalingsID;
         boolean aktiv = true;
 
-        System.out.println("Indtast betalings nr. du vil redigere:");
+        System.out.println("Indtast betalingsID du vil redigere:");
         betalingsID = utility.inputIntegerSvar();
         for (int i = 0; i < indbetalinger.size(); i++) {
 
 
             if (indbetalinger.get(i).getBetalingsID() == betalingsID) {
-                System.out.println("1: Ændre Medlemsnummer" +
-                        "\n2: Ændre Beløb" +
+                System.out.println("Hvad ønsker du at gøre:" +
+                        "\n1: Ændre medlemsnummer" +
+                        "\n2: Ændre beløb" +
                         "\n0: Afslut");
                 while (aktiv) {
 
