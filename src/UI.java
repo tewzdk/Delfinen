@@ -220,10 +220,11 @@ public class UI {
 
     private void resultatMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer, Medlemshaandtering medlemshaandtering) {
         System.out.println("Vælg en handling:");
-        System.out.println("1. Se resultater");
-        System.out.println("2. Tilføj resultat");
-        System.out.println("3. Rediger resultat");
-        System.out.println("4. Fjern resultat");
+        System.out.println("1. Se alle resultater");
+        System.out.println("2. Se top5-resultater");
+        System.out.println("3. Tilføj resultat");
+        System.out.println("4. Rediger resultat");
+        System.out.println("5. Fjern resultat");
         System.out.println("0. Gå tilbage");
         int svar;
         svar = utility.inputIntegerSvar();
@@ -237,14 +238,18 @@ public class UI {
                 break;
 
             case 2:
-                konkurrencesvoemning.tilfoejTraeningsResultat(utility, distancer);
+                konkurrencesvoemning.printTop5Resultater(utility, medlemshaandtering);
                 break;
 
             case 3:
-                konkurrencesvoemning.redigerResultat(utility, medlemshaandtering, distancer);
+                konkurrencesvoemning.tilfoejTraeningsResultat(utility, distancer);
                 break;
 
             case 4:
+                konkurrencesvoemning.redigerResultat(utility, medlemshaandtering, distancer);
+                break;
+
+            case 5:
                 konkurrencesvoemning.fjernResultat(utility, medlemshaandtering);
                 break;
         }

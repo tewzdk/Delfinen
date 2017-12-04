@@ -6,9 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 public class Medlemshaandtering {
     private ArrayList<Medlem> medlemsliste = new ArrayList<>();
@@ -116,6 +114,7 @@ public class Medlemshaandtering {
         }
 
     }
+
     public void tilgaaMedlemsinformationer(Utility utility){
         System.out.println("Indtast medlemsnummer:");
         int svar = utility.inputIntegerSvar();
@@ -126,10 +125,22 @@ public class Medlemshaandtering {
         }
     }
     public void printMedlemsliste(){
+        //tempArrayList er en midlertidig liste, der kopierer indeholdet af "medlemsliste".
+        ArrayList<Medlem> tempArrayList = new ArrayList<>();
         for (int i = 0; i < medlemsliste.size(); i++) {
-            System.out.println("[" + medlemsliste.get(i).getMedlemsnummer() + "] " + medlemsliste.get(i).getNavn());
+            tempArrayList.add(medlemsliste.get(i));
+
+        }
+        //her sorteres den midlertidige liste vha. medlemmernes navne.
+        Comparator<Medlem> medlemsComparator = Comparator.comparing(medlem -> medlem.getNavn());
+        Collections.sort(tempArrayList, medlemsComparator);
+
+        //her printes listen
+        for (int i = 0; i < tempArrayList.size(); i++) {
+            System.out.println("[" + tempArrayList.get(i).getMedlemsnummer() + "] " + tempArrayList.get(i).getNavn());
         }
         System.out.println();
+
     }
     public void tilfoejMedlem(Utility utility){
         int medlemsnummer;
@@ -192,6 +203,7 @@ public class Medlemshaandtering {
         System.out.println("Indtast medlemsnummer:");
         boolean validerSvar = false;
         boolean aktiv = true;
+
 
         while(!validerSvar){
             int svar = utility.inputIntegerSvar();
@@ -276,12 +288,12 @@ public class Medlemshaandtering {
                     }
                     validerSvar = true;
                     }
-                    else{
-                    System.out.println("Indtast venligst et korrekt medlemsnummer:");
-                    }
                 }
+            if(!validerSvar){
+                System.out.println("Medlemsnummer " + svar + " eksisterer ikke.\nIndtast venligst et korrekt medlemsnummer:");
             }
         }
+    }
     public void fjernMedlem(Utility utility){
         boolean validerSvar = false;
         boolean validerSvar2 = false;
@@ -309,11 +321,10 @@ public class Medlemshaandtering {
                     }
                     validerSvar = true;
                 }
-                else{
-                    System.out.println("Medlemsnummer " + svar + " eksisterer ikke. Indtast venligst et korrekt medlemsnummer:");
-                }
+            }
+            if(!validerSvar){
+                System.out.println("Medlemsnummer " + svar + " eksisterer ikke.\nIndtast venligst et korrekt medlemsnummer:");
             }
         }
-
     }
 }

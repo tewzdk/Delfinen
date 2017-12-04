@@ -426,9 +426,6 @@ public class Konkurrencesvoemning {
                     " | Tid: " + utility.omregnTid(resultater.get(i).getTid()) + " | " + navn + "]");
         }
         System.out.println();
-
-        //skal slettes
-        printTop5Resultater(utility, medlemshaandtering);
     }
 
     public void printTop5Resultater(Utility utility, Medlemshaandtering medlemshaandtering) {
@@ -482,7 +479,6 @@ public class Konkurrencesvoemning {
         resultatComparator = resultatComparator.thenComparing(Resultat::getTid);
 
         Collections.sort(resultater, resultatComparator);
-
     }
 
     public void tilfoejTraeningsResultat(Utility utility, Distancer distancer) {
