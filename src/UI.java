@@ -108,10 +108,6 @@ public class UI {
                 medlemshaandtering.printSeniorHoldliste();
                 break;
 
-            case 7:
-                indbetalingsMenu(utility, indbetalingsliste,medlemshaandtering);
-                break;
-
         }
 
         return true;
@@ -120,29 +116,53 @@ public class UI {
     //Kasserer
     private boolean hovedMenuKasserer(Utility utility, Indbetalingsliste indbetalingsliste,Medlemshaandtering medlemshaandtering) {
         System.out.println("Vælg en handling:");
-        System.out.println("1. Indberet betaling");
-        System.out.println("2. Oversigt over restance");
-        System.out.println("3. Ret indbetaling");
-        System.out.println("0. Log ud");
+        System.out.print("1: ");
+        System.out.println("Tilføj indbetaling");
+        System.out.print("2: ");
+        System.out.println("Restance oversigt");
+        System.out.print("3: ");
+        System.out.println("Rediger indbetaling");
+        System.out.print("4: ");
+        System.out.println("Udskriv bestemt medlems indbetalinger");
+        System.out.print("5: ");
+        System.out.println("Udskriv alle betalinger");
+        System.out.print("6: ");
+        System.out.println("Udskriv en bestemt betaling");
+        System.out.print("7: ");
+        System.out.println("Slet en betaling");
+        System.out.print("8: ");
+        System.out.println("Betal årlige kontingenter eller komprimer indbetalinger");
 
-        int svar;
-        svar = utility.inputIntegerSvar();
-        switch (svar) {
-            case 0:
-                return false;
 
-            case 1:
-                indbetalingsliste.tilfoejIndbetaling(utility);
-                break;
+            switch (utility.inputIntegerSvar()){
+                case 1:
+                    indbetalingsliste.tilfoejIndbetaling(utility);break;
 
-            case 2:
-                indbetalingsliste.printRestanceOversigt(utility,medlemshaandtering);
-                break;
+                case 2:
+                    indbetalingsliste.printRestanceOversigt(utility,medlemshaandtering);break;
 
-            case 3:
-                indbetalingsliste.redigerIndbetaling(utility);
-                break;
-        }
+                case 3:
+                    indbetalingsliste.redigerIndbetaling(utility);break;
+
+                case 4:
+                    indbetalingsliste.printMedlemsindbetalinger(utility);break;
+
+                case 5:
+                    indbetalingsliste.printAlleBetalinger();break;
+
+                case 6:
+                    indbetalingsliste.printEnkeltBetaling(utility);break;
+
+                case 7:
+                    indbetalingsliste.sletEnkeltBetaling(utility);break;
+
+                case 8:
+                    indbetalingsliste.betalKontingenter(utility,medlemshaandtering);
+
+                case 0: return false;
+
+                default: break;
+            }
         return true;
     }
 
@@ -269,59 +289,5 @@ public class UI {
 
         }
 
-    }
-
-    private void indbetalingsMenu(Utility utility,Indbetalingsliste indbetalingsliste,Medlemshaandtering medlemshaandtering) {
-        boolean aktiv = true;
-        System.out.println("Vælg en handling:");
-        System.out.print("1: ");
-        System.out.println("Tilføj indbetaling");
-        System.out.print("2: ");
-        System.out.println("Restance oversigt");
-        System.out.print("3: ");
-        System.out.println("Rediger indbetaling");
-        System.out.print("4: ");
-        System.out.println("Udskriv bestemt medlems indbetalinger");
-        System.out.print("5: ");
-        System.out.println("Udskriv alle betalinger");
-        System.out.print("6: ");
-        System.out.println("Udskriv en bestemt betaling");
-        System.out.print("7: ");
-        System.out.println("Slet en betaling");
-        System.out.print("8: ");
-        System.out.println("Betal årlige kontingenter eller komprimer indbetalinger");
-
-        while(aktiv){
-            switch (utility.inputIntegerSvar()){
-                case 1:
-                    indbetalingsliste.tilfoejIndbetaling(utility);break;
-
-                case 2:
-                    indbetalingsliste.printRestanceOversigt(utility,medlemshaandtering);break;
-
-                case 3:
-                    indbetalingsliste.redigerIndbetaling(utility);break;
-
-                case 4:
-                    indbetalingsliste.printMedlemsindbetalinger(utility);break;
-
-                case 5:
-                    indbetalingsliste.printAlleBetalinger();break;
-
-                case 6:
-                    indbetalingsliste.printEnkeltBetaling(utility);break;
-
-                case 7:
-                    indbetalingsliste.sletEnkeltBetaling(utility);break;
-
-                case 8:
-                    indbetalingsliste.betalKontingenter(utility,medlemshaandtering);
-
-                case 0: aktiv = false;
-
-                default: break;
-            }
-
-        }
     }
 }

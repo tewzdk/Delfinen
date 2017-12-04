@@ -102,10 +102,10 @@ public class Indbetalingsliste {
 
     public void printEnkeltBetaling(Utility utility) {
         System.out.println("Angiv betalingsID:");
-        int medlemsnummer = utility.inputIntegerSvar();
+        int betalingsid = utility.inputIntegerSvar();
 
         for (int i = 0; i < indbetalinger.size(); i++) {
-            if (indbetalinger.get(i).getMedlemsnummer() == medlemsnummer) {
+            if (indbetalinger.get(i).getBetalingsID() == betalingsid) {
                 System.out.println(
                         "Ny inbetaling tilføjet:" +
                                 "\nMedlemsnummer: " + indbetalinger.get(i).getMedlemsnummer() +
