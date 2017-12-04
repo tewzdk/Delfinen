@@ -148,7 +148,7 @@ public class Konkurrencesvoemning {
         if (staevneliste.size() > 0) {
             staevnelisteID = staevneliste.get(staevneliste.size() - 1).getStaevnelisteID() + 1;
         } else {
-            staevnelisteID = 0;
+            staevnelisteID = 1;
         }
 
         //Skaber det nye stævne

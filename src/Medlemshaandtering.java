@@ -132,7 +132,13 @@ public class Medlemshaandtering {
         System.out.println();
     }
     public void tilfoejMedlem(Utility utility){
-        int medlemsnummer = medlemsliste.size() + 1;
+        int medlemsnummer;
+
+        if (medlemsliste.size() > 0) {
+            medlemsnummer = medlemsliste.get(medlemsliste.size() - 1).getMedlemsnummer() + 1;
+        } else {
+            medlemsnummer = 1;
+        }
 
         //navn
         System.out.println("Indtast navn:");
