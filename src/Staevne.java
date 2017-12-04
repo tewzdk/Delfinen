@@ -6,12 +6,22 @@ public class Staevne {
     private Adresse adresse;
     private Date dato;
     private int staevnelisteID;
+    private String staevnebeskrivels;
 
-    public Staevne(String staevnenavn, Adresse adresse, Date dato, int staevnelisteNummer) {
+    public Staevne(String staevnenavn, Date dato, int staevnelisteNummer, String staevnebeskrivels) {
         this.staevnenavn = staevnenavn;
         this.adresse = adresse;
         this.dato = dato;
         this.staevnelisteID = staevnelisteNummer;
+        this.staevnebeskrivels = staevnebeskrivels;
+    }
+
+    public String getStaevnebeskrivels() {
+        return staevnebeskrivels;
+    }
+
+    public void setStaevnebeskrivels(String staevnebeskrivels) {
+        this.staevnebeskrivels = staevnebeskrivels;
     }
 
     public String getStaevnenavn() {
@@ -50,6 +60,6 @@ public class Staevne {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String staevnedato;
         staevnedato = simpleDateFormat.format(dato);
-        return staevnedato + ": " + staevnenavn + " (" + adresse + ") ";
+        return staevnedato + ": " + staevnenavn + " (" + staevnebeskrivels + ") ";
     }
 }

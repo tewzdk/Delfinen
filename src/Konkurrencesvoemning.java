@@ -65,20 +65,15 @@ public class Konkurrencesvoemning {
         while (scanner.hasNextInt()) {
             int staevneID = scanner.nextInt();
             String staevnenavn = scanner.next();
-            String gadenavn = scanner.next();
-            int husnummer = scanner.nextInt();
-            String etage = scanner.next();
-            int postnummer = scanner.nextInt();
-            String by = scanner.next();
             String datoString = scanner.next();
             Date date = null;
+            String staevnebeskrivelse = scanner.next();
             try {
                 date = utility.simpleDateFormat.parse(datoString);
             } catch (ParseException e) {
 
             }
-            Adresse adresse = new Adresse(gadenavn, husnummer, etage, postnummer, by);
-            Staevne staevne = new Staevne(staevnenavn, adresse, date, staevneID);
+            Staevne staevne = new Staevne(staevnenavn, date, staevneID,staevnebeskrivelse);
             staevneliste.add(staevne);
             scanner.nextLine();
         }
@@ -95,20 +90,15 @@ public class Konkurrencesvoemning {
         while(scanner.hasNextInt()){
             int staevneID = scanner.nextInt();
             String staevnenavn = scanner.next();
-            String gadenavn = scanner.next();
-            int husnummer = scanner.nextInt();
-            String etage = scanner.next();
-            int postnummer = scanner.nextInt();
-            String by = scanner.next();
             String datoString = scanner.next();
             Date date = null;
+            String staevnebeskrivelse = scanner.next();
             try{
                 date = utility.simpleDateFormat.parse(datoString);
             } catch (ParseException e){
 
             }
-            Adresse adresse = new Adresse(gadenavn,husnummer,etage,postnummer,by);
-            Staevne staevne = new Staevne(staevnenavn, adresse, date, staevneID);
+            Staevne staevne = new Staevne(staevnenavn, date, staevneID,staevnebeskrivelse);
             afsluttedeStaevner.add(staevne);
             scanner.nextLine();
         }
@@ -123,12 +113,8 @@ public class Konkurrencesvoemning {
                 outputStream.println(
                         staevneliste.get(i).getStaevnelisteID() + ";" +
                                 staevneliste.get(i).getStaevnenavn() + ";" +
-                                staevneliste.get(i).getAdresse().getGadenavn() + ";" +
-                                staevneliste.get(i).getAdresse().getHusnummer() + ";" +
-                                staevneliste.get(i).getAdresse().getEtage() + ";" +
-                                staevneliste.get(i).getAdresse().getPostnummer() + ";" +
-                                staevneliste.get(i).getAdresse().getBy() + ";" +
-                                datoString + ";"
+                                datoString + ";" +
+                                staevneliste.get(i).getStaevnebeskrivels() + ";"
 
                 );
             }
@@ -188,13 +174,15 @@ public class Konkurrencesvoemning {
 
     public void tilfoejStaevne(Utility utility) {
 
-        //Laver stævnenavn
+        //Tilføjer stævnenavn
         System.out.println("Indtast navnet på stævnet:");
         String staevnenavn = utility.inputString();
-        //Laver adresse
-        Adresse staevneadresse = utility.inputAdresse();
+        //Tilføjer Dato
         System.out.println("Indtast dato for stævnet (dd/mm/åååå)");
         Date staevneDato = utility.inputDato();
+        //Tilføjer note
+        System.out.println("Indtast stævnebeskrivelse");
+        String staevneBeskrivelse = utility.inputString();
 
         int staevnelisteID;
 
@@ -205,7 +193,7 @@ public class Konkurrencesvoemning {
         }
 
         //Skaber det nye stævne
-        Staevne staevne = new Staevne(staevnenavn, staevneadresse, staevneDato, staevnelisteID);
+        Staevne staevne = new Staevne(staevnenavn, staevneDato, staevnelisteID, staevneBeskrivelse);
         staevneliste.add(staevne);
         gemStaevneliste(utility);
     }
