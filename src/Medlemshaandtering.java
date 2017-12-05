@@ -196,8 +196,9 @@ public class Medlemshaandtering {
                 medlemsliste.add(passiv);
                 break;
         }
-        System.out.println("[Medlemmet er gemt]");
         gemMedlemsliste();
+        System.out.println("[Medlemmet er gemt]");
+        System.out.println();
     }
     public void redigerMedlem(Utility utility){
         System.out.println("Indtast medlemsnummer:");
@@ -294,7 +295,7 @@ public class Medlemshaandtering {
             }
         }
     }
-    public void fjernMedlem(Utility utility){
+    public void fjernMedlem(Utility utility, Konkurrencesvoemning konkurrencesvoemning){
         boolean validerSvar = false;
         boolean validerSvar2 = false;
         System.out.println("Indtast medlemsnummer:");
@@ -307,6 +308,11 @@ public class Medlemshaandtering {
                     while(!validerSvar2) {
                         String svar2 = utility.inputString();
                         if (svar2.equalsIgnoreCase("JA")) {
+                            for (int j = 0; j < konkurrencesvoemning.getResultater().size(); j++) {
+                                if(medlemsliste.get(i).getMedlemsnummer() == konkurrencesvoemning.getResultater().get(j).getMedlemsnummer()){
+                                    konkurrencesvoemning.getResultater().remove(konkurrencesvoemning.getResultater().get(j));
+                                }
+                            }
                             medlemsliste.remove(i);
                             System.out.println("[Medlemmet er blevet fjernet]");
                             System.out.println();
