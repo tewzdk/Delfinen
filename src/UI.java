@@ -39,7 +39,7 @@ public class UI {
             case 1:
                 aktiv = true;
                 while (aktiv) {
-                    aktiv = hovedMenuFormand(utility, medlemshaandtering,indbetalingsliste);
+                    aktiv = hovedMenuFormand(utility, medlemshaandtering,konkurrencesvoemning);
                 }
                 break;
 
@@ -67,7 +67,7 @@ public class UI {
     }
 
     //Formand
-    private boolean hovedMenuFormand(Utility utility, Medlemshaandtering medlemshaandtering,Indbetalingsliste indbetalingsliste) {
+    private boolean hovedMenuFormand(Utility utility, Medlemshaandtering medlemshaandtering, Konkurrencesvoemning konkurrencesvoemning) {
         Konkurrencesvoemning ks = new Konkurrencesvoemning();
         System.out.println("Vælg en handling:");
         System.out.println("1. Tilgå medlemsinformationer");
@@ -100,7 +100,7 @@ public class UI {
                 break;
 
             case 5:
-                medlemshaandtering.fjernMedlem(utility);
+                medlemshaandtering.fjernMedlem(utility, konkurrencesvoemning);
                 break;
 
             case 6:
@@ -145,7 +145,7 @@ public class UI {
                     indbetalingsliste.redigerIndbetaling(utility);break;
 
                 case 4:
-                    indbetalingsliste.printMedlemsindbetalinger(utility);break;
+                    indbetalingsliste.printMedlemsindbetalinger(medlemshaandtering,utility);break;
 
                 case 5:
                     indbetalingsliste.printAlleBetalinger();break;
@@ -190,7 +190,7 @@ public class UI {
                 break;
 
             case 3:
-                staevneMenu(utility, konkurrencesvoemning, distancer);
+                staevneMenu(utility, konkurrencesvoemning, distancer, medlemshaandtering);
                 break;
         }
         return true;
@@ -221,10 +221,11 @@ public class UI {
     private void resultatMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer, Medlemshaandtering medlemshaandtering) {
         System.out.println("Vælg en handling:");
         System.out.println("1. Se alle resultater");
-        System.out.println("2. Se top5-resultater");
-        System.out.println("3. Tilføj resultat");
-        System.out.println("4. Rediger resultat");
-        System.out.println("5. Fjern resultat");
+        System.out.println("2. Se resultater for enkelt medlem");
+        System.out.println("3. Se top5-resultater");
+        System.out.println("4. Tilføj resultat");
+        System.out.println("5. Rediger resultat");
+        System.out.println("6. Fjern resultat");
         System.out.println("0. Gå tilbage");
         int svar;
         svar = utility.inputIntegerSvar();
@@ -238,30 +239,34 @@ public class UI {
                 break;
 
             case 2:
-                konkurrencesvoemning.printTop5Resultater(utility, medlemshaandtering);
+                konkurrencesvoemning.printMedlemsResultater(utility, medlemshaandtering);
                 break;
 
             case 3:
-                konkurrencesvoemning.tilfoejTraeningsResultat(utility, distancer);
+                konkurrencesvoemning.printTop5Resultater(utility, medlemshaandtering);
                 break;
 
             case 4:
-                konkurrencesvoemning.redigerResultat(utility, medlemshaandtering, distancer);
+                konkurrencesvoemning.tilfoejResultat(utility, distancer);
                 break;
 
             case 5:
+                konkurrencesvoemning.redigerResultat(utility, medlemshaandtering, distancer);
+                break;
+
+            case 6:
                 konkurrencesvoemning.fjernResultat(utility, medlemshaandtering);
                 break;
         }
 
     }
 
-    private void staevneMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer) {
+    private void staevneMenu(Utility utility, Konkurrencesvoemning konkurrencesvoemning, Distancer distancer, Medlemshaandtering medlemshaandtering) {
 
         System.out.println("Vælg en handling");
         System.out.println("1. Se aktive staevner");
         System.out.println("2. Se afsluttede staevner");
-        System.out.println("3. Tilfoej staevne");
+        System.out.println("3. Tilføj staevne");
         System.out.println("4. Rediger staevne");
         System.out.println("5. Afslut stævne");
         System.out.println("0. Gå tilbage");
@@ -274,7 +279,7 @@ public class UI {
                 break;
 
             case 1:
-                konkurrencesvoemning.printAktiveStaevner();
+                konkurrencesvoemning.printAktiveStaevner(utility, medlemshaandtering);
                 break;
 
             case 2:
@@ -282,7 +287,7 @@ public class UI {
                 break;
 
             case 3:
-                konkurrencesvoemning.tilfoejStaevne(utility);
+                konkurrencesvoemning.tilfoejStaevne(utility, medlemshaandtering);
                 break;
 
             case 4:
