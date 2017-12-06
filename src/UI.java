@@ -132,6 +132,8 @@ public class UI {
         System.out.println("Slet en betaling");
         System.out.print("8: ");
         System.out.println("Betal årlige kontingenter eller komprimer indbetalinger");
+        System.out.print("0: ");
+        System.out.println("Log af");
 
 
             switch (utility.inputIntegerSvar()){
