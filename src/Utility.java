@@ -15,13 +15,17 @@ public class Utility {
 
     public int inputIntegerSvar(){
             int svar = -1;
+            boolean validerSvar = false;
 
-                try {
-                    svar = in.nextInt();
-                } catch (InputMismatchException exception) {
-                    System.out.println("Indtast venligst et nummer:");
-                    in.nextLine();
-                }
+        while(!validerSvar) {
+            try {
+                svar = in.nextInt();
+                validerSvar = true;
+            } catch (InputMismatchException exception) {
+                System.out.println("Indtast venligst et nummer:");
+                in.nextLine();
+            }
+        }
 
             return svar;
         }

@@ -124,14 +124,21 @@ public class Indbetalingsliste {
         System.out.println("Angiv medlemsnummer:");
         int medlemsnummer = utility.inputIntegerSvar();
         System.out.println(utility.navnFraMedlemsnummer(medlemshaandtering, medlemsnummer));
+        boolean fundetMedlem = false;
 
         for (int i = 0; i < indbetalinger.size(); i++) {
             if (indbetalinger.get(i).getMedlemsnummer() == medlemsnummer) {
+                fundetMedlem = true;
                 System.out.println("ID: " + indbetalinger.get(i).getBetalingsID() +
                         " nr.: " + indbetalinger.get(i).getMedlemsnummer() +
                         " kr.: " + indbetalinger.get(i).getBeloeb());
             }
         }
+
+        if (!fundetMedlem){
+            System.out.println("Kunne ikke finde betalinger for dette medlemsnummer.");
+        }
+
         System.out.println();
 
     }
@@ -299,7 +306,7 @@ public class Indbetalingsliste {
                         print = false;
                     }
                     System.out.println( "Nr.: " + tempIndbetalinger.get(i).getMedlemsnummer() +
-                            " mangler at betale: " + tempIndbetalinger.get(i).getBeloeb());
+                            " mangler at betale: " + -tempIndbetalinger.get(i).getBeloeb());
                 }
 
             }

@@ -157,7 +157,7 @@ public class UI {
                     indbetalingsliste.sletEnkeltBetaling(utility);break;
 
                 case 8:
-                    indbetalingsliste.betalKontingenter(utility,medlemshaandtering);
+                    indbetalingsliste.betalKontingenter(utility,medlemshaandtering); break;
 
                 case 0: return false;
 
