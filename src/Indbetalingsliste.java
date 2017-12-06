@@ -209,6 +209,7 @@ public class Indbetalingsliste {
 
         Date idag = new Date();
         double kontingent = 0;
+        Boolean print = true;
 
         idag.getTime();
 
@@ -232,7 +233,6 @@ public class Indbetalingsliste {
                         if (yearsDelta > 17 && yearsDelta < 60) {
                             //mellem 18 og 60 år
                             kontingent = 1600;
-                            System.out.println();
 
                         } else if (yearsDelta > 59) {
                             //over 60 år
@@ -264,9 +264,18 @@ public class Indbetalingsliste {
                     }
 
                 }
-                System.out.println("MedlemNr.: " + medlemer.get(i).getMedlemsnummer() + " Kontingent: " + kontingent + " Restance: " + tempIndbetalinger.get(i).getBeloeb());
 
+            }
 
+            for (int i = 0; i < tempIndbetalinger.size(); i++) {
+
+                if (tempIndbetalinger.get(i).getBeloeb() == 0) {
+                    tempIndbetalinger.remove(i);
+                    i--;
+                }else {
+                    tempIndbetalinger.get(i).setBetalingsID(i);
+                    System.out.println("MedlemNr.: " + tempIndbetalinger.get(i).getMedlemsnummer() + " Kontingent: " + kontingent + " Restance: " + tempIndbetalinger.get(i).getBeloeb());
+                }
             }
 
             if (indbetalinger.size() > 0) {
@@ -283,7 +292,7 @@ public class Indbetalingsliste {
             System.out.println("Disse medlemsnumre skylder kontingent:");
             for (int i = 0; i < tempIndbetalinger.size(); i++) {
 
-                Boolean print = true;
+
 
                 if(tempIndbetalinger.get(i).getBeloeb()<0) {
                     if (print) {
