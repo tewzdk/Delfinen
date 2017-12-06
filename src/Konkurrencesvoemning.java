@@ -583,7 +583,7 @@ public class Konkurrencesvoemning {
         resultatComparator = resultatComparator.thenComparing(disciplin -> disciplin.getDisciplin().getDistance());
         resultatComparator = resultatComparator.thenComparing(Resultat::getTid);
 
-        Collections.sort(resultater, resultatComparator);
+        resultater.sort(resultatComparator);
     }
 
     public void tilfoejResultat(Utility utility, Distancer distancer) {
