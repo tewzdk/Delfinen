@@ -62,6 +62,6 @@ public class Staevne {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String staevnedato;
         staevnedato = simpleDateFormat.format(dato);
-        return staevnedato + ": " + staevnenavn + " (" + staevnebeskrivelse + ") ";
+        return staevnedato + ": " + staevnenavn + " - \"" + staevnebeskrivelse + "\"";
     }
 }

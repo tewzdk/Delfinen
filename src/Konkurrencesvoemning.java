@@ -182,7 +182,7 @@ public class Konkurrencesvoemning {
         if (staevneliste.size() > 0) {
             for (int i = 0; i < staevneliste.size(); i++) {
                 System.out.println(staevneliste.get(i));
-                System.out.println("Deltagere:");
+                System.out.println("Svømmere fra klubben:");
                 for (int j = 0; j < staevneliste.get(i).getDeltagere().length; j++) {
                     if(staevneliste.get(i).getDeltagere()[j] != 0){
                         System.out.println(utility.navnFraMedlemsnummer(medlemshaandtering, staevneliste.get(i).getDeltagere()[j]));
@@ -191,20 +191,27 @@ public class Konkurrencesvoemning {
                 System.out.println();
             }
         } else {
-            System.out.println("[Der er ingen planlagt stævner]");
+            System.out.println("[Der er ingen planlagt stævner]\n");
         }
     }
 
-    public void printAfsluttedeStaevner() {
+    public void printAfsluttedeStaevner(Utility utility, Medlemshaandtering medlemshaandtering) {
 
         if (afsluttedeStaevner.size() > 0) {
             for (int i = 0; i < afsluttedeStaevner.size(); i++) {
                 System.out.println(afsluttedeStaevner.get(i));
+                System.out.println("Svømmere fra klubben:");
+                for (int j = 0; j < afsluttedeStaevner.get(i).getDeltagere().length; j++) {
+                    if (afsluttedeStaevner.get(i).getDeltagere()[j] != 0) {
+                        System.out.println(utility.navnFraMedlemsnummer(medlemshaandtering, afsluttedeStaevner.get(i).getDeltagere()[j]));
+                    }
+                }
+                System.out.println();
             }
-        } else {
-            System.out.println("Der er ingen afsluttede stævner");
         }
-        System.out.println("");
+         else {
+            System.out.println("Der er ingen afsluttede stævner\n");
+        }
     }
 
     public void tilfoejStaevne(Utility utility, Medlemshaandtering medlemshaandtering) {

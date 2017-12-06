@@ -283,7 +283,7 @@ public class UI {
                 break;
 
             case 2:
-                konkurrencesvoemning.printAfsluttedeStaevner();
+                konkurrencesvoemning.printAfsluttedeStaevner(utility, medlemshaandtering);
                 break;
 
             case 3:
