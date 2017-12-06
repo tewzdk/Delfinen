@@ -100,6 +100,7 @@ public class Indbetalingsliste {
             }
         }
         gemIndbetalinger(utility);
+        System.out.println();
     }
 
     public void printEnkeltBetaling(Utility utility) {
@@ -118,6 +119,7 @@ public class Indbetalingsliste {
         }
 
 
+        System.out.println();
     }
 
     public void printMedlemsindbetalinger(Medlemshaandtering medlemshaandtering, Utility utility) {
@@ -136,7 +138,7 @@ public class Indbetalingsliste {
         }
 
         if (!fundetMedlem){
-            System.out.println("Kunne ikke finde betalinger for dette medlemsnummer.");
+            System.out.println("Kunne ikke finde betalinger fra dette medlemsnummer");
         }
 
         System.out.println();
@@ -151,6 +153,7 @@ public class Indbetalingsliste {
                     " kr.: " + indbetalinger.get(i).getBeloeb());
         }
 
+        System.out.println();
     }
 
     public void redigerIndbetaling(Utility utility) {
@@ -181,6 +184,8 @@ public class Indbetalingsliste {
         if (aktiv){
             System.out.println("Kunne ikke finde betalingsID");
         }
+
+        System.out.println();
 
     }
 
@@ -286,23 +291,23 @@ public class Indbetalingsliste {
             }
 
             if (indbetalinger.size() > 0) {
-                System.out.println("Følgende indbetalinger kunne ikke forbindes med et medlem");
+                System.out.println("Følgende indbetalinger kunne ikke forbindes med et medlem:");
                 for (int i = 0; i < indbetalinger.size(); i++) {
                     System.out.println("ID: " + indbetalinger.get(i).getBetalingsID() +
                             " nr.: " + indbetalinger.get(i).getMedlemsnummer() +
                             " kr.: " + indbetalinger.get(i).getBeloeb());
                     tempIndbetalinger.add(indbetalinger.get(i));
                 }
-                System.out.println("Betalingerne er blevet tilføjet til listen igen. Slet eller ret for at fjerne overskydende betalinger");
+                System.out.println("Betalingerne er blevet tilføjet til listen igen. Slet eller ret for at fjerne overskydende betalinger.\n");
             }
 
-            System.out.println("Disse medlemsnumre skylder kontingent:");
             for (int i = 0; i < tempIndbetalinger.size(); i++) {
 
 
 
                 if(tempIndbetalinger.get(i).getBeloeb()<0) {
                     if (print) {
+                        System.out.println("Disse medlemsnumre skylder kontingent:");
                         print = false;
                     }
                     System.out.println( "Nr.: " + tempIndbetalinger.get(i).getMedlemsnummer() +
@@ -319,6 +324,8 @@ public class Indbetalingsliste {
         if (!(betal == 0 || betal == 1 || betal == 2)) {
             betalKontingenter(utility,medlemshaandtering);
         }
+
+        System.out.println();
     }
 
     private void gemIndbetalinger(Utility utility){
