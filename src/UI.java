@@ -145,7 +145,7 @@ public class UI {
                     indbetalingsliste.redigerIndbetaling(utility);break;
 
                 case 4:
-                    indbetalingsliste.printMedlemsindbetalinger(utility);break;
+                    indbetalingsliste.printMedlemsindbetalinger(medlemshaandtering,utility);break;
 
                 case 5:
                     indbetalingsliste.printAlleBetalinger();break;

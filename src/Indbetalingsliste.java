@@ -80,7 +80,9 @@ public class Indbetalingsliste {
                 }
 
             }
-            System.out.println("Medlemsnummer: " + medlemer.get(i).getMedlemsnummer() + " Kontingent: " + kontingent + " Restance: " + restance);
+            System.out.println(medlemer.get(i).getMedlemsnummer() + ". "
+                    + utility.navnFraMedlemsnummer(medlemshaandtering,medlemer.get(i).getMedlemsnummer())
+                    + " Kontingent: " + kontingent + " Restance: " + restance);
 
         }
         System.out.println();
@@ -118,9 +120,10 @@ public class Indbetalingsliste {
 
     }
 
-    public void printMedlemsindbetalinger(Utility utility) {
+    public void printMedlemsindbetalinger(Medlemshaandtering medlemshaandtering, Utility utility) {
         System.out.println("Angiv medlemsnummer:");
         int medlemsnummer = utility.inputIntegerSvar();
+        System.out.println(utility.navnFraMedlemsnummer(medlemshaandtering, medlemsnummer));
 
         for (int i = 0; i < indbetalinger.size(); i++) {
             if (indbetalinger.get(i).getMedlemsnummer() == medlemsnummer) {
@@ -129,6 +132,7 @@ public class Indbetalingsliste {
                         " kr.: " + indbetalinger.get(i).getBeloeb());
             }
         }
+        System.out.println();
 
     }
 
@@ -209,8 +213,8 @@ public class Indbetalingsliste {
         idag.getTime();
 
         System.out.println("1: Komprimer betalinger" +
-                "\n2: Udfør kontingetnt betaling" +
-                "\n0: Anuller");
+                "\n2: Udfør kontingentbetaling" +
+                "\n0: Afslut");
 
         int betal = utility.inputIntegerSvar();
 
@@ -228,6 +232,7 @@ public class Indbetalingsliste {
                         if (yearsDelta > 17 && yearsDelta < 60) {
                             //mellem 18 og 60 år
                             kontingent = 1600;
+                            System.out.println();
 
                         } else if (yearsDelta > 59) {
                             //over 60 år
@@ -275,13 +280,13 @@ public class Indbetalingsliste {
                 System.out.println("Betalingerne er blevet tilføjet til listen igen. Slet eller ret for at fjerne overskydende betalinger");
             }
 
+            System.out.println("Disse medlemsnumre skylder kontingent:");
             for (int i = 0; i < tempIndbetalinger.size(); i++) {
 
                 Boolean print = true;
 
                 if(tempIndbetalinger.get(i).getBeloeb()<0) {
                     if (print) {
-                        System.out.println("Disse medlemsnumre skylder kontingent:");
                         print = false;
                     }
                     System.out.println( "Nr.: " + tempIndbetalinger.get(i).getMedlemsnummer() +
